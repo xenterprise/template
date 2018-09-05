@@ -533,6 +533,8 @@ class Profile extends Component {
                 <Button size="lg" className="btn-facebook btn-brand text mr-1 mb-1"><span>Book Authoring</span></Button>
                 <Button size="lg" className="btn-facebook btn-brand text mr-1 mb-1"><span>Visual Studio</span></Button>
                 <Button size="lg" className="btn-facebook btn-brand text mr-1 mb-1"><span>HTML/CSS</span></Button>
+                <Button size="lg" className="btn-facebook btn-brand text mr-1 mb-1"><span>Python</span></Button>
+                <Button size="lg" className="btn-facebook btn-brand text mr-1 mb-1"><span>PHP</span></Button>
               </CardBody>
             </Card>
           </Col>
