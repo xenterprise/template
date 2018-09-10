@@ -46,12 +46,9 @@ class BaseLayout extends Component {
             
             
             <Container fluid>
-           
               <Switch>
-              
-                <Route path = '/basel/ali' exact component = {MyComponent} />
+                {/* <Route path = '/basel/ali' exact component = {MyComponent} /> */}
                 {routes.map((route, idx) => {
-                  console.log('HelloX', route)
                     return route.component ? (<Route key={idx} path={'/basel' + route.path} exact={route.exact} name={route.name} render={props => (
                         <route.component {...props} />
                       )} />)

@@ -35,6 +35,9 @@ class DefaultHeader extends Component {
             <NavLink href="#/basel/launchpad">LaunchPad</NavLink>
           </NavItem>
           <NavItem className="px-3">
+            <NavLink href="#/basel/aform">AForm</NavLink>
+          </NavItem>
+          <NavItem className="px-3">
             <NavLink href="/">Dashboard</NavLink>
           </NavItem>
           <NavItem className="px-3">

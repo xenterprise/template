@@ -194,6 +194,12 @@ const Profile = Loadable({
   loading: Loading,
 });
 
+const Aform = Loadable({
+  loader: () => import('./views/Aform/Aform'),
+  loading: Loading,
+});
+
+
 // const BaseLayout = Loadable({
 //   loader: () => import('./containers/BaseLayout'),
 //   loading: Loading,
@@ -206,6 +212,7 @@ const routes = [
   // { path: '/basel', exact: true, name: 'BaseLayout', component: BaseLayout },
   { path: '/dashboard', name: 'Dashboard', component: Dashboard },
   { path: '/profile', name: 'Profile', component: Profile },
+  { path: '/aform', name: 'Aform', component: Aform },
   { path: '/theme', exact: true, name: 'Theme', component: Colors },
   { path: '/theme/colors', name: 'Colors', component: Colors },
   { path: '/theme/typography', name: 'Typography', component: Typography },

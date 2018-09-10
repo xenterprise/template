@@ -492,390 +492,390 @@ class Profile extends Component {
 
     return (
       <div className="animated fadeIn">
-        {/* <Card>
-          <CardBody> */}
-            <Card>
-              <CardBody>
-                <Row>
-                  <Col md="5">
-                    <div align="left">
-                      <h1>Muhammad Mobeen Younis</h1>
-                      <h3>Electrical Engineer</h3>
-                      <h5>Willing to Takeon and Tackle Challenges</h5>
-                    </div>
 
-                  </Col>
-                  <Col md="2">
-                    <div align="center">
-                      <img src={'assets/img/avatars/9.jpg'} className="img-avatar" alt="admin@bootstrapmaster.com" />
-                    </div>
-                  </Col>
-                  <Col md="5">
-                    <div align="right">
-                      <h5>mobeenyounis@gmail.com</h5>
-                      <h5>+92 335 9123993</h5>
-                      <h5>www.hosterlink.com</h5>
-                      <h5>@mmobeenyounis</h5>
-                      <Button className="btn-facebook btn-brand icon mr-1 mb-1"><i className="fa fa-facebook"></i></Button>
-                      <Button className="btn-twitter btn-brand icon mr-1 mb-1"><i className="fa fa-twitter"></i></Button>
-                      <Button className="btn-linkedin btn-brand icon mr-1 mb-1"><i className="fa fa-linkedin"></i></Button>
-                      <Button className="btn-github btn-brand icon mr-1 mb-1"><i className="fa fa-github"></i></Button>
-                      <Button href="https://www.facebook.com" target="_blank" className="btn-stack-overflow btn-brand icon mr-1 mb-1"><i className="fa fa-stack-overflow"></i></Button>
-                    </div>
-                  </Col>
-                </Row>
+        <Row>
+          <Col md="9">
+          <Card>
+          <CardBody>
+            <Row>
+              <Col md="5">
+                <div align="left">
+                  <h1>Muhammad Mobeen Younis</h1>
+                  <h3>Electrical Engineer</h3>
+                  <h5>Willing to Takeon and Tackle Challenges</h5>
+                </div>
+
+              </Col>
+              <Col md="2">
+                <div align="center">
+                  <img src={'assets/img/avatars/9.jpg'} className="img-avatar" alt="admin@bootstrapmaster.com" />
+                </div>
+              </Col>
+              <Col md="5">
+                <div align="right">
+                  <h5>mobeenyounis@gmail.com</h5>
+                  <h5>+92 335 9123993</h5>
+                  <h5>www.hosterlink.com</h5>
+                  <h5>@mmobeenyounis</h5>
+                  <Button className="btn-facebook btn-brand icon mr-1 mb-1"><i className="fa fa-facebook"></i></Button>
+                  <Button className="btn-twitter btn-brand icon mr-1 mb-1"><i className="fa fa-twitter"></i></Button>
+                  <Button className="btn-linkedin btn-brand icon mr-1 mb-1"><i className="fa fa-linkedin"></i></Button>
+                  <Button className="btn-github btn-brand icon mr-1 mb-1"><i className="fa fa-github"></i></Button>
+                  <Button href="https://www.facebook.com" target="_blank" className="btn-stack-overflow btn-brand icon mr-1 mb-1"><i className="fa fa-stack-overflow"></i></Button>
+                </div>
+              </Col>
+            </Row>
+          </CardBody>
+        </Card>
+        <Row>
+          <Col>
+            <Card>
+
+              <CardHeader>
+                <h3>Skills</h3>
+              </CardHeader>
+              <CardBody >
+
+                <Button size="lg" className="btn-facebook btn-brand text mr-1 mb-1"><span>React JS</span></Button>
+                <Button size="lg" className="btn-facebook btn-brand text mr-1 mb-1"><span>Node JS</span></Button>
+                <Button size="lg" className="btn-facebook btn-brand text mr-1 mb-1"><span>C/C++</span></Button>
+                <Button size="lg" className="btn-facebook btn-brand text mr-1 mb-1"><span>C# .Net</span></Button>
+                <Button size="lg" className="btn-facebook btn-brand text mr-1 mb-1"><span>Embedded C</span></Button>
+                <Button size="lg" className="btn-facebook btn-brand text mr-1 mb-1"><span>FPGA Verilog</span></Button>
+                <Button size="lg" className="btn-facebook btn-brand text mr-1 mb-1"><span>Business Intelligence</span></Button>
+                <Button size="lg" className="btn-facebook btn-brand text mr-1 mb-1"><span>Book Authoring</span></Button>
+                <Button size="lg" className="btn-facebook btn-brand text mr-1 mb-1"><span>Visual Studio</span></Button>
+                <Button size="lg" className="btn-facebook btn-brand text mr-1 mb-1"><span>HTML/CSS</span></Button>
+                <Button size="lg" className="btn-facebook btn-brand text mr-1 mb-1"><span>Python</span></Button>
+                <Button size="lg" className="btn-facebook btn-brand text mr-1 mb-1"><span>PHP</span></Button>
               </CardBody>
             </Card>
+          </Col>
+        </Row>
+
+
+        <Card>
+          <CardHeader>
+            <h3>Work Experience & Projects</h3>
+          </CardHeader>
+          <CardBody>
             <Row>
-              <Col>
-                <Card>
-
+              <Col xs="12" sm="6" md="4">
+                <Card className="border-primary">
                   <CardHeader>
-                    <h3>Skills</h3>
+                    <h4>CARE (Pvt) Ltd.</h4>
+                    <h5>Design Engineer</h5>
+                    <h6>September 2015-February 2016</h6>
                   </CardHeader>
-                  <CardBody >
-
-                    <Button size="lg" className="btn-facebook btn-brand text mr-1 mb-1"><span>React JS</span></Button>
-                    <Button size="lg" className="btn-facebook btn-brand text mr-1 mb-1"><span>Node JS</span></Button>
-                    <Button size="lg" className="btn-facebook btn-brand text mr-1 mb-1"><span>C/C++</span></Button>
-                    <Button size="lg" className="btn-facebook btn-brand text mr-1 mb-1"><span>C# .Net</span></Button>
-                    <Button size="lg" className="btn-facebook btn-brand text mr-1 mb-1"><span>Embedded C</span></Button>
-                    <Button size="lg" className="btn-facebook btn-brand text mr-1 mb-1"><span>FPGA Verilog</span></Button>
-                    <Button size="lg" className="btn-facebook btn-brand text mr-1 mb-1"><span>Business Intelligence</span></Button>
-                    <Button size="lg" className="btn-facebook btn-brand text mr-1 mb-1"><span>Book Authoring</span></Button>
-                    <Button size="lg" className="btn-facebook btn-brand text mr-1 mb-1"><span>Visual Studio</span></Button>
-                    <Button size="lg" className="btn-facebook btn-brand text mr-1 mb-1"><span>HTML/CSS</span></Button>
-                    <Button size="lg" className="btn-facebook btn-brand text mr-1 mb-1"><span>Python</span></Button>
-                    <Button size="lg" className="btn-facebook btn-brand text mr-1 mb-1"><span>PHP</span></Button>
-                  </CardBody>
+                  <CardBody>
+                    Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut
+                    laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation
+                    ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat.
+              </CardBody>
+                </Card>
+              </Col>
+              <Col xs="12" sm="6" md="4">
+                <Card className="border-primary">
+                  <CardHeader>
+                    <h4>CARE (pvt) Ltd.</h4>
+                    <h5>Design Engineer</h5>
+                    <h6>September 2015-February 2016</h6>
+                  </CardHeader>
+                  <CardBody>
+                    Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut
+                    laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation
+                    ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat.
+              </CardBody>
+                </Card>
+              </Col>
+              <Col xs="12" sm="6" md="4">
+                <Card className="border-primary">
+                  <CardHeader>
+                    <h4>CARE (pvt) Ltd.</h4>
+                    <h5>Design Engineer</h5>
+                    <h6>September 2015-February 2016</h6>
+                  </CardHeader>
+                  <CardBody>
+                    Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut
+                    laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation
+                    ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat.
+              </CardBody>
+                </Card>
+              </Col>
+              <Col xs="12" sm="6" md="4">
+                <Card className="border-primary">
+                  <CardHeader>
+                    <h4>CARE (pvt) Ltd.</h4>
+                    <h5>Design Engineer</h5>
+                    <h6>September 2015-February 2016</h6>
+                  </CardHeader>
+                  <CardBody>
+                    Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut
+                    laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation
+                    ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat.
+              </CardBody>
+                </Card>
+              </Col>
+              <Col xs="12" sm="6" md="4">
+                <Card className="border-primary">
+                  <CardHeader>
+                    <h4>CARE (pvt) Ltd.</h4>
+                    <h5>Design Engineer</h5>
+                    <h6>September 2015-February 2016</h6>
+                  </CardHeader>
+                  <CardBody>
+                    Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut
+                    laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation
+                    ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat.
+              </CardBody>
                 </Card>
               </Col>
             </Row>
+          </CardBody>
+        </Card>
 
 
+
+
+
+        <Row>
+          <Col>
             <Card>
               <CardHeader>
-                <h3>Work Experience & Projects</h3>
+                <h3>Education</h3>
               </CardHeader>
               <CardBody>
-                <Row>
-                  <Col xs="12" sm="6" md="4">
-                    <Card className="border-primary">
-                      <CardHeader>
-                        <h4>CARE (Pvt) Ltd.</h4>
-                        <h5>Design Engineer</h5>
-                        <h6>September 2015-February 2016</h6>
-                      </CardHeader>
-                      <CardBody>
-                        Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut
-                        laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation
-                        ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat.
-              </CardBody>
-                    </Card>
-                  </Col>
-                  <Col xs="12" sm="6" md="4">
-                    <Card className="border-primary">
-                      <CardHeader>
-                        <h4>CARE (pvt) Ltd.</h4>
-                        <h5>Design Engineer</h5>
-                        <h6>September 2015-February 2016</h6>
-                      </CardHeader>
-                      <CardBody>
-                        Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut
-                        laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation
-                        ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat.
-              </CardBody>
-                    </Card>
-                  </Col>
-                  <Col xs="12" sm="6" md="4">
-                    <Card className="border-primary">
-                      <CardHeader>
-                        <h4>CARE (pvt) Ltd.</h4>
-                        <h5>Design Engineer</h5>
-                        <h6>September 2015-February 2016</h6>
-                      </CardHeader>
-                      <CardBody>
-                        Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut
-                        laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation
-                        ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat.
-              </CardBody>
-                    </Card>
-                  </Col>
-                  <Col xs="12" sm="6" md="4">
-                    <Card className="border-primary">
-                      <CardHeader>
-                        <h4>CARE (pvt) Ltd.</h4>
-                        <h5>Design Engineer</h5>
-                        <h6>September 2015-February 2016</h6>
-                      </CardHeader>
-                      <CardBody>
-                        Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut
-                        laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation
-                        ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat.
-              </CardBody>
-                    </Card>
-                  </Col>
-                  <Col xs="12" sm="6" md="4">
-                    <Card className="border-primary">
-                      <CardHeader>
-                        <h4>CARE (pvt) Ltd.</h4>
-                        <h5>Design Engineer</h5>
-                        <h6>September 2015-February 2016</h6>
-                      </CardHeader>
-                      <CardBody>
-                        Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut
-                        laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation
-                        ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat.
-              </CardBody>
-                    </Card>
-                  </Col>
-                </Row>
+                <ListGroup>
+                  <ListGroupItem disabled tag="a" href="#"><h4>BS in Electrical Engineering (CE)</h4><h5>CASE, Center for Advanced Studies in
+Engineering, Islamabad, Pakistan</h5></ListGroupItem>
+                </ListGroup>
               </CardBody>
             </Card>
-
-
-
-
-
-            <Row>
-              <Col>
-                <Card>
-                  <CardHeader>
-                    <h3>Education</h3>
-                  </CardHeader>
-                  <CardBody>
-                    <ListGroup>
-                      <ListGroupItem disabled tag="a" href="#"><h4>BS in Electrical Engineering (CE)</h4><h5>CASE, Center for Advanced Studies in
-Engineering, Islamabad, Pakistan</h5></ListGroupItem>
-                    </ListGroup>
-                  </CardBody>
-                </Card>
-              </Col>
-            </Row>
-            <Row>
-              <Col>
-                <Card>
-                  <CardHeader>
-                    <h3>Organizations</h3>
-                  </CardHeader>
-                  <CardBody>
-                    <ListGroup>
-                      <ListGroupItem disabled tag="a" href="#"><h5>SKYELECTRIC (pvt) Ltd Islamabad, Pakistan</h5></ListGroupItem>
-                      <ListGroupItem disabled tag="a" href="#"><h5>Center for Advanced Research in Engineering (CARE)</h5></ListGroupItem>
-                      <ListGroupItem disabled tag="a" href="#"><h5>Center for Advanced Studies in Engineering (CASE)</h5></ListGroupItem>
-                      <ListGroupItem disabled tag="a" href="#"><h5>Marvelous Technologies</h5></ListGroupItem>
-                      <ListGroupItem disabled tag="a" href="#"><h5>Step Robotics</h5></ListGroupItem>
-                      <ListGroupItem disabled tag="a" href="#"><h5>HosterLink Web Services</h5></ListGroupItem>
-                    </ListGroup>
-                  </CardBody>
-                </Card>
-              </Col>
-            </Row>
-            <Row>
-              <Col>
-                <Card>
-                  <CardHeader>
-                    <h3>Certifications</h3>
-                  </CardHeader>
-                  <CardBody>
-                    <ListGroup>
-                      <ListGroupItem disabled tag="a" href="#"><h5>WISSEN Certification</h5><h6>Internet Search Methodologies and Search Engine Optimization</h6></ListGroupItem>
-                    </ListGroup>
-                  </CardBody>
-                </Card>
-              </Col>
-            </Row>
-            <Row>
-              <Col>
-                <Card>
-                  <CardHeader>
-                    <h3>Publications</h3>
-                  </CardHeader>
-                  <CardBody>
-                    <ListGroup>
-                      <ListGroupItem disabled tag="a" href="#"><h5>IEEE Research Publication</h5><h6>“Simulation and Implementation of Solar Power Battery Charger using Perturb &
+          </Col>
+        </Row>
+        <Row>
+          <Col>
+            <Card>
+              <CardHeader>
+                <h3>Organizations</h3>
+              </CardHeader>
+              <CardBody>
+                <ListGroup>
+                  <ListGroupItem disabled tag="a" href="#"><h5>SKYELECTRIC (pvt) Ltd Islamabad, Pakistan</h5></ListGroupItem>
+                  <ListGroupItem disabled tag="a" href="#"><h5>Center for Advanced Research in Engineering (CARE)</h5></ListGroupItem>
+                  <ListGroupItem disabled tag="a" href="#"><h5>Center for Advanced Studies in Engineering (CASE)</h5></ListGroupItem>
+                  <ListGroupItem disabled tag="a" href="#"><h5>Marvelous Technologies</h5></ListGroupItem>
+                  <ListGroupItem disabled tag="a" href="#"><h5>Step Robotics</h5></ListGroupItem>
+                  <ListGroupItem disabled tag="a" href="#"><h5>HosterLink Web Services</h5></ListGroupItem>
+                </ListGroup>
+              </CardBody>
+            </Card>
+          </Col>
+        </Row>
+        <Row>
+          <Col>
+            <Card>
+              <CardHeader>
+                <h3>Certifications</h3>
+              </CardHeader>
+              <CardBody>
+                <ListGroup>
+                  <ListGroupItem disabled tag="a" href="#"><h5>WISSEN Certification</h5><h6>Internet Search Methodologies and Search Engine Optimization</h6></ListGroupItem>
+                </ListGroup>
+              </CardBody>
+            </Card>
+          </Col>
+        </Row>
+        <Row>
+          <Col>
+            <Card>
+              <CardHeader>
+                <h3>Publications</h3>
+              </CardHeader>
+              <CardBody>
+                <ListGroup>
+                  <ListGroupItem disabled tag="a" href="#"><h5>IEEE Research Publication</h5><h6>“Simulation and Implementation of Solar Power Battery Charger using Perturb &
 Observe Algorithm”</h6></ListGroupItem>
-                    </ListGroup>
-                  </CardBody>
-                </Card>
-              </Col>
-            </Row>
-
-
-
-
-
-
-
-
-
-
-            <Row>
-              <Col>
-                <Card>
-                  <CardHeader>
-                    <h3>Looking for opportunities </h3>
-                  </CardHeader>
-                  <CardBody>
-                    <Table hover responsive className="table-outline mb-0 d-none d-sm-table">
-                      <thead className="thead-light">
-                        <tr>
-                          <th><h4>Services</h4></th>
-                          <th className="text-center"><h4>Project Based Jobs</h4></th>
-                          <th className="text-center"><h4>Part Time Jobs</h4></th>
-                          <th className="text-center"><h4>Full Time Jobs</h4></th>
-                          <th className="text-center"><h4>Partnerships</h4></th>
-                          <th className="text-center"><h4>Consultation</h4></th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        <tr>
-                          <td>
-                            <div><h5>Web Development</h5></div>
-                            <div className="small text-muted">
-                              <span>New</span> | Registered: Jan 1, 2015
+                </ListGroup>
+              </CardBody>
+            </Card>
+          </Col>
+        </Row>
+        <Row>
+          <Col>
+            <Card>
+              <CardHeader>
+                <h3>Looking for opportunities </h3>
+              </CardHeader>
+              <CardBody>
+                <Table hover responsive className="table-outline mb-0 d-none d-sm-table">
+                  <thead className="thead-light">
+                    <tr>
+                      <th><h4>Services</h4></th>
+                      <th className="text-center"><h4>Project Based Jobs</h4></th>
+                      <th className="text-center"><h4>Part Time Jobs</h4></th>
+                      <th className="text-center"><h4>Full Time Jobs</h4></th>
+                      <th className="text-center"><h4>Partnerships</h4></th>
+                      <th className="text-center"><h4>Consultation</h4></th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>
+                        <div><h5>Web Development</h5></div>
+                        <div className="small text-muted">
+                          <span>New</span> | Registered: Jan 1, 2015
                         </div>
-                          </td>
-                          <td className="text-center">
-                            <img src={'assets/img/vectors/yes_.png'} className="img-avatar" alt="admin@bootstrapmaster.com" />
-                          </td>
-                          <td className="text-center">
-                            <img src={'assets/img/vectors/blank.png'} className="img-avatar" alt="admin@bootstrapmaster.com" />
-                          </td>
-                          <td className="text-center">
-                            <img src={'assets/img/vectors/blank.png'} className="img-avatar" alt="admin@bootstrapmaster.com" />
-                          </td>
-                          <td className="text-center">
-                            <img src={'assets/img/vectors/blank.png'} className="img-avatar" alt="admin@bootstrapmaster.com" />
-                          </td>
-                          <td className="text-center">
-                            <img src={'assets/img/vectors/blank.png'} className="img-avatar" alt="admin@bootstrapmaster.com" />
-                          </td>
-                        </tr>
-                        <tr>
-                          <td>
-                            <div><h5>Software Development</h5></div>
-                            <div className="small text-muted">
+                      </td>
+                      <td className="text-center">
+                        <img src={'assets/img/vectors/yes_.png'} className="img-avatar" alt="admin@bootstrapmaster.com" />
+                      </td>
+                      <td className="text-center">
+                        <img src={'assets/img/vectors/blank.png'} className="img-avatar" alt="admin@bootstrapmaster.com" />
+                      </td>
+                      <td className="text-center">
+                        <img src={'assets/img/vectors/blank.png'} className="img-avatar" alt="admin@bootstrapmaster.com" />
+                      </td>
+                      <td className="text-center">
+                        <img src={'assets/img/vectors/blank.png'} className="img-avatar" alt="admin@bootstrapmaster.com" />
+                      </td>
+                      <td className="text-center">
+                        <img src={'assets/img/vectors/blank.png'} className="img-avatar" alt="admin@bootstrapmaster.com" />
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <div><h5>Software Development</h5></div>
+                        <div className="small text-muted">
 
-                              <span>Recurring</span> | Registered: Jan 1, 2015
+                          <span>Recurring</span> | Registered: Jan 1, 2015
                       </div>
-                          </td>
-                          <td className="text-center">
-                            <img src={'assets/img/vectors/yes_.png'} className="img-avatar" alt="admin@bootstrapmaster.com" />
-                          </td>
-                          <td className="text-center">
-                            <img src={'assets/img/vectors/blank.png'} className="img-avatar" alt="admin@bootstrapmaster.com" />
-                          </td>
-                          <td className="text-center">
-                            <img src={'assets/img/vectors/blank.png'} className="img-avatar" alt="admin@bootstrapmaster.com" />
-                          </td>
-                          <td className="text-center">
-                            <img src={'assets/img/vectors/blank.png'} className="img-avatar" alt="admin@bootstrapmaster.com" />
-                          </td>
-                          <td className="text-center">
-                            <img src={'assets/img/vectors/blank.png'} className="img-avatar" alt="admin@bootstrapmaster.com" />
-                          </td>
-                        </tr>
-                        <tr>
-                          <td>
-                            <div><h5>Trading & Investments</h5></div>
-                            <div className="small text-muted">
-                              <span>New</span> | Registered: Jan 1, 2015
+                      </td>
+                      <td className="text-center">
+                        <img src={'assets/img/vectors/yes_.png'} className="img-avatar" alt="admin@bootstrapmaster.com" />
+                      </td>
+                      <td className="text-center">
+                        <img src={'assets/img/vectors/blank.png'} className="img-avatar" alt="admin@bootstrapmaster.com" />
+                      </td>
+                      <td className="text-center">
+                        <img src={'assets/img/vectors/blank.png'} className="img-avatar" alt="admin@bootstrapmaster.com" />
+                      </td>
+                      <td className="text-center">
+                        <img src={'assets/img/vectors/blank.png'} className="img-avatar" alt="admin@bootstrapmaster.com" />
+                      </td>
+                      <td className="text-center">
+                        <img src={'assets/img/vectors/blank.png'} className="img-avatar" alt="admin@bootstrapmaster.com" />
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <div><h5>Trading & Investments</h5></div>
+                        <div className="small text-muted">
+                          <span>New</span> | Registered: Jan 1, 2015
                       </div>
-                          </td>
-                          <td className="text-center">
-                            <img src={'assets/img/vectors/yes_.png'} className="img-avatar" alt="admin@bootstrapmaster.com" />
-                          </td>
-                          <td className="text-center">
-                            <img src={'assets/img/vectors/yes_.png'} className="img-avatar" alt="admin@bootstrapmaster.com" />
-                          </td>
-                          <td className="text-center">
-                            <img src={'assets/img/vectors/yes_.png'} className="img-avatar" alt="admin@bootstrapmaster.com" />
-                          </td>
-                          <td className="text-center">
-                            <img src={'assets/img/vectors/blank.png'} className="img-avatar" alt="admin@bootstrapmaster.com" />
-                          </td>
-                          <td className="text-center">
-                            <img src={'assets/img/vectors/blank.png'} className="img-avatar" alt="admin@bootstrapmaster.com" />
-                          </td>
-                        </tr>
-                        <tr>
-                          <td>
-                            <div><h5>Mentorship</h5></div>
-                            <div className="small text-muted">
-                              <span>New</span> | Registered: Jan 1, 2015
+                      </td>
+                      <td className="text-center">
+                        <img src={'assets/img/vectors/yes_.png'} className="img-avatar" alt="admin@bootstrapmaster.com" />
+                      </td>
+                      <td className="text-center">
+                        <img src={'assets/img/vectors/yes_.png'} className="img-avatar" alt="admin@bootstrapmaster.com" />
+                      </td>
+                      <td className="text-center">
+                        <img src={'assets/img/vectors/yes_.png'} className="img-avatar" alt="admin@bootstrapmaster.com" />
+                      </td>
+                      <td className="text-center">
+                        <img src={'assets/img/vectors/blank.png'} className="img-avatar" alt="admin@bootstrapmaster.com" />
+                      </td>
+                      <td className="text-center">
+                        <img src={'assets/img/vectors/blank.png'} className="img-avatar" alt="admin@bootstrapmaster.com" />
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <div><h5>Mentorship</h5></div>
+                        <div className="small text-muted">
+                          <span>New</span> | Registered: Jan 1, 2015
                       </div>
-                          </td>
-                          <td className="text-center">
-                            <img src={'assets/img/vectors/yes_.png'} className="img-avatar" alt="admin@bootstrapmaster.com" />
-                          </td>
-                          <td className="text-center">
-                            <img src={'assets/img/vectors/yes_.png'} className="img-avatar" alt="admin@bootstrapmaster.com" />
-                          </td>
-                          <td className="text-center">
-                            <img src={'assets/img/vectors/yes_.png'} className="img-avatar" alt="admin@bootstrapmaster.com" />
-                          </td>
-                          <td className="text-center">
-                            <img src={'assets/img/vectors/blank.png'} className="img-avatar" alt="admin@bootstrapmaster.com" />
-                          </td>
-                          <td className="text-center">
-                            <img src={'assets/img/vectors/blank.png'} className="img-avatar" alt="admin@bootstrapmaster.com" />
-                          </td>
-                        </tr>
-                        <tr>
-                          <td>
-                            <div><h5>Web Hosting</h5></div>
-                            <div className="small text-muted">
-                              <span>New</span> | Registered: Jan 1, 2015
+                      </td>
+                      <td className="text-center">
+                        <img src={'assets/img/vectors/yes_.png'} className="img-avatar" alt="admin@bootstrapmaster.com" />
+                      </td>
+                      <td className="text-center">
+                        <img src={'assets/img/vectors/yes_.png'} className="img-avatar" alt="admin@bootstrapmaster.com" />
+                      </td>
+                      <td className="text-center">
+                        <img src={'assets/img/vectors/yes_.png'} className="img-avatar" alt="admin@bootstrapmaster.com" />
+                      </td>
+                      <td className="text-center">
+                        <img src={'assets/img/vectors/blank.png'} className="img-avatar" alt="admin@bootstrapmaster.com" />
+                      </td>
+                      <td className="text-center">
+                        <img src={'assets/img/vectors/blank.png'} className="img-avatar" alt="admin@bootstrapmaster.com" />
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <div><h5>Web Hosting</h5></div>
+                        <div className="small text-muted">
+                          <span>New</span> | Registered: Jan 1, 2015
                       </div>
-                          </td>
-                          <td className="text-center">
-                            <img src={'assets/img/vectors/yes_.png'} className="img-avatar" alt="admin@bootstrapmaster.com" />
-                          </td>
-                          <td className="text-center">
-                            <img src={'assets/img/vectors/yes_.png'} className="img-avatar" alt="admin@bootstrapmaster.com" />
-                          </td>
-                          <td className="text-center">
-                            <img src={'assets/img/vectors/blank.png'} className="img-avatar" alt="admin@bootstrapmaster.com" />
-                          </td>
-                          <td className="text-center">
-                            <img src={'assets/img/vectors/blank.png'} className="img-avatar" alt="admin@bootstrapmaster.com" />
-                          </td>
-                          <td className="text-center">
-                            <img src={'assets/img/vectors/yes_.png'} className="img-avatar" alt="admin@bootstrapmaster.com" />
-                          </td>
-                        </tr>
-                        <tr>
-                          <td>
-                            <div><h5>Real Estate</h5></div>
-                            <div className="small text-muted">
-                              <span>New</span> | Registered: Jan 1, 2015
+                      </td>
+                      <td className="text-center">
+                        <img src={'assets/img/vectors/yes_.png'} className="img-avatar" alt="admin@bootstrapmaster.com" />
+                      </td>
+                      <td className="text-center">
+                        <img src={'assets/img/vectors/yes_.png'} className="img-avatar" alt="admin@bootstrapmaster.com" />
+                      </td>
+                      <td className="text-center">
+                        <img src={'assets/img/vectors/blank.png'} className="img-avatar" alt="admin@bootstrapmaster.com" />
+                      </td>
+                      <td className="text-center">
+                        <img src={'assets/img/vectors/blank.png'} className="img-avatar" alt="admin@bootstrapmaster.com" />
+                      </td>
+                      <td className="text-center">
+                        <img src={'assets/img/vectors/yes_.png'} className="img-avatar" alt="admin@bootstrapmaster.com" />
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <div><h5>Real Estate</h5></div>
+                        <div className="small text-muted">
+                          <span>New</span> | Registered: Jan 1, 2015
                       </div>
-                          </td>
-                          <td className="text-center">
-                            <img src={'assets/img/vectors/yes_.png'} className="img-avatar" alt="admin@bootstrapmaster.com" />
-                          </td>
-                          <td className="text-center">
-                            <img src={'assets/img/vectors/yes_.png'} className="img-avatar" alt="admin@bootstrapmaster.com" />
-                          </td>
-                          <td className="text-center">
-                            <img src={'assets/img/vectors/blank.png'} className="img-avatar" alt="admin@bootstrapmaster.com" />
-                          </td>
-                          <td className="text-center">
-                            <img src={'assets/img/vectors/yes_.png'} className="img-avatar" alt="admin@bootstrapmaster.com" />
-                          </td>
-                          <td className="text-center">
-                            <img src={'assets/img/vectors/blank.png'} className="img-avatar" alt="admin@bootstrapmaster.com" />
-                          </td>
-                        </tr>
-                      </tbody>
-                    </Table>
-                  </CardBody>
-                </Card>
-              </Col>
-            </Row>
-          {/* </CardBody>
-        </Card> */}
+                      </td>
+                      <td className="text-center">
+                        <img src={'assets/img/vectors/yes_.png'} className="img-avatar" alt="admin@bootstrapmaster.com" />
+                      </td>
+                      <td className="text-center">
+                        <img src={'assets/img/vectors/yes_.png'} className="img-avatar" alt="admin@bootstrapmaster.com" />
+                      </td>
+                      <td className="text-center">
+                        <img src={'assets/img/vectors/blank.png'} className="img-avatar" alt="admin@bootstrapmaster.com" />
+                      </td>
+                      <td className="text-center">
+                        <img src={'assets/img/vectors/yes_.png'} className="img-avatar" alt="admin@bootstrapmaster.com" />
+                      </td>
+                      <td className="text-center">
+                        <img src={'assets/img/vectors/blank.png'} className="img-avatar" alt="admin@bootstrapmaster.com" />
+                      </td>
+                    </tr>
+                  </tbody>
+                </Table>
+              </CardBody>
+            </Card>
+          </Col>
+        </Row>
+          </Col>
+          <Col md="3">
+            <Card>
+              <CardBody>
+                <h4> Latest Trends</h4>
+              </CardBody>
+            </Card>
+          </Col>
+
+        </Row>
+        
       </div>
     );
   }
