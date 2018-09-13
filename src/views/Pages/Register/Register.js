@@ -1,7 +1,53 @@
 import React, { Component } from 'react';
-import { Button, Card, CardBody, CardFooter, Col, Container, Form, Input, InputGroup, InputGroupAddon, InputGroupText, Row } from 'reactstrap';
+import { Alert, Button, Card, CardBody, CardFooter, Col, Container, Form, Input, InputGroup, InputGroupAddon, InputGroupText, Row } from 'reactstrap';
+import axios from 'axios'
+import { Redirect} from 'react-router-dom';
 
 class Register extends Component {
+  
+  constructor() {
+    super();
+    this.state = {
+      username: '',
+      email: '',
+      password: '',
+      msg: 'Create Your Account'
+    }
+    this.data = {
+      username: '',
+      email: '',
+      password: '',
+
+    }
+    this.formSubmit = this.formSubmit.bind(this);
+    this.inputChanged = this.inputChanged.bind(this);
+  }
+
+
+  formSubmit(e) {
+    e.preventDefault();
+    this.data.username = this.state.username
+    this.data.email = this.state.email
+    this.data.password = this.state.password
+
+    axios.post('http://localhost:3000/registeruser', this.data).then((res) => {
+      console.log(res.data.msg);
+      this.setState({
+        msg: res.data.msg
+      })
+    }).catch((err) => {
+      this.setState({
+        msg: 'Check Internet & Try Again'
+      })
+    })
+  }
+
+  inputChanged(e) {
+    this.setState({ [e.target.name]: e.target.value })
+  }
+
+
+
   render() {
     return (
       <div className="app flex-row align-items-center">
@@ -10,22 +56,27 @@ class Register extends Component {
             <Col md="6">
               <Card className="mx-4">
                 <CardBody className="p-4">
-                  <Form>
-                    <h1>Register</h1>
-                    <p className="text-muted">Create your account</p>
+                  <Form onSubmit={this.formSubmit}>
+                    <h1>Hi! Register here</h1>
+
+                    {this.state.msg == 'Create Your Account' ? this.state.msg
+                      : this.state.msg == 'User Registered Successfully' ? <div><Alert color="success">{this.state.msg}</Alert><Redirect to="/login" /></div>
+                        : <Alert color="danger">{this.state.msg}</Alert>}
+
+
                     <InputGroup className="mb-3">
                       <InputGroupAddon addonType="prepend">
                         <InputGroupText>
                           <i className="icon-user"></i>
                         </InputGroupText>
                       </InputGroupAddon>
-                      <Input type="text" placeholder="Username" autoComplete="username" />
+                      <Input type="text" name="username" value={this.state.username} onChange={this.inputChanged} placeholder="Username" autoComplete="username" />
                     </InputGroup>
                     <InputGroup className="mb-3">
                       <InputGroupAddon addonType="prepend">
                         <InputGroupText>@</InputGroupText>
                       </InputGroupAddon>
-                      <Input type="text" placeholder="Email" autoComplete="email" />
+                      <Input type="text" name="email" value={this.state.email} onChange={this.inputChanged} placeholder="Email" autoComplete="email" />
                     </InputGroup>
                     <InputGroup className="mb-3">
                       <InputGroupAddon addonType="prepend">
@@ -33,28 +84,33 @@ class Register extends Component {
                           <i className="icon-lock"></i>
                         </InputGroupText>
                       </InputGroupAddon>
-                      <Input type="password" placeholder="Password" autoComplete="new-password" />
+                      <Input type="password" name="password" value={this.state.password} onChange={this.inputChanged} placeholder="Password" autoComplete="new-password" />
                     </InputGroup>
-                    <InputGroup className="mb-4">
+                    {/* <InputGroup className="mb-4">
                       <InputGroupAddon addonType="prepend">
                         <InputGroupText>
                           <i className="icon-lock"></i>
                         </InputGroupText>
                       </InputGroupAddon>
-                      <Input type="password" placeholder="Repeat password" autoComplete="new-password" />
-                    </InputGroup>
-                    <Button color="success" block>Create Account</Button>
+                      <Input type="password" name="repeat" value={this.state.repeat} onChange={this.inputChanged} placeholder="Repeat password" autoComplete="new-password" />
+                    </InputGroup> */}
+                    <Button color="success" block onSubmit="">Create Account</Button>
                   </Form>
+                  
                 </CardBody>
                 <CardFooter className="p-4">
-                  <Row>
+                <p>Already have an account?</p>
+                <Button color="info" block href="#/login">Login</Button>
+                  {/* <Row>
+
+                    
                     <Col xs="12" sm="6">
                       <Button className="btn-facebook" block><span>facebook</span></Button>
                     </Col>
                     <Col xs="12" sm="6">
                       <Button className="btn-twitter" block><span>twitter</span></Button>
                     </Col>
-                  </Row>
+                  </Row> */}
                 </CardFooter>
               </Card>
             </Col>

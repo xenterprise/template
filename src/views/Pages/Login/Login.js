@@ -1,7 +1,71 @@
 import React, { Component } from 'react';
-import { Button, Card, CardBody, CardGroup, Col, Container, Form, Input, InputGroup, InputGroupAddon, InputGroupText, Row } from 'reactstrap';
+import { Alert, Button, Card, CardBody, CardGroup, Col, Container, Form, Input, InputGroup, InputGroupAddon, InputGroupText, Row } from 'reactstrap';
+import axios from 'axios'
+import { Redirect } from 'react-router-dom';
+
 
 class Login extends Component {
+  constructor() {
+    super();
+    this.state = {
+      email: '',
+      password: '',
+      msg: 'Sign In to your account',
+      emailFlag: 0,
+      loggedin: false
+    }
+    this.data = {
+      email: '',
+      password: ''
+    }
+    this.formSubmit = this.formSubmit.bind(this);
+    this.inputChanged = this.inputChanged.bind(this);
+  }
+  formSubmit(e) {
+    e.preventDefault();
+    this.data.email = this.state.email
+    this.data.password = this.state.password
+
+    console.log(this.data)
+    console.log(this.state)
+    if (this.state.emailFlag == 0) {
+      axios.post('http://localhost:3000/login', this.data).then((res) => {
+        console.log(res.data);
+        if (res.data.msg == 'Agree') {
+          this.setState({
+            loggedin: true
+          })
+          localStorage.account = this.state.email
+          console.log('Saved Profile')
+          console.log(localStorage.account)
+        } else {
+          this.setState({
+            loggedin: false
+          })
+        }
+      }).catch((err) => {
+        this.setState({
+          msg: 'Check Internet & Try Again'
+        })
+      })
+    }
+  }
+
+  inputChanged(e) {
+    this.setState({ [e.target.name]: e.target.value })
+    if (this.state.email.includes('@')) {
+      this.setState({
+        emailFlag: 0
+      })
+    } else {
+      this.setState({
+        emailFlag: 1
+      })
+    }
+  }
+
+
+
   render() {
     return (
       <div className="app flex-row align-items-center">
@@ -11,16 +75,24 @@ class Login extends Component {
               <CardGroup>
                 <Card className="p-4">
                   <CardBody>
-                    <Form>
+
+
+
+
+                    <Form onSubmit={this.formSubmit}>
                       <h1>Login</h1>
-                      <p className="text-muted">Sign In to your account</p>
+
+                      {this.state.emailFlag == 0 ? this.state.msg
+                        : <Alert color="danger">Invalid Email Provided</Alert>}
+
+
                       <InputGroup className="mb-3">
                         <InputGroupAddon addonType="prepend">
                           <InputGroupText>
                             <i className="icon-user"></i>
                           </InputGroupText>
                         </InputGroupAddon>
-                        <Input type="text" placeholder="Username" autoComplete="username" />
+                        <Input type="text" required name="email" placeholder="Email" value={this.state.email} onChange={this.inputChanged} autoComplete="username" />
                       </InputGroup>
                       <InputGroup className="mb-4">
                         <InputGroupAddon addonType="prepend">
@@ -28,7 +100,7 @@ class Login extends Component {
                             <i className="icon-lock"></i>
                           </InputGroupText>
                         </InputGroupAddon>
-                        <Input type="password" placeholder="Password" autoComplete="current-password" />
+                        <Input type="password" required name="password" placeholder="Password" value={this.state.password} onChange={this.inputChanged} autoComplete="current-password" />
                       </InputGroup>
                       <Row>
                         <Col xs="6">
@@ -45,9 +117,8 @@ class Login extends Component {
                   <CardBody className="text-center">
                     <div>
                       <h2>Sign up</h2>
-                      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut
-                        labore et dolore magna aliqua.</p>
-                      <Button color="primary" className="mt-3" active>Register Now!</Button>
+                      <p>Make your Profile<br />Get Hired</p>
+                      <Button color="primary" className="mt-3" active href="#/register">Create Account</Button>
                     </div>
                   </CardBody>
                 </Card>

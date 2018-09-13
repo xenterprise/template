@@ -14,16 +14,34 @@ import axios from 'axios';
 
 
 const log = (type) => console.log.bind(console, type);
-const defaultData = {
+
+const defaultData={
+  Personal:{
+    Name: '',
+    Email:''
+  }
 };
+
+
+function getuserData(theObject) {
+ 
+}
+
+// document.addEventListener("DOMContentLoaded", function() {
+//   getuserData(theObject)
+// });
 
 const SubmitRoutine = ({ formData }) => {
   console.log("Data submitted:", formData)
-  axios.post('http://localhost:3000/adduser',formData)
+  // axios.post('http://localhost:3000/adduser', formData)
+  axios.post('http://localhost:3000/updateuser',formData)
+  console.log("Hello", formData)
+  
 };
 
 const OnChangeRoutine = ({ formData }) => {
-  console.log("Data :", formData)
+  // console.log("Data :", formData)
+  
 };
 
 const ErrorRoutine = (errors) => {
@@ -64,7 +82,7 @@ const schemaCore = {
       items: {
         type: "object",
         properties: {
-          Company: { type: "number", title: "Company/Organization" },
+          Company: { type: "string", title: "Company/Organization" },
           Position: { type: "string" },
           Duration: { type: "string" },
           Details: { type: "string" },
@@ -142,7 +160,7 @@ const schemaCore = {
 
 const uiSchemaCore = {
   Personal: {
-    Name: { "ui:widget": "text", classNames: "col-8" },
+    Name: { "ui:widget": "text", classNames: "col-8 " },
     Title: { "ui:widget": "text", classNames: "col-8" },
     Tagline: { "ui:widget": "text", classNames: "col-8" },
     Email: { "ui:widget": "text", classNames: "col-8" },
@@ -152,7 +170,7 @@ const uiSchemaCore = {
   },
   Social: {
     items: {
-      Platform: { "ui:widget": "select" },
+      Platform: { "ui:widget": "select"},
       Link: { "ui:widget": "text", }
     },
     "ui:options": {
@@ -230,7 +248,7 @@ const uiSchemaCore = {
       inline: false
     }
   },
-}
+} 
 
 // InsertCV=()=>{
 //   console.log("Insert Method is Called");
@@ -250,11 +268,30 @@ class Aform extends Component {
     super(props);
 
     this.state = {
+      waiting: true,
+      defaultData:{}
     };
+    this.data = {
+      email : ''
+    }
+    console.log('ali')
+    
   }
 
+  componentDidMount(){
+    this.data.email = localStorage.account
+    axios.post('http://localhost:3000/loaduser',this.data).then((res) => {
+      this.setState({
+        defaultData:res.data,
+        waiting:false
+      })
+    }).catch((err) => {
+      console.log(err)
+    })
+  }
 
   render() {
+
     return (
       <div className="animated fadeIn">
 
@@ -264,13 +301,16 @@ class Aform extends Component {
         <Container fluid>
           <Row>
             <Col md="8">
+              {this.state.waiting?null:
               <Form schema={schemaCore}
-                formData = {defaultData}
-                uiSchema={uiSchemaCore}
-                onChange={OnChangeRoutine}
-                onSubmit={SubmitRoutine}
-                onError={ErrorRoutine}
-              />
+              formData={this.state.defaultData}
+              uiSchema={uiSchemaCore}
+              onChange={OnChangeRoutine}
+              onSubmit={SubmitRoutine}
+              onError={ErrorRoutine}
+            />
+              }
+              
             </Col>
             <Col md="4">
               <Card>
@@ -279,6 +319,7 @@ class Aform extends Component {
                 </CardBody>
               </Card>
             </Col>
+
 
           </Row>
         </Container>

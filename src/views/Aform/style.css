@@ -1,7 +1,11 @@
 i.glyphicon { 
     display: none; 
 }
+/* .btn-submit::after{
+    content:'Save Profile'
 
+
+} */
 .btn-add::after {
     content: 'Add';
     color: black;
