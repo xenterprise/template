@@ -1,10 +1,14 @@
 import React, { Component } from 'react';
 import { Alert, Button, Card, CardBody, CardFooter, Col, Container, Form, Input, InputGroup, InputGroupAddon, InputGroupText, Row } from 'reactstrap';
 import axios from 'axios'
-import { Redirect} from 'react-router-dom';
+import { Redirect } from 'react-router-dom';
+// import {db} from '../../../firebase'
+// import { auth, db } from '../../../firebase';
+import fire from '../../../config/Fire';
+
 
 class Register extends Component {
-  
+
   constructor() {
     super();
     this.state = {
@@ -19,6 +23,19 @@ class Register extends Component {
       password: '',
 
     }
+    this.baseData = {
+      "Personal": {
+        "Name": "",
+        "Title": ""
+      },
+      "Social": [],
+      "Education": [],
+      "Certifications": [],
+      "Organizations": [],
+      "Publications": [],
+      "Services": [],
+      "Work": []
+    }
     this.formSubmit = this.formSubmit.bind(this);
     this.inputChanged = this.inputChanged.bind(this);
   }
@@ -30,16 +47,21 @@ class Register extends Component {
     this.data.email = this.state.email
     this.data.password = this.state.password
 
-    axios.post('http://localhost:3000/registeruser', this.data).then((res) => {
-      console.log(res.data.msg);
-      this.setState({
-        msg: res.data.msg
-      })
-    }).catch((err) => {
-      this.setState({
-        msg: 'Check Internet & Try Again'
-      })
-    })
+    // auth.doCreateUserWithEmailAndPassword(this.data.email, this.data.password)
+    //   .then(authUser => {
+    //     db.doCreateUser(authUser.user.uid, 'Human', this.data.email, this.baseData)
+    //       .then(() => {
+    //       })
+    //       .catch(error => {
+    //         console.log(error)
+    //       });
+    //   })
+    //   .catch(error => {
+    //     console.log(error)
+    //   });
+
+
+    fire.auth().createUserWithEmailAndPassword(this.data.email, this.data.password);
   }
 
   inputChanged(e) {
@@ -96,11 +118,11 @@ class Register extends Component {
                     </InputGroup> */}
                     <Button color="success" block onSubmit="">Create Account</Button>
                   </Form>
-                  
+
                 </CardBody>
                 <CardFooter className="p-4">
-                <p>Already have an account?</p>
-                <Button color="info" block href="#/login">Login</Button>
+                  <p>Already have an account?</p>
+                  <Button color="info" block href="#/login">Login</Button>
                   {/* <Row>
 
                     

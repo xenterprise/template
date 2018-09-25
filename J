@@ -1,0 +1,39 @@
+
+    // axios.post('http://localhost:3000/registeruser', this.data).then((res) => {
+    //   console.log(res.data.msg);
+    //   this.setState({
+    //     msg: res.data.msg
+    //   })
+    // }).catch((err) => {
+    //   this.setState({
+    //     msg: 'Check Internet & Try Again'
+    //   })
+    // })
+
+
+    
+        // Create a user in your own accessible Firebase Database too
+        // db.doCreateUser(authUser.user.uid, username, email)
+        //   .then(() => {
+        //     this.setState(() => ({ ...INITIAL_STATE }));
+        //     history.push(routes.HOME);
+        //   })
+        //   .catch(error => {
+        //     this.setState(updateByPropertyName('error', error));
+        //   });
+
+
+        import { db } from './firebase';
+
+// User API
+
+export const doCreateUser = (id, username, email) =>
+  db.ref(`users/${id}`).set({
+    username,
+    email,
+  });
+
+export const onceGetUsers = () =>
+  db.ref('users').once('value');
+
+// Other db APIs ...

@@ -18,10 +18,38 @@ import { DefaultLayout } from './containers';
 import { BaseLayout } from './containers';
 // Pages
 import { Login, Page404, Page500, Register } from './views/Pages';
-
 // import { renderRoutes } from 'react-router-config';
-
+// import Fire from Config/Fire
+import fire from './config/Fire'
 class App extends Component {
+
+  constructor() {
+    super();
+    this.state = ({
+      user: null,
+    });
+    this.authListener = this.authListener.bind(this);
+  }
+  
+  authListener() {
+    fire.auth().onAuthStateChanged((user) => {
+      console.log('LISTENER TRIG')
+      console.log(user)
+      if (user) {
+        localStorage.setItem('user', user.uid)
+        console.log('IF TRIG')
+      } else {
+        localStorage.setItem('user', null)
+        console.log('ELSE TRIG')
+      }
+
+    })
+  }
+
+  componentDidMount() {
+    this.authListener();
+  }
+  
   render() {
     return (
       <HashRouter>

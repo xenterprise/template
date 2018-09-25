@@ -2,9 +2,12 @@ import React, { Component } from 'react';
 import { Alert, Button, Card, CardBody, CardGroup, Col, Container, Form, Input, InputGroup, InputGroupAddon, InputGroupText, Row } from 'reactstrap';
 import axios from 'axios'
 import { Redirect } from 'react-router-dom';
+// import { auth, db } from '../../../firebase';
+import fire from '../../../config/Fire';
 
 
 class Login extends Component {
+     
   constructor() {
     super();
     this.state = {
@@ -12,43 +15,64 @@ class Login extends Component {
       password: '',
       msg: 'Sign In to your account',
       emailFlag: 0,
-      loggedin: false
+      loggedin: false,
+      // user: null,
     }
+
+
     this.data = {
       email: '',
       password: ''
     }
     this.formSubmit = this.formSubmit.bind(this);
     this.inputChanged = this.inputChanged.bind(this);
+    // this.authListener = this.authListener.bind(this);
   }
   formSubmit(e) {
     e.preventDefault();
     this.data.email = this.state.email
     this.data.password = this.state.password
 
-    console.log(this.data)
-    console.log(this.state)
-    if (this.state.emailFlag == 0) {
-      axios.post('http://localhost:3000/login', this.data).then((res) => {
-        console.log(res.data);
-        if (res.data.msg == 'Agree') {
-          this.setState({
-            loggedin: true
-          })
-          localStorage.account = this.state.email
-          console.log('Saved Profile')
-          console.log(localStorage.account)
-        } else {
-          this.setState({
-            loggedin: false
-          })
-        }
-      }).catch((err) => {
-        this.setState({
-          msg: 'Check Internet & Try Again'
-        })
-      })
-    }
+    // console.log(this.data)
+    // console.log(this.state)
+    // if (this.state.emailFlag == 0) {
+    //   axios.post('http://localhost:3000/login', this.data).then((res) => {
+    //     console.log(res.data);
+    //     if (res.data.msg == 'Agree') {
+    //       this.setState({
+    //         loggedin: true
+    //       })
+    //       localStorage.account = this.state.email
+    //       console.log('Saved Profile')
+    //       console.log(localStorage.account)
+    //     } else {
+    //       this.setState({
+    //         loggedin: false
+    //       })
+    //     }
+    //   }).catch((err) => {
+    //     this.setState({
+    //       msg: 'Check Internet & Try Again'
+    //     })
+    //   })
+    // }
+
+
+
+    
+    // auth.doSignInWithEmailAndPassword(this.data.email, this.data.password)
+    // .then(() => {
+    //   // this.setState(() => ({ ...INITIAL_STATE }));
+    //   // history.push('#/basel/profile');
+    //   console.log('Signing in')
+    // })
+    // .catch(error => {
+    //   console.log(error)
+    // });
+
+    fire.auth().signInWithEmailAndPassword(this.data.email, this.data.password)
+
+
   }
 
   inputChanged(e) {
@@ -62,8 +86,24 @@ class Login extends Component {
         emailFlag: 1
       })
     }
+
+    console.log(localStorage.getItem('user'))
   }
 
+  // authListener() {
+  //   fire.auth().onAuthStateChanged((user) => {
+  //     console.log('LISTENER TRIG')
+  //     console.log(user)
+  //     if (user) {
+  //       localStorage.setItem('user', user.uid)
+  //       console.log('IF TRIG')
+  //     } else {
+  //       localStorage.setItem('user', null)
+  //       console.log('ELSE TRIG')
+  //     }
+
+  //   })
+  // }
 
 
   render() {

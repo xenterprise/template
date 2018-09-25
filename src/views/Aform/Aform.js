@@ -11,6 +11,7 @@ import {
 } from 'reactstrap';
 import Form from "react-jsonschema-form";
 import axios from 'axios';
+// import { auth, db } from '../../firebase';
 
 
 const log = (type) => console.log.bind(console, type);
@@ -23,13 +24,6 @@ const defaultData={
 };
 
 
-function getuserData(theObject) {
- 
-}
-
-// document.addEventListener("DOMContentLoaded", function() {
-//   getuserData(theObject)
-// });
 
 const SubmitRoutine = ({ formData }) => {
   console.log("Data submitted:", formData)
@@ -269,25 +263,43 @@ class Aform extends Component {
 
     this.state = {
       waiting: true,
-      defaultData:{}
+      defaultData:{},
     };
     this.data = {
       email : ''
     }
-    console.log('ali')
+    console.log('Aform Log Entry')
     
   }
 
   componentDidMount(){
-    this.data.email = localStorage.account
-    axios.post('http://localhost:3000/loaduser',this.data).then((res) => {
-      this.setState({
-        defaultData:res.data,
-        waiting:false
-      })
-    }).catch((err) => {
-      console.log(err)
-    })
+
+    // this.data.email = localStorage.account
+    // axios.post('http://localhost:3000/loaduser',this.data).then((res) => {
+    //   this.setState({
+    //     defaultData:res.data,
+    //     waiting:false
+    //   })
+    // }).catch((err) => {
+    //   console.log(err)
+    // })
+
+    // db.onceGetUsers()
+    // .then(snapshot =>
+    //   // this.setState(() => ({ users: snapshot.val() }))
+    //   console.log(snapshot.val())
+    // );
+
+
+    // db.getUser('6bzTPv4jP6ap0s5XqOBSRa1hiDh2')
+    // .then(snapshot =>
+    //   // this.setState(() => ({ users: snapshot.val() }))
+    //   console.log(localStorage)
+
+     
+    // );
+
+    
   }
 
   render() {
@@ -300,6 +312,8 @@ class Aform extends Component {
           <CardBody> */}
         <Container fluid>
           <Row>
+
+            
             <Col md="8">
               {this.state.waiting?null:
               <Form schema={schemaCore}
