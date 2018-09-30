@@ -37,9 +37,11 @@ class App extends Component {
       console.log(user)
       if (user) {
         localStorage.setItem('user', user.uid)
+        this.setState({user})
         console.log('IF TRIG')
       } else {
         localStorage.setItem('user', null)
+        this.setState({user})
         console.log('ELSE TRIG')
       }
 
@@ -58,7 +60,7 @@ class App extends Component {
           <Route exact path="/register" name="Register Page" component={Register} />
           <Route exact path="/404" name="Page 404" component={Page404} />
           <Route exact path="/500" name="Page 500" component={Page500} />
-          <Route path="/basel" name="Basel" component={BaseLayout} />
+          <Route path="/basel" name="Basel" component={this.state.user?BaseLayout:Login} />
           {/* <Route exact path="/def" name="Home" component={DefaultLayout} /> */}
           <Route path="/" name="Home" component={DefaultLayout} />
         </Switch>

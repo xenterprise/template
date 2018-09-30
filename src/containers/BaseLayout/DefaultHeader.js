@@ -5,6 +5,7 @@ import PropTypes from 'prop-types';
 import { AppAsideToggler, AppHeaderDropdown, AppNavbarBrand, AppSidebarToggler } from '@coreui/react';
 import logo from '../../assets/img/brand/logo.svg'
 import sygnet from '../../assets/img/brand/sygnet.svg'
+import fire from '../../config/Fire'
 
 const propTypes = {
   children: PropTypes.node,
@@ -49,8 +50,8 @@ class DefaultHeader extends Component {
         </Nav>
         <Nav className="ml-auto" navbar>
 
-        <NavItem className="d-md-down-none">
-          <h6>{localStorage.account}</h6>
+          <NavItem className="d-md-down-none">
+            <h6>{localStorage.account}</h6>
           </NavItem>
 
 
@@ -81,7 +82,12 @@ class DefaultHeader extends Component {
               <DropdownItem><i className="fa fa-file"></i> Projects<Badge color="primary">42</Badge></DropdownItem>
               <DropdownItem divider />
               <DropdownItem><i className="fa fa-shield"></i> Lock Account</DropdownItem>
-              <DropdownItem><i className="fa fa-lock"></i> Logout</DropdownItem>
+              <DropdownItem onClick={() => fire.auth().signOut()}><i className="fa fa-lock"></i> Logout</DropdownItem>
+              {/* <DropdownItem >
+                <div onClick={() => fire.auth().signOut()}>
+                <i className="fa fa-lock"></i>Another Action
+                </div>
+              </DropdownItem> */}
             </DropdownMenu>
           </AppHeaderDropdown>
         </Nav>

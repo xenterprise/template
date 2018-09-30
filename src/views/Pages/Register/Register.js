@@ -12,21 +12,19 @@ class Register extends Component {
   constructor() {
     super();
     this.state = {
-      username: '',
       email: '',
       password: '',
       msg: 'Create Your Account'
     }
-    this.data = {
-      username: '',
-      email: '',
-      password: '',
-
-    }
-    this.baseData = {
+    
+    this.userPacket = {
+      "Email": "",
       "Personal": {
-        "Name": "",
-        "Title": ""
+        "name": "",
+        "title": "",
+        "tagline": "",
+        "contactno": "",
+        "website": "",
       },
       "Social": [],
       "Education": [],
@@ -43,25 +41,18 @@ class Register extends Component {
 
   formSubmit(e) {
     e.preventDefault();
-    this.data.username = this.state.username
-    this.data.email = this.state.email
-    this.data.password = this.state.password
+    this.userPacket.Email = this.state.email
 
-    // auth.doCreateUserWithEmailAndPassword(this.data.email, this.data.password)
-    //   .then(authUser => {
-    //     db.doCreateUser(authUser.user.uid, 'Human', this.data.email, this.baseData)
-    //       .then(() => {
-    //       })
-    //       .catch(error => {
-    //         console.log(error)
-    //       });
-    //   })
-    //   .catch(error => {
-    //     console.log(error)
-    //   });
-
-
-    fire.auth().createUserWithEmailAndPassword(this.data.email, this.data.password);
+    fire.auth().createUserWithEmailAndPassword(this.state.email, this.state.password)
+      .then(authUser => {
+        var dbref = fire.database().ref(`users/${authUser.user.uid}`);
+        dbref.set(this.userPacket)
+          .then(() => {
+          })
+          .catch(error => {
+            console.log(error)
+          });
+      })
   }
 
   inputChanged(e) {
@@ -86,14 +77,14 @@ class Register extends Component {
                         : <Alert color="danger">{this.state.msg}</Alert>}
 
 
-                    <InputGroup className="mb-3">
+                    {/* <InputGroup className="mb-3">
                       <InputGroupAddon addonType="prepend">
                         <InputGroupText>
                           <i className="icon-user"></i>
                         </InputGroupText>
                       </InputGroupAddon>
                       <Input type="text" name="username" value={this.state.username} onChange={this.inputChanged} placeholder="Username" autoComplete="username" />
-                    </InputGroup>
+                    </InputGroup> */}
                     <InputGroup className="mb-3">
                       <InputGroupAddon addonType="prepend">
                         <InputGroupText>@</InputGroupText>

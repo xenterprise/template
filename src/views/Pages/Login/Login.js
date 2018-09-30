@@ -32,47 +32,7 @@ class Login extends Component {
     e.preventDefault();
     this.data.email = this.state.email
     this.data.password = this.state.password
-
-    // console.log(this.data)
-    // console.log(this.state)
-    // if (this.state.emailFlag == 0) {
-    //   axios.post('http://localhost:3000/login', this.data).then((res) => {
-    //     console.log(res.data);
-    //     if (res.data.msg == 'Agree') {
-    //       this.setState({
-    //         loggedin: true
-    //       })
-    //       localStorage.account = this.state.email
-    //       console.log('Saved Profile')
-    //       console.log(localStorage.account)
-    //     } else {
-    //       this.setState({
-    //         loggedin: false
-    //       })
-    //     }
-    //   }).catch((err) => {
-    //     this.setState({
-    //       msg: 'Check Internet & Try Again'
-    //     })
-    //   })
-    // }
-
-
-
-    
-    // auth.doSignInWithEmailAndPassword(this.data.email, this.data.password)
-    // .then(() => {
-    //   // this.setState(() => ({ ...INITIAL_STATE }));
-    //   // history.push('#/basel/profile');
-    //   console.log('Signing in')
-    // })
-    // .catch(error => {
-    //   console.log(error)
-    // });
-
     fire.auth().signInWithEmailAndPassword(this.data.email, this.data.password)
-
-
   }
 
   inputChanged(e) {
