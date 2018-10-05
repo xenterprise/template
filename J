@@ -366,3 +366,32 @@ const uiSchemaCore = {
     // .catch(error => {
     //   console.log(error)
     // });
+
+
+
+    // let temp = Object.assign([], this.state.User.Personal.Social)
+    // temp.push({ a: 'r', b: 't' })
+    // console.log('Temp After push:', temp)
+    // this.setState({...this.state,
+    //   User:{
+    //     ...this.state.User,
+    //     Personal:{
+    //       ...this.state.User.Personal,
+    //       Social:temp
+    //     }
+
+
+    // }})
+
+
+    // this.setState({
+    //   User: {
+    //     ...this.state.User,
+    //     Personal: {
+    //       ...this.state.User.Personal,
+    //       Social: [
+    //         ...this.state.User.Personal.Social, 
+    //       ]
+    //     }
+    //   },
+    // });

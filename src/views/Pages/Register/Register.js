@@ -16,7 +16,7 @@ class Register extends Component {
       password: '',
       msg: 'Create Your Account'
     }
-    
+
     this.userPacket = {
       "Email": "",
       "Personal": {
@@ -25,14 +25,15 @@ class Register extends Component {
         "tagline": "",
         "contactno": "",
         "website": "",
+        "Social": [{ a: "FB", b: "LINK" }],
+        "Education": [],
+        "Certifications": [],
+        "Organizations": [],
+        "Publications": [],
+        "Services": [],
+        "Work": []
       },
-      "Social": [],
-      "Education": [],
-      "Certifications": [],
-      "Organizations": [],
-      "Publications": [],
-      "Services": [],
-      "Work": []
+
     }
     this.formSubmit = this.formSubmit.bind(this);
     this.inputChanged = this.inputChanged.bind(this);
