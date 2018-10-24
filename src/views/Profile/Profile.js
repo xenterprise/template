@@ -465,6 +465,7 @@ class Profile extends Component {
       dropdownOpen: false,
       radioSelected: 2,
       activeTab: '1',
+      profile_user: localStorage.getItem('user')
     };
   }
 
@@ -488,11 +489,23 @@ class Profile extends Component {
     });
   }
 
+  componentDidMount(){
+    console.log('Param ', this.props.match.params.id)
+    this.setState({
+      profile_user: this.props.match.params.id
+    })
+  }
   render() {
 
     return (
       <div className="animated fadeIn">
 
+<Row>
+  <h1>
+  {this.state.profile_user}
+  </h1>
+  {}
+</Row>
         <Row>
           <Col md="9">
           <Card>

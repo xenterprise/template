@@ -1,28 +1,21 @@
 import React, { Component } from 'react';
-import { Redirect, Route, Switch } from 'react-router-dom';
+import { Route, Switch } from 'react-router-dom';
 import { Container } from 'reactstrap';
 import MyComponent from './MyComponent'
 
 
 import {
-  AppAside,
-  AppBreadcrumb,
   AppFooter,
   AppHeader,
-  AppSidebar,
-  AppSidebarFooter,
-  AppSidebarForm,
-  AppSidebarHeader,
-  AppSidebarMinimizer,
-  AppSidebarNav,
 } from '@coreui/react';
 // sidebar nav config
-import navigation from '../../_nav';
+// import navigation from '../../_nav';
 // routes config
 import routes from '../../routes';
-import DefaultAside from './DefaultAside';
+// import DefaultAside from './DefaultAside';
 import DefaultFooter from './DefaultFooter';
 import DefaultHeader from './DefaultHeader';
+import Profile from '../../views/Profile/Profile';
 
 class BaseLayout extends Component {
   render() {
@@ -49,10 +42,12 @@ class BaseLayout extends Component {
               <Switch>
                 {/* <Route path = '/basel/ali' exact component = {MyComponent} /> */}
                 {routes.map((route, idx) => {
+                  
                     return route.component ? (<Route key={idx} path={'/basel' + route.path} exact={route.exact} name={route.name} render={props => (
-                        <route.component {...props} />
-                      )} />)
-                      : (null);
+                      <route.component {...props} />
+                    )} />) : (null);
+                  
+                    
                   },
                 )}
                 {/* <Redirect from="/" to="/dashboard" /> */}
