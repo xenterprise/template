@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Alert, Button, Card, CardBody, CardGroup, Col, Container, Form, Input, InputGroup, InputGroupAddon, InputGroupText, Row } from 'reactstrap';
-import axios from 'axios'
+// import axios from 'axios'
 import { Redirect } from 'react-router-dom';
 // import { auth, db } from '../../../firebase';
 import fire from '../../../config/Fire';

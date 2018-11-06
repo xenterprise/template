@@ -19,10 +19,15 @@ import {
   Progress,
   Row,
   Table,
+  FormGroup,
+  Label,
+  InputGroup,
+  Input,
+  InputGroupAddon
 } from 'reactstrap';
 import { Nav, NavItem, NavLink, TabContent, TabPane, ListGroup, ListGroupItem, ListGroupItemHeading, ListGroupItemText, } from 'reactstrap';
 import classnames from 'classnames';
-import Widget03 from '../../views/Widgets/Widget03'
+import Widget03 from '../Widgets/Widget03'
 import { CustomTooltips } from '@coreui/coreui-plugin-chartjs-custom-tooltips';
 import { getStyle, hexToRgba } from '@coreui/coreui/dist/js/coreui-utilities'
 
@@ -144,43 +149,31 @@ function Skills(props) {
 
 }
 
-// This code also executes even when Personal is not populated yet so at that time, Work does not exist
-function WorkExperience(props) {       
+
+function WorkExperience(props) {
   if (props.this.state.user.Personal) {
-    if(props.this.state.user.Personal.Work){
-      return (
-        <div>
-          <Row>
-            {/* {
-              Object.keys(props.this.state.user.Personal.Work).map((item, i) => (
-                <Col key={i} xs="12" sm="6" md="6">
-                  <Card className="border-primary">
-                    <CardHeader>
-                      <h4>{props.this.state.user.Personal.Work[item].com}</h4>
-                      <h6>{props.this.state.user.Personal.Work[item].des}</h6>
-                      <p>{props.this.state.user.Personal.Work[item].dur}</p>
-                    </CardHeader>
-                    <CardBody>
-                      {props.this.state.user.Personal.Work[item].det}
-                    </CardBody>
-                  </Card>
-                </Col>
-              ))
-            } */}
-          </Row>
-        </div>
-      )
-    }
-    else{
-      return (
-        <div>
-          <p>
-            No Work Information
-          </p>
-        </div>
-      )
-    }
-    
+    return (
+      <div>
+        <Row>
+          {
+            Object.keys(props.this.state.user.Personal.Work).map((item, i) => (
+              <Col key={i} xs="12" sm="6" md="6">
+                <Card className="border-primary">
+                  <CardHeader>
+                    <h4>{props.this.state.user.Personal.Work[item].com}</h4>
+                    <h6>{props.this.state.user.Personal.Work[item].des}</h6>
+                    <p>{props.this.state.user.Personal.Work[item].dur}</p>
+                  </CardHeader>
+                  <CardBody>
+                    {props.this.state.user.Personal.Work[item].det}
+                  </CardBody>
+                </Card>
+              </Col>
+            ))
+          }
+        </Row>
+      </div>
+    )
   } else {
     return (
       <div>
@@ -468,7 +461,7 @@ function Availability() {
 
 
 
-class Profile extends Component {
+class Search extends Component {
   constructor(props) {
     super(props);
 
@@ -510,28 +503,15 @@ class Profile extends Component {
   }
 
   componentDidMount() {
-    console.log('Param ', this.props.match.params.id)
-    this.setState({
-      profile_user: this.props.match.params.id
+    // console.log('Param ', this.props.match.params.id)
+    // this.setState({
+    //   profile_user: this.props.match.params.id
+    // })
+
+    var dbref = fire.database().ref(`users`)
+    dbref.orderByChild("Email").on("child_added", function(snapshot){
+      console.log('Search Log', snapshot.key);
     })
-
-    var dbref = fire.database().ref(`users/${localStorage.getItem('user')}`)
-    dbref.on("value", (snapshot) => {
-      console.log('Snapshot', snapshot.val())
-      let snap = snapshot.val()
-      console.log('firbase snap: ', snap)
-      // this.user = snap
-      this.setState({
-        user: snap
-      })
-      console.log(this.user)
-      console.log('Current State USer',this.state.user )
-
-
-
-    }, (errorObject) => {
-      console.log("The read failed: " + errorObject.code);
-    });
 
 
   }
@@ -547,97 +527,31 @@ class Profile extends Component {
           {}
         </Row>
         <Row>
+
           <Col md="9">
+            {/* <Card>
+              <CardBody> */}
+                <FormGroup>
+                  {/* <Label htmlFor="appendedInputButtons">Two-button append</Label> */}
+                  <div className="controls">
+                    <InputGroup>
+                      <Input valid id="appendedInputButtons" size="16" type="text" placeholder="Search for People, Jobs & other opportunities" />
+                      <InputGroupAddon addonType="append">
+                        <Button color="primary">Search</Button>
+                        <Button color="secondary">Options</Button>
+                      </InputGroupAddon>
+                    </InputGroup>
+                  </div>
+                </FormGroup>
+              {/* </CardBody>
+            </Card> */}
 
             <Card>
               <CardBody>
-                <PrimaryInfo this={this} />
+
               </CardBody>
             </Card>
-
-            <Card>
-              <CardHeader>
-                <h5>Skills</h5>
-              </CardHeader>
-              <CardBody >
-                <Skills this={this} />
-              </CardBody>
-            </Card>
-
-            <Card>
-              <CardHeader>
-                <h5>Work Experience & Projects</h5>
-              </CardHeader>
-              <CardBody>
-                <WorkExperience this={this} />
-              </CardBody>
-            </Card>
-
-
-
-
-
-            <Row>
-              <Col>
-                <Card>
-                  <CardHeader>
-                    <h5>Education</h5>
-                  </CardHeader>
-                  <CardBody>
-                    <ListGroup>
-                      <Education this={this} />
-                    </ListGroup>
-                  </CardBody>
-                </Card>
-              </Col>
-            </Row>
-
-
-            <Row>
-              <Col>
-                <Card>
-                  <CardHeader>
-                    <h5>Organizations</h5>
-                  </CardHeader>
-                  <CardBody>
-                    <ListGroup>
-                      <Organizations this={this} />
-                    </ListGroup>
-                  </CardBody>
-                </Card>
-              </Col>
-            </Row>
-            <Row>
-              <Col>
-                <Card>
-                  <CardHeader>
-                    <h5>Certifications</h5>
-                  </CardHeader>
-                  <CardBody>
-                    <ListGroup>
-                      <Certifications this={this} />
-                    </ListGroup>
-                  </CardBody>
-                </Card>
-              </Col>
-            </Row>
-            <Row>
-              <Col>
-                <Card>
-                  <CardHeader>
-                    <h5>Publications</h5>
-                  </CardHeader>
-                  <CardBody>
-                    <ListGroup>
-                      <Publications this={this} />
-                    </ListGroup>
-                  </CardBody>
-                </Card>
-              </Col>
-            </Row>
           </Col>
-
-
 
           <Col md="3">
             <Card>
@@ -654,4 +568,4 @@ class Profile extends Component {
   }
 }
 
-export default Profile;
+export default Search;

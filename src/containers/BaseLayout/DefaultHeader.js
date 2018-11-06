@@ -33,10 +33,10 @@ class DefaultHeader extends Component {
             <NavLink href="#/basel/profile">Profile</NavLink>
           </NavItem>
           <NavItem className="px-3">
-            <NavLink href="#/basel/launchpad">LaunchPad</NavLink>
+            <NavLink href="#/basel/search">Search</NavLink>
           </NavItem>
           <NavItem className="px-3">
-            <NavLink href="#/basel/aform">AForm</NavLink>
+            <NavLink href="#/basel/aform">Edit Profile</NavLink>
           </NavItem>
           <NavItem className="px-3">
             <NavLink href="/">Dashboard</NavLink>

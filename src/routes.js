@@ -199,6 +199,10 @@ const Aform = Loadable({
   loading: Loading,
 });
 
+const Search = Loadable({
+  loader: () => import('./views/Search/Search'),
+  loading: Loading,
+});
 
 // const BaseLayout = Loadable({
 //   loader: () => import('./containers/BaseLayout'),
@@ -215,6 +219,7 @@ const routes = [
   { path: '/profile/:id', exact: true, name: 'Profile Details', component: Profile },
   // { path: '/profile:uid', name: 'Profile_uid', component: Profile },
   { path: '/aform', name: 'Aform', component: Aform },
+  { path: '/search', name: 'Search', component: Search },
   { path: '/theme', exact: true, name: 'Theme', component: Colors },
   { path: '/theme/colors', name: 'Colors', component: Colors },
   { path: '/theme/typography', name: 'Typography', component: Typography },

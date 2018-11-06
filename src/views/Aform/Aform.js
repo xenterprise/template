@@ -21,7 +21,7 @@ import {
   Collapse, Dropdown, DropdownToggle, DropdownMenu, DropdownItem, Progress, Table, TabContent, TabPane
 } from 'reactstrap';
 // import Form from "react-jsonschema-form";
-import axios from 'axios';
+// import axios from 'axios';
 // import { auth, db } from '../../firebase';
 import fire from '../../config/Fire'
 
@@ -104,6 +104,31 @@ function CompAbout(props) {
       </Row>
     </div>
   );
+}
+
+function CompSkills(props) {
+  return (
+    <div>
+      {
+        Object.keys(props.data).map((item, i) => (
+          <Button
+            size="lg"
+            className="btn-facebook btn-brand text mr-1 mb-1">
+            <span>{item}</span>
+          </Button>
+        ))
+      }
+
+      <Row>
+        <Col xs="12" md="9">
+          <form ref={input => props.this.addSkillForm = input} onSubmit={(e) => { props.this.addSkill(e) }}>
+            <Input type="text" id="text-input" name="new_skill" placeholder="Enter New Skills Here" onChange={props.this.Base_inputChanged} />
+          </form>
+        </Col>
+      </Row>
+
+    </div>
+  )
 }
 
 function CompSocial_Display(props) {
@@ -296,44 +321,44 @@ function CompSocial_AddForm(props) {
   return (
     <div>
 
-      <form onSubmit={(e) => { props.this.addItem(e) }}>
-        <div className="form-group">
-          <Row>
-            <Col md="3">
-              <Label htmlFor="text-input">Platform Name</Label>
-            </Col>
-            <Col md="6">
-              <Dropdown isOpen={props.this.state.dropdownOpen_Social} toggle={props.this.toggleDD_Social}>
-                <DropdownToggle caret>
-                  {props.this.state.new_platformName}
-                </DropdownToggle>
-                <DropdownMenu>
-                  <DropdownItem name="Facebook" onClick={props.this.Social_ddChanged}>Facebook</DropdownItem>
-                  <DropdownItem name="Twitter" onClick={props.this.Social_ddChanged}>Twitter</DropdownItem>
-                  <DropdownItem name="Youtube" onClick={props.this.Social_ddChanged}>Youtube</DropdownItem>
-                  <DropdownItem name="Linkedin" onClick={props.this.Social_ddChanged}>LinkedIn</DropdownItem>
-                </DropdownMenu>
-              </Dropdown>
-            </Col>
-          </Row>
-          <Row>
-            <Col md="3">
-              <Label htmlFor="text-input">Profile Link</Label>
-            </Col>
-            <Col md="6">
-              <Input type="text" id="text-input" name="new_platformLink" placeholder="Link to your Social Profile" onChange={props.this.Base_inputChanged} />
-            </Col>
-          </Row>
-          <Row>
-            <Col md="2">
-              <Button type="submit" size="sm" color="primary" ><i className="fa fa-dot-circle-o"></i> Save Changes</Button>
-            </Col>
-            <Col md="2">
-              <Button size="sm" color="danger" onClick={props.this.toggleFlag_Social}><i className="fa fa-close"></i> Cancel</Button>
-            </Col>
-          </Row>
-        </div>
-      </form>
+      {/* <form onSubmit={(e) => { props.this.addItem(e) }}> */}
+      <div className="form-group">
+        <Row>
+          <Col md="3">
+            <Label htmlFor="text-input">Platform Name</Label>
+          </Col>
+          <Col md="6">
+            <Dropdown isOpen={props.this.state.dropdownOpen_Social} toggle={props.this.toggleDD_Social}>
+              <DropdownToggle caret>
+                {props.this.state.new_platformName}
+              </DropdownToggle>
+              <DropdownMenu>
+                <DropdownItem name="Facebook" onClick={props.this.Social_ddChanged}>Facebook</DropdownItem>
+                <DropdownItem name="Twitter" onClick={props.this.Social_ddChanged}>Twitter</DropdownItem>
+                <DropdownItem name="Youtube" onClick={props.this.Social_ddChanged}>Youtube</DropdownItem>
+                <DropdownItem name="Linkedin" onClick={props.this.Social_ddChanged}>LinkedIn</DropdownItem>
+              </DropdownMenu>
+            </Dropdown>
+          </Col>
+        </Row>
+        <Row>
+          <Col md="3">
+            <Label htmlFor="text-input">Profile Link</Label>
+          </Col>
+          <Col md="6">
+            <Input type="text" id="text-input" name="new_platformLink" placeholder="Link to your Social Profile" onChange={props.this.Base_inputChanged} />
+          </Col>
+        </Row>
+        <Row>
+          <Col md="2">
+            <Button size="sm" color="primary" name="Social" onClick={props.this.addItem.bind(props.this)}><i className="fa fa-dot-circle-o"></i> Save Changes</Button>
+          </Col>
+          <Col md="2">
+            <Button size="sm" color="danger" onClick={props.this.toggleFlag_Social}><i className="fa fa-close"></i> Cancel</Button>
+          </Col>
+        </Row>
+      </div>
+      {/* </form> */}
     </div>
   );
 }
@@ -458,7 +483,7 @@ function CompOrganization_AddForm(props) {
               <Input type="text" id="text-input" name="new_organization_name" placeholder="Link to your Social Profile" onChange={props.this.Base_inputChanged} />
             </Col>
           </Row>
-          
+
           <Row>
             <Col md="2">
               <Button type="submit" size="sm" color="primary" ><i className="fa fa-dot-circle-o"></i> Save Changes</Button>
@@ -500,7 +525,7 @@ function CompWork_AddForm(props) {
           </Row>
 
 
-<Row>
+          <Row>
             <Col md="3">
               <Label htmlFor="text-input">Duration:</Label>
             </Col>
@@ -687,15 +712,16 @@ class Aform extends Component {
       new_platformLink: "",
       new_education_degree: '',
       new_education_institute: '',
-      new_work_company:'',
-      new_work_designation:'',
-      new_work_duration:'',
-      new_work_details:'',
-      new_certification_name:'',
-      new_certification_org:'',
-      new_organization_name:'',
-      new_publication_publisher:'',
-      new_publication_name:'',
+      new_work_company: '',
+      new_work_designation: '',
+      new_work_duration: '',
+      new_work_details: '',
+      new_certification_name: '',
+      new_certification_org: '',
+      new_organization_name: '',
+      new_publication_publisher: '',
+      new_publication_name: '',
+      new_skill: '',
 
       // activeTabLG_Parent: 1,
       dropdownOpen_Social: false,
@@ -703,12 +729,12 @@ class Aform extends Component {
       Flag_Social_View: false,
       Flag_Education_View: false,
       Flag_Work_View: false,
-      Flag_Certification_View:false,
-      Flag_Organization_View:false,
-      Flag_Publication_View:false,
+      Flag_Certification_View: false,
+      Flag_Organization_View: false,
+      Flag_Publication_View: false,
 
 
-      accordion: [false, false, false, false, false, false, false],
+      accordion: [false, false, false, false, false, false, false, false],
 
       User: {
         Email: "",
@@ -726,7 +752,8 @@ class Aform extends Component {
           Publications: [],
           Services: [],
           Work: []
-        }
+        },
+        skills: {}
       }
     }
 
@@ -752,6 +779,7 @@ class Aform extends Component {
     this.addItem_Certificate = this.addItem_Certificate.bind(this);
     this.addItem_Organization = this.addItem_Organization.bind(this);
     this.addItem_Publication = this.addItem_Publication.bind(this);
+    this.addSkill = this.addSkill.bind(this);
 
     this.toggleDD_Social = this.toggleDD_Social.bind(this);
     this.Social_ddChanged = this.Social_ddChanged.bind(this);
@@ -763,7 +791,7 @@ class Aform extends Component {
     this.toggleFlag_Certificate = this.toggleFlag_Certificate.bind(this);
     this.toggleFlag_Organization = this.toggleFlag_Organization.bind(this);
     this.toggleFlag_Publication = this.toggleFlag_Publication.bind(this);
-    
+
     this.toggleAccordion = this.toggleAccordion.bind(this);
   }
 
@@ -775,12 +803,13 @@ class Aform extends Component {
       let snap = snapshot.val()
       this.setState({
         User: {
-          ...this.state.User,
+          // ...this.state.User,
           Email: snap.Email,
           Personal: {
             ...this.state.User.Personal,
             ...snap.Personal
-          }
+          },
+          skills: { ...snap.skills }
         }
       })
     }, (errorObject) => {
@@ -810,8 +839,8 @@ class Aform extends Component {
 
   Submit_About(e) {
     e.preventDefault();
-    var dbref = fire.database().ref(`users/${localStorage.getItem('user')}`);
-    dbref.set(this.state.User)
+    var dbref = fire.database().ref(`users/${localStorage.getItem('user')}/Personal`);
+    dbref.set(this.state.User.Personal)
       .then(() => {
       })
       .catch(error => {
@@ -899,18 +928,18 @@ class Aform extends Component {
     temp[e.target.name] = e.target.value
     this.setState(temp)
   }
-
+  //http://www.howtocreate.co.uk/referencedvariables.html
   addItem(e) {
     e.preventDefault();
     console.log(this.state)
     let temp = Object.assign({}, this.state)
     console.log('Temp Log', temp)
-    temp.User.Personal.Social.push({ platform: this.state.new_platformName, link: this.state.new_platformLink })
+    temp.User.Personal[e.target.name].push({ platform: this.state.new_platformName, link: this.state.new_platformLink })
     console.log('Temp After push:', temp)
     this.setState(temp)
     console.log('State after Set State:', this.state)
-    var dbref = fire.database().ref(`users/${localStorage.getItem('user')}`);
-    dbref.set(this.state.User)
+    var dbref = fire.database().ref(`users/${localStorage.getItem('user')}/Personal/Social`);
+    dbref.set(this.state.User.Personal.Social)
       .then(() => {
       })
       .catch(error => {
@@ -928,8 +957,8 @@ class Aform extends Component {
     console.log('Temp After push:', temp)
     this.setState(temp)
     console.log('State after Set State:', this.state)
-    var dbref = fire.database().ref(`users/${localStorage.getItem('user')}`);
-    dbref.set(this.state.User)
+    var dbref = fire.database().ref(`users/${localStorage.getItem('user')}/Personal/Education`);
+    dbref.set(this.state.User.Personal.Education)
       .then(() => {
       })
       .catch(error => {
@@ -945,12 +974,12 @@ class Aform extends Component {
     console.log(this.state)
     let temp = Object.assign({}, this.state)
     console.log('Temp Log', temp)
-    temp.User.Personal.Organizations.push({ name: this.state.new_organization_name})
+    temp.User.Personal.Organizations.push({ name: this.state.new_organization_name })
     console.log('Temp After push:', temp)
     this.setState(temp)
     console.log('State after Set State:', this.state)
-    var dbref = fire.database().ref(`users/${localStorage.getItem('user')}`);
-    dbref.set(this.state.User)
+    var dbref = fire.database().ref(`users/${localStorage.getItem('user')}/Personal/Organizations`);
+    dbref.set(this.state.User.Personal.Organizations)
       .then(() => {
       })
       .catch(error => {
@@ -970,8 +999,8 @@ class Aform extends Component {
     console.log('Temp After push:', temp)
     this.setState(temp)
     console.log('State after Set State:', this.state)
-    var dbref = fire.database().ref(`users/${localStorage.getItem('user')}`);
-    dbref.set(this.state.User)
+    var dbref = fire.database().ref(`users/${localStorage.getItem('user')}/Personal/Certifications`);
+    dbref.set(this.state.User.Personal.Certifications)
       .then(() => {
       })
       .catch(error => {
@@ -991,8 +1020,8 @@ class Aform extends Component {
     console.log('Temp After push:', temp)
     this.setState(temp)
     console.log('State after Set State:', this.state)
-    var dbref = fire.database().ref(`users/${localStorage.getItem('user')}`);
-    dbref.set(this.state.User)
+    var dbref = fire.database().ref(`users/${localStorage.getItem('user')}/Personal/Publications`);
+    dbref.set(this.state.User.Personal.Publications)
       .then(() => {
       })
       .catch(error => {
@@ -1005,15 +1034,11 @@ class Aform extends Component {
 
   addItem_Work(e) {
     e.preventDefault();
-    console.log(this.state)
     let temp = Object.assign({}, this.state)
-    console.log('Temp Log', temp)
     temp.User.Personal.Work.push({ com: this.state.new_work_company, des: this.state.new_work_designation, dur: this.state.new_work_duration, det: this.state.new_work_details, })
-    console.log('Temp After push:', temp)
     this.setState(temp)
-    console.log('State after Set State:', this.state)
-    var dbref = fire.database().ref(`users/${localStorage.getItem('user')}`);
-    dbref.set(this.state.User)
+    var dbref = fire.database().ref(`users/${localStorage.getItem('user')}/Personal/Work`);
+    dbref.set(this.state.User.Personal.Work)
       .then(() => {
       })
       .catch(error => {
@@ -1023,6 +1048,20 @@ class Aform extends Component {
     this.toggleFlag_Work()
   }
 
+  addSkill(e) {
+    e.preventDefault();
+    console.log('Add Skill Form Submitted', this.state.new_skill)
+
+    var dbref = fire.database().ref(`users/${localStorage.getItem('user')}/skills`)
+    dbref.child(this.state.new_skill).set(true)
+      .then(() => {
+      })
+      .catch(error => {
+        console.log(error)
+      });
+
+    this.addSkillForm.reset()
+  }
 
   delItem(i) {
     console.log('DelItem Called', i);
@@ -1031,8 +1070,8 @@ class Aform extends Component {
     console.log('Temp After push:', temp)
     this.setState(temp)
     console.log('State after Set State:', this.state)
-    var dbref = fire.database().ref(`users/${localStorage.getItem('user')}`);
-    dbref.set(this.state.User)
+    var dbref = fire.database().ref(`users/${localStorage.getItem('user')}/Personal/Social`);
+    dbref.set(this.state.User.Personal['Social'])
       .then(() => {
       })
       .catch(error => {
@@ -1046,8 +1085,8 @@ class Aform extends Component {
     console.log('Temp After push:', temp)
     this.setState(temp)
     console.log('State after Set State:', this.state)
-    var dbref = fire.database().ref(`users/${localStorage.getItem('user')}`);
-    dbref.set(this.state.User)
+    var dbref = fire.database().ref(`users/${localStorage.getItem('user')}/Personal/Education`);
+    dbref.set(this.state.User.Personal.Education)
       .then(() => {
       })
       .catch(error => {
@@ -1063,8 +1102,8 @@ class Aform extends Component {
     console.log('Temp After push:', temp)
     this.setState(temp)
     console.log('State after Set State:', this.state)
-    var dbref = fire.database().ref(`users/${localStorage.getItem('user')}`);
-    dbref.set(this.state.User)
+    var dbref = fire.database().ref(`users/${localStorage.getItem('user')}/Personal/Certifications`);
+    dbref.set(this.state.User.Personal.Certifications)
       .then(() => {
       })
       .catch(error => {
@@ -1079,8 +1118,8 @@ class Aform extends Component {
     console.log('Temp After push:', temp)
     this.setState(temp)
     console.log('State after Set State:', this.state)
-    var dbref = fire.database().ref(`users/${localStorage.getItem('user')}`);
-    dbref.set(this.state.User)
+    var dbref = fire.database().ref(`users/${localStorage.getItem('user')}/Personal/Publications`);
+    dbref.set(this.state.User.Personal.Publications)
       .then(() => {
       })
       .catch(error => {
@@ -1095,8 +1134,8 @@ class Aform extends Component {
     console.log('Temp After push:', temp)
     this.setState(temp)
     console.log('State after Set State:', this.state)
-    var dbref = fire.database().ref(`users/${localStorage.getItem('user')}`);
-    dbref.set(this.state.User)
+    var dbref = fire.database().ref(`users/${localStorage.getItem('user')}/Personal/Organizations`);
+    dbref.set(this.state.User.Personal.Organizations)
       .then(() => {
       })
       .catch(error => {
@@ -1112,8 +1151,8 @@ class Aform extends Component {
     console.log('Temp After push:', temp)
     this.setState(temp)
     console.log('State after Set State:', this.state)
-    var dbref = fire.database().ref(`users/${localStorage.getItem('user')}`);
-    dbref.set(this.state.User)
+    var dbref = fire.database().ref(`users/${localStorage.getItem('user')}/Personal/Work`);
+    dbref.set(this.state.User.Personal.Work)
       .then(() => {
       })
       .catch(error => {
@@ -1161,14 +1200,26 @@ class Aform extends Component {
                 </Card>
 
 
+                <Card>
+                  <CardHeader id="headingOne">
+                    <Button block color="link" className="text-left m-0 p-0" onClick={() => this.toggleAccordion(1)} aria-expanded={this.state.accordion[1]} aria-controls="collapseOne">
+                      <h5 className="m-0 p-0">Skills</h5>
+                    </Button>
+                  </CardHeader>
+                  <Collapse isOpen={this.state.accordion[1]} data-parent="#accordion" id="collapseOne" aria-labelledby="headingOne">
+                    <CardBody>
+                      <CompSkills data={this.state.User.skills} this={this} />
+                    </CardBody>
+                  </Collapse>
+                </Card>
 
                 <Card>
                   <CardHeader id="headingTwo">
-                    <Button block color="link" className="text-left m-0 p-0" onClick={() => this.toggleAccordion(1)} aria-expanded={this.state.accordion[1]} aria-controls="collapseTwo">
+                    <Button block color="link" className="text-left m-0 p-0" onClick={() => this.toggleAccordion(2)} aria-expanded={this.state.accordion[2]} aria-controls="collapseTwo">
                       <h5 className="m-0 p-0">Social</h5>
                     </Button>
                   </CardHeader>
-                  <Collapse isOpen={this.state.accordion[1]} data-parent="#accordion" id="collapseTwo">
+                  <Collapse isOpen={this.state.accordion[2]} data-parent="#accordion" id="collapseTwo">
                     <CardBody>
                       <CompSocial data={this.state.User.Personal} this={this} />
                     </CardBody>
@@ -1179,11 +1230,11 @@ class Aform extends Component {
 
                 <Card>
                   <CardHeader id="headingThree">
-                    <Button block color="link" className="text-left m-0 p-0" onClick={() => this.toggleAccordion(2)} aria-expanded={this.state.accordion[2]} aria-controls="collapseThree">
+                    <Button block color="link" className="text-left m-0 p-0" onClick={() => this.toggleAccordion(3)} aria-expanded={this.state.accordion[3]} aria-controls="collapseThree">
                       <h5 className="m-0 p-0">Education</h5>
                     </Button>
                   </CardHeader>
-                  <Collapse isOpen={this.state.accordion[2]} data-parent="#accordion" id="collapseThree">
+                  <Collapse isOpen={this.state.accordion[3]} data-parent="#accordion" id="collapseThree">
                     <CardBody>
                       <CompEducation data={this.state.User.Personal} this={this} />
                     </CardBody>
@@ -1193,11 +1244,11 @@ class Aform extends Component {
 
                 <Card>
                   <CardHeader id="headingFour">
-                    <Button block color="link" className="text-left m-0 p-0" onClick={() => this.toggleAccordion(3)} aria-expanded={this.state.accordion[3]} aria-controls="collapseThree">
+                    <Button block color="link" className="text-left m-0 p-0" onClick={() => this.toggleAccordion(4)} aria-expanded={this.state.accordion[4]} aria-controls="collapseThree">
                       <h5 className="m-0 p-0">Work</h5>
                     </Button>
                   </CardHeader>
-                  <Collapse isOpen={this.state.accordion[3]} data-parent="#accordion" id="collapseThree">
+                  <Collapse isOpen={this.state.accordion[4]} data-parent="#accordion" id="collapseThree">
                     <CardBody>
                       <CompWork data={this.state.User.Personal} this={this} />
                     </CardBody>
@@ -1207,11 +1258,11 @@ class Aform extends Component {
 
                 <Card>
                   <CardHeader id="headingFive">
-                    <Button block color="link" className="text-left m-0 p-0" onClick={() => this.toggleAccordion(4)} aria-expanded={this.state.accordion[4]} aria-controls="collapseThree">
+                    <Button block color="link" className="text-left m-0 p-0" onClick={() => this.toggleAccordion(5)} aria-expanded={this.state.accordion[5]} aria-controls="collapseThree">
                       <h5 className="m-0 p-0">Certifications</h5>
                     </Button>
                   </CardHeader>
-                  <Collapse isOpen={this.state.accordion[4]} data-parent="#accordion" id="collapseThree">
+                  <Collapse isOpen={this.state.accordion[5]} data-parent="#accordion" id="collapseThree">
                     <CardBody>
                       <CompCertificate data={this.state.User.Personal} this={this} />
                     </CardBody>
@@ -1220,11 +1271,11 @@ class Aform extends Component {
 
                 <Card>
                   <CardHeader id="headingSix">
-                    <Button block color="link" className="text-left m-0 p-0" onClick={() => this.toggleAccordion(5)} aria-expanded={this.state.accordion[5]} aria-controls="collapseThree">
+                    <Button block color="link" className="text-left m-0 p-0" onClick={() => this.toggleAccordion(6)} aria-expanded={this.state.accordion[6]} aria-controls="collapseThree">
                       <h5 className="m-0 p-0">Organizations</h5>
                     </Button>
                   </CardHeader>
-                  <Collapse isOpen={this.state.accordion[5]} data-parent="#accordion" id="collapseThree">
+                  <Collapse isOpen={this.state.accordion[6]} data-parent="#accordion" id="collapseThree">
                     <CardBody>
                       <CompOrganization data={this.state.User.Personal} this={this} />
                     </CardBody>
@@ -1234,11 +1285,11 @@ class Aform extends Component {
 
                 <Card>
                   <CardHeader id="headingSeven">
-                    <Button block color="link" className="text-left m-0 p-0" onClick={() => this.toggleAccordion(6)} aria-expanded={this.state.accordion[6]} aria-controls="collapseThree">
+                    <Button block color="link" className="text-left m-0 p-0" onClick={() => this.toggleAccordion(7)} aria-expanded={this.state.accordion[7]} aria-controls="collapseThree">
                       <h5 className="m-0 p-0">Publications</h5>
                     </Button>
                   </CardHeader>
-                  <Collapse isOpen={this.state.accordion[6]} data-parent="#accordion" id="collapseThree">
+                  <Collapse isOpen={this.state.accordion[7]} data-parent="#accordion" id="collapseThree">
                     <CardBody>
                       <CompPublication data={this.state.User.Personal} this={this} />
                     </CardBody>
@@ -1249,6 +1300,13 @@ class Aform extends Component {
               </div>
             </CardBody>
             {/* </Card> */}
+          </Col>
+          <Col md="3">
+            <Card>
+              <CardBody>
+                <h4> Latest Trends</h4>
+              </CardBody>
+            </Card>
           </Col>
         </Row>
         {/* </Container> */}
