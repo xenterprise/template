@@ -172,34 +172,34 @@ function Compsocial_Display(props) {
 
 
 function CompCertificate_Display(props) {
-  if(props.data.certifications)
-  return (
-    <div>
-      {
-        Object.keys(props.data.certifications).map((item, i) => (
-          <Row key={i}>
-            <Col md="1">
-              <div className="avatar">
-                <img src={'assets/img/avatars/1.jpg'} className="img-avatar" alt="admin@bootstrapmaster.com" />
-                <span className="avatar-status badge-success"></span>
-              </div>
+  if (props.data.certifications)
+    return (
+      <div>
+        {
+          Object.keys(props.data.certifications).map((item, i) => (
+            <Row key={i}>
+              <Col md="1">
+                <div className="avatar">
+                  <img src={'assets/img/avatars/1.jpg'} className="img-avatar" alt="admin@bootstrapmaster.com" />
+                  <span className="avatar-status badge-success"></span>
+                </div>
 
-            </Col>
-            <Col md="8">
-              <div><strong>{props.data.certifications[item].name}</strong></div>
-              <div className="small text-muted">
-                {props.data.certifications[item].org}
-              </div>
-            </Col>
-            <Col md="1">
-              <div className="card-header-actions" >
-                <a className="card-header-action btn btn-close" ><i className="icon-close" onClick={props.this.delItem_Certificate.bind(props.this, i)}></i></a>
-              </div>
-            </Col>
-          </Row>
-        ))}
-    </div>
-  );
+              </Col>
+              <Col md="8">
+                <div><strong>{props.data.certifications[item].name}</strong></div>
+                <div className="small text-muted">
+                  {props.data.certifications[item].org}
+                </div>
+              </Col>
+              <Col md="1">
+                <div className="card-header-actions" >
+                  <a className="card-header-action btn btn-close" ><i className="icon-close" onClick={props.this.delItem_Certificate.bind(props.this, i)}></i></a>
+                </div>
+              </Col>
+            </Row>
+          ))}
+      </div>
+    );
   else
     return (
       <div>
@@ -209,34 +209,34 @@ function CompCertificate_Display(props) {
 }
 
 function CompPublication_Display(props) {
-  if(props.data.publications)
-  return (
-    <div>
-      {
-        Object.keys(props.data.publications).map((item, i) => (
-          <Row key={i}>
-            <Col md="1">
-              <div className="avatar">
-                <img src={'assets/img/avatars/1.jpg'} className="img-avatar" alt="admin@bootstrapmaster.com" />
-                <span className="avatar-status badge-success"></span>
-              </div>
+  if (props.data.publications)
+    return (
+      <div>
+        {
+          Object.keys(props.data.publications).map((item, i) => (
+            <Row key={i}>
+              <Col md="1">
+                <div className="avatar">
+                  <img src={'assets/img/avatars/1.jpg'} className="img-avatar" alt="admin@bootstrapmaster.com" />
+                  <span className="avatar-status badge-success"></span>
+                </div>
 
-            </Col>
-            <Col md="8">
-              <div><strong>{props.data.publications[item].pub}</strong></div>
-              <div className="small text-muted">
-                {props.data.publications[item].name}
-              </div>
-            </Col>
-            <Col md="1">
-              <div className="card-header-actions" >
-                <a className="card-header-action btn btn-close" ><i className="icon-close" onClick={props.this.delItem_Publication.bind(props.this, i)}></i></a>
-              </div>
-            </Col>
-          </Row>
-        ))}
-    </div>
-  );
+              </Col>
+              <Col md="8">
+                <div><strong>{props.data.publications[item].pub}</strong></div>
+                <div className="small text-muted">
+                  {props.data.publications[item].name}
+                </div>
+              </Col>
+              <Col md="1">
+                <div className="card-header-actions" >
+                  <a className="card-header-action btn btn-close" ><i className="icon-close" onClick={props.this.delItem_Publication.bind(props.this, i)}></i></a>
+                </div>
+              </Col>
+            </Row>
+          ))}
+      </div>
+    );
   else
     return (
       <div>
@@ -247,34 +247,34 @@ function CompPublication_Display(props) {
 
 
 function CompOrganization_Display(props) {
-  if(props.data.organizations)
-  return (
-    <div>
-      {
-        Object.keys(props.data.organizations).map((item, i) => (
-          <Row key={i}>
-            <Col md="1">
-              <div className="avatar">
-                <img src={'assets/img/avatars/1.jpg'} className="img-avatar" alt="admin@bootstrapmaster.com" />
-                <span className="avatar-status badge-success"></span>
-              </div>
+  if (props.data.organizations)
+    return (
+      <div>
+        {
+          Object.keys(props.data.organizations).map((item, i) => (
+            <Row key={i}>
+              <Col md="1">
+                <div className="avatar">
+                  <img src={'assets/img/avatars/1.jpg'} className="img-avatar" alt="admin@bootstrapmaster.com" />
+                  <span className="avatar-status badge-success"></span>
+                </div>
 
-            </Col>
-            <Col md="8">
-              <div><strong>{props.data.organizations[item].name}</strong></div>
-              {/* <div className="small text-muted">
+              </Col>
+              <Col md="8">
+                <div><strong>{props.data.organizations[item].name}</strong></div>
+                {/* <div className="small text-muted">
                 {props.data.organizations[item].org}
               </div> */}
-            </Col>
-            <Col md="1">
-              <div className="card-header-actions" >
-                <a className="card-header-action btn btn-close" ><i className="icon-close" onClick={props.this.delItem_Organization.bind(props.this, i)}></i></a>
-              </div>
-            </Col>
-          </Row>
-        ))}
-    </div>
-  );
+              </Col>
+              <Col md="1">
+                <div className="card-header-actions" >
+                  <a className="card-header-action btn btn-close" ><i className="icon-close" onClick={props.this.delItem_Organization.bind(props.this, i)}></i></a>
+                </div>
+              </Col>
+            </Row>
+          ))}
+      </div>
+    );
   else
     return (
       <div>
@@ -287,34 +287,34 @@ function CompOrganization_Display(props) {
 
 
 function Compeducation_Display(props) {
-  if(props.data.education)
-  return (
-    <div>
-      {
-        Object.keys(props.data.education).map((item, i) => (
-          <Row key={i}>
-            <Col md="1">
-              <div className="avatar">
-                <img src={'assets/img/avatars/1.jpg'} className="img-avatar" alt="admin@bootstrapmaster.com" />
-                <span className="avatar-status badge-success"></span>
-              </div>
+  if (props.data.education)
+    return (
+      <div>
+        {
+          Object.keys(props.data.education).map((item, i) => (
+            <Row key={i}>
+              <Col md="1">
+                <div className="avatar">
+                  <img src={'assets/img/avatars/1.jpg'} className="img-avatar" alt="admin@bootstrapmaster.com" />
+                  <span className="avatar-status badge-success"></span>
+                </div>
 
-            </Col>
-            <Col md="8">
-              <div><strong>{props.data.education[item].deg}</strong></div>
-              <div className="small text-muted">
-                {props.data.education[item].inst}
-              </div>
-            </Col>
-            <Col md="1">
-              <div className="card-header-actions" >
-                <a className="card-header-action btn btn-close" ><i className="icon-close" onClick={props.this.delItem_education.bind(props.this, i)}></i></a>
-              </div>
-            </Col>
-          </Row>
-        ))}
-    </div>
-  );
+              </Col>
+              <Col md="8">
+                <div><strong>{props.data.education[item].deg}</strong></div>
+                <div className="small text-muted">
+                  {props.data.education[item].inst}
+                </div>
+              </Col>
+              <Col md="1">
+                <div className="card-header-actions" >
+                  <a className="card-header-action btn btn-close" ><i className="icon-close" onClick={props.this.delItem_education.bind(props.this, i)}></i></a>
+                </div>
+              </Col>
+            </Row>
+          ))}
+      </div>
+    );
   else
     return (
       <div>
@@ -630,44 +630,44 @@ function Compsocial(props) {
 }
 
 function Compeducation(props) {
-  
-    return (
-      <div>
-        <Row >
-          <Col md="3">
-            <h5>Education & Degrees</h5>
-          </Col>
-          <Col>
-            {props.this.state.Flag_education_View ? null : <Button type="submit" size="sm" onClick={props.this.toggleFlag_education} color="primary" ><i className="fa fa-dot-circle-o"></i> Add New</Button>}
 
-          </Col>
-        </Row>
+  return (
+    <div>
+      <Row >
+        <Col md="3">
+          <h5>Education & Degrees</h5>
+        </Col>
+        <Col>
+          {props.this.state.Flag_education_View ? null : <Button type="submit" size="sm" onClick={props.this.toggleFlag_education} color="primary" ><i className="fa fa-dot-circle-o"></i> Add New</Button>}
 
-        {props.this.state.Flag_education_View ? <Compeducation_AddForm this={props.this} /> : <Compeducation_Display data={props.data} this={props.this} />}
+        </Col>
+      </Row>
 
-      </div>
-    );
-  
+      {props.this.state.Flag_education_View ? <Compeducation_AddForm this={props.this} /> : <Compeducation_Display data={props.data} this={props.this} />}
+
+    </div>
+  );
+
 }
 
 function CompCertificate(props) {
   // if (props.data.certifications)
-    return (
-      <div>
-        <Row >
-          <Col md="3">
-            <h5>Certifications</h5>
-          </Col>
-          <Col>
-            {props.this.state.Flag_Certificate_View ? null : <Button type="submit" size="sm" onClick={props.this.toggleFlag_Certificate} color="primary" ><i className="fa fa-dot-circle-o"></i> Add New</Button>}
+  return (
+    <div>
+      <Row >
+        <Col md="3">
+          <h5>Certifications</h5>
+        </Col>
+        <Col>
+          {props.this.state.Flag_Certificate_View ? null : <Button type="submit" size="sm" onClick={props.this.toggleFlag_Certificate} color="primary" ><i className="fa fa-dot-circle-o"></i> Add New</Button>}
 
-          </Col>
-        </Row>
+        </Col>
+      </Row>
 
-        {props.this.state.Flag_Certificate_View ? <CompCertificate_AddForm this={props.this} /> : <CompCertificate_Display data={props.data} this={props.this} />}
+      {props.this.state.Flag_Certificate_View ? <CompCertificate_AddForm this={props.this} /> : <CompCertificate_Display data={props.data} this={props.this} />}
 
-      </div>
-    );
+    </div>
+  );
   // else {
   //   // return (<Compsocial_AddForm this={props.this} />)
   // }
@@ -675,22 +675,22 @@ function CompCertificate(props) {
 
 function CompPublication(props) {
   // if (props.data.publications)
-    return (
-      <div>
-        <Row >
-          <Col md="3">
-            <h5>Publications</h5>
-          </Col>
-          <Col>
-            {props.this.state.Flag_Publication_View ? null : <Button type="submit" size="sm" onClick={props.this.toggleFlag_Publication} color="primary" ><i className="fa fa-dot-circle-o"></i> Add New</Button>}
+  return (
+    <div>
+      <Row >
+        <Col md="3">
+          <h5>Publications</h5>
+        </Col>
+        <Col>
+          {props.this.state.Flag_Publication_View ? null : <Button type="submit" size="sm" onClick={props.this.toggleFlag_Publication} color="primary" ><i className="fa fa-dot-circle-o"></i> Add New</Button>}
 
-          </Col>
-        </Row>
+        </Col>
+      </Row>
 
-        {props.this.state.Flag_Publication_View ? <CompPublication_AddForm this={props.this} /> : <CompPublication_Display data={props.data} this={props.this} />}
+      {props.this.state.Flag_Publication_View ? <CompPublication_AddForm this={props.this} /> : <CompPublication_Display data={props.data} this={props.this} />}
 
-      </div>
-    );
+    </div>
+  );
   // else {
   //   // return (<Compsocial_AddForm this={props.this} />)
   // }
@@ -699,22 +699,22 @@ function CompPublication(props) {
 
 function CompOrganization(props) {
   // if (props.data.organizations)
-    return (
-      <div>
-        <Row >
-          <Col md="3">
-            <h5>Organizations</h5>
-          </Col>
-          <Col>
-            {props.this.state.Flag_Organization_View ? null : <Button type="submit" size="sm" onClick={props.this.toggleFlag_Organization} color="primary" ><i className="fa fa-dot-circle-o"></i> Add New</Button>}
+  return (
+    <div>
+      <Row >
+        <Col md="3">
+          <h5>Organizations</h5>
+        </Col>
+        <Col>
+          {props.this.state.Flag_Organization_View ? null : <Button type="submit" size="sm" onClick={props.this.toggleFlag_Organization} color="primary" ><i className="fa fa-dot-circle-o"></i> Add New</Button>}
 
-          </Col>
-        </Row>
+        </Col>
+      </Row>
 
-        {props.this.state.Flag_Organization_View ? <CompOrganization_AddForm this={props.this} /> : <CompOrganization_Display data={props.data} this={props.this} />}
+      {props.this.state.Flag_Organization_View ? <CompOrganization_AddForm this={props.this} /> : <CompOrganization_Display data={props.data} this={props.this} />}
 
-      </div>
-    );
+    </div>
+  );
   // else {
   //   // return (<Compsocial_AddForm this={props.this} />)
   // }
@@ -850,7 +850,7 @@ class Aform extends Component {
         //   skills: { ...snap.skills }
         // }
         user: {
-          ...this.state.user,...snap
+          ...this.state.user, ...snap
           //Dont Overwrite the user Object, Just update the new Values in Snap
         }
       })
@@ -1222,23 +1222,25 @@ class Aform extends Component {
   render() {
     return (
       <div className="animated fadeIn">
-        <Row>
-          <Col>
-            <CardBody>
-              <h4>Profile Settings</h4>
-            </CardBody>
-          </Col>
-        </Row>
+
         {/* <Container fluid> */}
         <Row>
-          <Col>
-            {/* <Card> */}
-            {/* <CardHeader>
-                <i className="fa fa-align-justify"></i> Collapse <small>accordion</small>
-                <div className="card-header-actions">
-                  <Badge>NEW</Badge>
-                </div>
-              </CardHeader> */}
+          <Col md="2">
+
+            <Button outline color="primary" size="lg" block href="#/basel/profile">Profile</Button>
+            <Button outline color="primary" size="lg" block  href="#/basel/jobpost">Job Section</Button>
+            <Button outline color="primary" size="lg" block  href="#/basel/aform">Settings</Button>
+
+          </Col>
+
+          <Col md="7">
+            <Row>
+              <Col>
+                <CardBody>
+                  <h4>Profile Settings</h4>
+                </CardBody>
+              </Col>
+            </Row>
             <CardBody>
               <div id="accordion">
 

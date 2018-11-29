@@ -76,7 +76,7 @@ function CompJob_Home(props) {
         <Col md="9">
         </Col>
         <Col md="3">
-          <Button type="submit" align="right" size="sm" color="dark" onClick={props.this.ChangeState_FORM}><i className="fa fa-dot-circle-o"></i> Post New Job</Button>
+          <Button type="submit" align="right" size="md" color="primary" onClick={props.this.ChangeState_FORM}><i className="fa fa-dot-circle-o"></i> Post A Job</Button>
         </Col>
       </Row>
       <h5>Your Job Section</h5>
@@ -544,7 +544,7 @@ class Jobpost extends Component {
       let temp = Object.assign({}, this.state)
       console.log("NOW VALUE OF temp is ", temp)
       temp.job = jobSnap.val()
-      this.setState({...this.state, temp})
+      this.setState({ ...this.state, temp })
     })
 
     // console.log("NOW VALUE OF temp is ", temp)
@@ -563,14 +563,14 @@ class Jobpost extends Component {
 
     console.log("Delete State", this.state)
 
-    for (var i = 0; i < this.state.user_jobs.length; i++){
+    for (var i = 0; i < this.state.user_jobs.length; i++) {
 
-        if(this.state.user_jobs[i].k === key){
-          let temp = Object.assign({}, this.state)
-          console.log("Index Count ", i)
-          temp.user_jobs.splice(i,1)
-          this.setState({...this.state, temp})
-        }
+      if (this.state.user_jobs[i].k === key) {
+        let temp = Object.assign({}, this.state)
+        console.log("Index Count ", i)
+        temp.user_jobs.splice(i, 1)
+        this.setState({ ...this.state, temp })
+      }
     }
   }
 
@@ -642,7 +642,15 @@ class Jobpost extends Component {
       <div className="animated fadeIn">
 
         <Row>
-          <Col md="9">
+          <Col md="2">
+
+            <Button outline color="primary" size="lg" block href="#/basel/profile">Profile</Button>
+            <Button outline color="primary" size="lg" block  href="#/basel/jobpost">Job Section</Button>
+            <Button outline color="primary" size="lg" block  href="#/basel/aform">Settings</Button>
+            
+          </Col>
+
+          <Col md="7">
             <Card>
               <CardBody>
                 {this.state.job_view === "FORM" ? <CompJob_Form this={this} /> : <CompJob_Home this={this} />}

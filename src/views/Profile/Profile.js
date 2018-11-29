@@ -564,8 +564,15 @@ class Profile extends Component {
           {}
         </Row>
         <Row>
-          <Col md="9">
+          <Col md="2">
 
+            <Button outline color="primary" size="lg" block href="#/basel/profile">Profile</Button>
+            <Button outline color="primary" size="lg" block  href="#/basel/jobpost">Job Section</Button>
+            <Button outline color="primary" size="lg" block  href="#/basel/aform">Settings</Button>
+
+          </Col>
+
+          <Col md="7">
             <Card>
               <CardBody>
                 <PrimaryInfo this={this} />
