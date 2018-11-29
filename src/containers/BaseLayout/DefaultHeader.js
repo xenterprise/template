@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
-import { Badge, DropdownItem, DropdownMenu, DropdownToggle, Nav, NavItem, NavLink } from 'reactstrap';
+import { Badge, DropdownItem, DropdownMenu, DropdownToggle, Nav, NavItem, NavLink, FormGroup, InputGroup, Input, InputGroupAddon, Button } from 'reactstrap';
 import PropTypes from 'prop-types';
 
 import { AppAsideToggler, AppHeaderDropdown, AppNavbarBrand, AppSidebarToggler } from '@coreui/react';
-import logo from '../../assets/img/brand/logo.svg'
+import logo from '../../assets/img/brand/logor.png'
 import sygnet from '../../assets/img/brand/sygnet.svg'
 import fire from '../../config/Fire'
 
@@ -23,7 +23,7 @@ class DefaultHeader extends Component {
       <React.Fragment>
         {/* <AppSidebarToggler className="d-lg-none" display="md" mobile /> */}
         <AppNavbarBrand
-          full={{ src: logo, width: 89, height: 25, alt: 'CoreUI Logo' }}
+          full={{ src: logo, width: 112, height: 45, alt: 'CoreUI Logo' }}
           minimized={{ src: sygnet, width: 30, height: 30, alt: 'CoreUI Logo' }}
         />
         {/* <AppSidebarToggler className="d-md-down-none" display="lg" /> */}
@@ -32,39 +32,44 @@ class DefaultHeader extends Component {
           <NavItem className="px-3">
             <NavLink href="#/basel/profile">Profile</NavLink>
           </NavItem>
-          <NavItem className="px-3">
+          {/* <NavItem className="px-3">
             <NavLink href="#/basel/search">Search</NavLink>
-          </NavItem>
-          <NavItem className="px-3">
+          </NavItem> */}
+          {/* <NavItem className="px-3">
             <NavLink href="#/basel/aform">Edit Profile</NavLink>
-          </NavItem>
-          <NavItem className="px-3">
+          </NavItem> */}
+          {/* <NavItem className="px-3">
             <NavLink href="/">Dashboard</NavLink>
-          </NavItem>
+          </NavItem> */}
           <NavItem className="px-3">
-            <NavLink href="#/users">Users</NavLink>
+            <NavLink href="#/basel/jobpost">Job</NavLink>
           </NavItem>
-          <NavItem className="px-3">
+          {/* <NavItem className="px-3">
             <NavLink href="#">Settings</NavLink>
+          </NavItem> */}
+
+          <NavItem className="px-3">
+            <InputGroup>
+              <Input valid id="appendedInputButtons" size="48" type="text" placeholder="Search for People, Jobs & other opportunities" />
+              <InputGroupAddon addonType="append">
+                <Button color="primary">Search</Button>
+                <Button color="secondary">Options</Button>
+              </InputGroupAddon>
+            </InputGroup>
           </NavItem>
         </Nav>
-        <Nav className="ml-auto" navbar>
+
+
+        <Nav className="d-md-down-none ml-auto" navbar>
 
           <NavItem className="d-md-down-none">
             <h6>{localStorage.account}</h6>
           </NavItem>
 
-
-
-          {/* <NavItem className="d-md-down-none">
-            <NavLink href="#"><i className="icon-bell"></i><Badge pill color="danger">5</Badge></NavLink>
+          <NavItem className="px-3">
+            <NavLink href="#/basel/jobpost">Username</NavLink>
           </NavItem>
-          <NavItem className="d-md-down-none">
-            <NavLink href="#"><i className="icon-list"></i></NavLink>
-          </NavItem>
-          <NavItem className="d-md-down-none">
-            <NavLink href="#"><i className="icon-location-pin"></i></NavLink>
-          </NavItem> */}
+
           <AppHeaderDropdown direction="down">
             <DropdownToggle nav>
               <img src={'assets/img/avatars/6.jpg'} className="img-avatar" alt="admin@bootstrapmaster.com" />

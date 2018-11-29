@@ -45,7 +45,7 @@ for (var i = 0; i <= elements; i++) {
   data3.push(65);
 }
 
-function SocialPlatformClassA(platform) {
+function socialPlatformClassA(platform) {
   if (platform === 'Facebook') {
     return "btn-facebook btn-brand icon mr-1 mb-1"
   } else if (platform === 'Twitter') {
@@ -53,7 +53,7 @@ function SocialPlatformClassA(platform) {
   }
 }
 
-function SocialPlatformClassB(platform) {
+function socialPlatformClassB(platform) {
   if (platform === 'Facebook') {
     return "fa fa-facebook"
   } else if (platform === 'Twitter') {
@@ -63,16 +63,16 @@ function SocialPlatformClassB(platform) {
 
 
 function PrimaryInfo(props) {
-  if (props.this.state.user.Personal) {
+  if (props.this.state.user) {
 
     return (
       <div>
         <Row>
           <Col md="5">
             <div align="left">
-              <h4>{props.this.state.user.Personal.name}</h4>
-              <h5>{props.this.state.user.Personal.title}</h5>
-              <h6>{props.this.state.user.Personal.tagline}</h6>
+              <h4>{props.this.state.user.name}</h4>
+              <h5>{props.this.state.user.title}</h5>
+              <h6>{props.this.state.user.tagline}</h6>
             </div>
 
           </Col>
@@ -83,22 +83,11 @@ function PrimaryInfo(props) {
           </Col>
           <Col md="5">
             <div align="right">
-              <h5>{props.this.state.user.Email}</h5>
-              <h5>{props.this.state.user.Personal.contactno}</h5>
-              <h5>{props.this.state.user.Personal.website}</h5>
-              <h5>{props.this.state.user.Personal.username}</h5>
-              {
-                Object.keys(props.this.state.user.Personal.Social).map((item, i) => (
-
-                  <Button key={i}
-                    href={"https://" + props.this.state.user.Personal.Social[item].link}
-                    target="_blank"
-                    className={SocialPlatformClassA(props.this.state.user.Personal.Social[item].platform)}>
-                    <i className={SocialPlatformClassB(props.this.state.user.Personal.Social[item].platform)}></i>
-                  </Button>
-
-                ))
-              }
+              <h5>{props.this.state.user.email}</h5>
+              <h5>{props.this.state.user.contactno}</h5>
+              <h5>{props.this.state.user.website}</h5>
+              <h5>{props.this.state.user.username}</h5>
+              {props.this.state.user.social ? <SocialPlatforms this={props.this} /> : null}
             </div>
           </Col>
         </Row>
@@ -108,7 +97,36 @@ function PrimaryInfo(props) {
     return (
       <div>
         <p>
-          Loading
+          No Data Available, Please Go to "Edit Profile"
+        </p>
+      </div>
+    )
+  }
+
+}
+function SocialPlatforms(props) {
+  if (props.this.state.user.social) {
+    return (
+      <div>
+        {
+          Object.keys(props.this.state.user.social).map((item, i) => (
+
+            <Button key={i}
+              href={"https://" + props.this.state.user.social[item].link}
+              target="_blank"
+              className={socialPlatformClassA(props.this.state.user.social[item].platform)}>
+              <i className={socialPlatformClassB(props.this.state.user.social[item].platform)}></i>
+            </Button>
+
+          ))
+        }
+      </div>
+    )
+  } else {
+    return (
+      <div>
+        <p>
+          No Social Data Available, Please Go to "Edit Profile"
         </p>
       </div>
     )
@@ -117,16 +135,16 @@ function PrimaryInfo(props) {
 }
 
 function Skills(props) {
-  if (props.this.state.user.Personal) {
-    props.this.skills = props.this.state.user.Personal.skills.split(',')
+  if (props.this.state.user.skills) {
     return (
       <div>
         {
-          Object.keys(props.this.skills).map((item, i) => (
-            <Button key={i}
+          Object.keys(props.this.state.user.skills).map((item, i) => (
+            <Button
+              key={i}
               size="lg"
               className="btn-facebook btn-brand text mr-1 mb-1">
-              <span>{props.this.skills[item]}</span>
+              <span>{item}</span>
             </Button>
           ))
         }
@@ -136,56 +154,55 @@ function Skills(props) {
     return (
       <div>
         <p>
-          Loading
+          No Data Available, Please Go to "Edit Profile"
         </p>
       </div>
     )
   }
-
 }
 
-// This code also executes even when Personal is not populated yet so at that time, Work does not exist
-function WorkExperience(props) {       
-  if (props.this.state.user.Personal) {
-    if(props.this.state.user.Personal.Work){
+// This code also executes even when Personal is not populated yet so at that time, work does not exist
+function WorkExperience(props) {
+  if (props.this.state.user.work) {
+    if (props.this.state.user.work) {
       return (
         <div>
           <Row>
-            {/* {
-              Object.keys(props.this.state.user.Personal.Work).map((item, i) => (
+            {
+              Object.keys(props.this.state.user.work).map((item, i) => (
                 <Col key={i} xs="12" sm="6" md="6">
                   <Card className="border-primary">
                     <CardHeader>
-                      <h4>{props.this.state.user.Personal.Work[item].com}</h4>
-                      <h6>{props.this.state.user.Personal.Work[item].des}</h6>
-                      <p>{props.this.state.user.Personal.Work[item].dur}</p>
+                      <h4>{props.this.state.user.work[item].com}</h4>
+                      <h6>{props.this.state.user.work[item].des}</h6>
+                      <p>{props.this.state.user.work[item].dur}</p>
                     </CardHeader>
                     <CardBody>
-                      {props.this.state.user.Personal.Work[item].det}
+                      {props.this.state.user.work[item].det}
                     </CardBody>
                   </Card>
                 </Col>
               ))
-            } */}
+            }
           </Row>
         </div>
       )
     }
-    else{
+    else {
       return (
         <div>
           <p>
-            No Work Information
+            No work Information
           </p>
         </div>
       )
     }
-    
+
   } else {
     return (
       <div>
         <p>
-          Loading
+          No Data Available, Please Go to "Edit Profile"
         </p>
       </div>
     )
@@ -195,14 +212,14 @@ function WorkExperience(props) {
 
 
 function Education(props) {
-  if (props.this.state.user.Personal) {
+  if (props.this.state.user.education) {
     return (
       <div>
         {
-          Object.keys(props.this.state.user.Personal.Education).map((item, i) => (
+          Object.keys(props.this.state.user.education).map((item, i) => (
             <ListGroupItem key={i}>
-              <h5>{props.this.state.user.Personal.Education[item].deg}</h5>
-              <p>{props.this.state.user.Personal.Education[item].inst}</p>
+              <h5>{props.this.state.user.education[item].deg}</h5>
+              <p>{props.this.state.user.education[item].inst}</p>
             </ListGroupItem>
           ))
         }
@@ -212,7 +229,7 @@ function Education(props) {
     return (
       <div>
         <p>
-          Loading
+          No Data Available, Please Go to "Edit Profile"
         </p>
       </div>
     )
@@ -221,13 +238,13 @@ function Education(props) {
 }
 
 function Organizations(props) {
-  if (props.this.state.user.Personal) {
+  if (props.this.state.user.organizations) {
     return (
       <div>
         {
-          Object.keys(props.this.state.user.Personal.Organizations).map((item, i) => (
+          Object.keys(props.this.state.user.organizations).map((item, i) => (
             <ListGroupItem key={i}>
-              <h5>{props.this.state.user.Personal.Organizations[item].name}</h5>
+              <h5>{props.this.state.user.organizations[item].name}</h5>
             </ListGroupItem>
           ))
         }
@@ -237,7 +254,7 @@ function Organizations(props) {
     return (
       <div>
         <p>
-          Loading
+          No Data Available, Please Go to "Edit Profile"
         </p>
       </div>
     )
@@ -246,14 +263,14 @@ function Organizations(props) {
 }
 
 function Certifications(props) {
-  if (props.this.state.user.Personal) {
+  if (props.this.state.user.certifications) {
     return (
       <div>
         {
-          Object.keys(props.this.state.user.Personal.Certifications).map((item, i) => (
+          Object.keys(props.this.state.user.certifications).map((item, i) => (
             <ListGroupItem key={i}>
-              <h5>{props.this.state.user.Personal.Certifications[item].org}</h5>
-              <p>{props.this.state.user.Personal.Certifications[item].name}</p>
+              <h5>{props.this.state.user.certifications[item].org}</h5>
+              <p>{props.this.state.user.certifications[item].name}</p>
             </ListGroupItem>
           ))
         }
@@ -263,7 +280,7 @@ function Certifications(props) {
     return (
       <div>
         <p>
-          Loading
+          No Data Available, Please Go to "Edit Profile"
         </p>
       </div>
     )
@@ -271,14 +288,14 @@ function Certifications(props) {
 }
 
 function Publications(props) {
-  if (props.this.state.user.Personal) {
+  if (props.this.state.user.publications) {
     return (
       <div>
         {
-          Object.keys(props.this.state.user.Personal.Publications).map((item, i) => (
+          Object.keys(props.this.state.user.publications).map((item, i) => (
             <ListGroupItem key={i}>
-              <h5>{props.this.state.user.Personal.Publications[item].pub}</h5>
-              <p>{props.this.state.user.Personal.Publications[item].name}</p>
+              <h5>{props.this.state.user.publications[item].pub}</h5>
+              <p>{props.this.state.user.publications[item].name}</p>
             </ListGroupItem>
           ))
         }
@@ -288,7 +305,7 @@ function Publications(props) {
     return (
       <div>
         <p>
-          Loading
+          No Data Available, Please Go to "Edit Profile"
         </p>
       </div>
     )
@@ -525,7 +542,7 @@ class Profile extends Component {
         user: snap
       })
       console.log(this.user)
-      console.log('Current State USer',this.state.user )
+      console.log('Current State user', this.state.user)
 
 
 

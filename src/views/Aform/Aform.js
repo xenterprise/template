@@ -37,7 +37,7 @@ function CompAbout(props) {
           <Label htmlFor="text-input">Name</Label>
         </Col>
         <Col xs="12" md="9">
-          <Input type="text" id="text-input" name="name" placeholder="Your Name Here" value={props.data.Personal.name} onChange={props.this.inputChanged} />
+          <Input type="text" name="name" placeholder="Your Name Here" value={props.data.name} onChange={props.this.inputChanged} />
         </Col>
       </Row>
 
@@ -46,7 +46,7 @@ function CompAbout(props) {
           <Label htmlFor="text-input">Title</Label>
         </Col>
         <Col xs="12" md="9">
-          <Input type="text" id="text-input" name="title" placeholder="e.g., Engineer/ Teacher/ Astronaut" value={props.data.Personal.title} onChange={props.this.inputChanged} />
+          <Input type="text" name="title" placeholder="e.g., Engineer/ Teacher/ Astronaut" value={props.data.title} onChange={props.this.inputChanged} />
         </Col>
       </Row>
 
@@ -55,25 +55,25 @@ function CompAbout(props) {
           <Label htmlFor="text-input">Tagline</Label>
         </Col>
         <Col xs="12" md="9">
-          <Input type="text" id="text-input" name="tagline" placeholder="Something about you briefly" value={props.data.Personal.tagline} onChange={props.this.inputChanged} />
+          <Input type="text" name="tagline" placeholder="Something about you briefly" value={props.data.tagline} onChange={props.this.inputChanged} />
         </Col>
       </Row>
 
-      <Row>
+      {/* <Row>
         <Col md="2">
-          <Label htmlFor="text-input">Email</Label>
+          <Label htmlFor="text-input">email</Label>
         </Col>
         <Col xs="12" md="9">
-          <Input disabled type="text" id="text-input" name="Email" placeholder="youremail@something.com" value={props.data.Email} onChange={props.this.inputChanged} />
+          <Input disabled type="text" id="text-input" name="email" placeholder="youremail@something.com" value={props.data.email} onChange={props.this.inputChanged} />
         </Col>
-      </Row>
+      </Row> */}
 
       <Row>
         <Col md="2">
           <Label htmlFor="text-input">Phone Number</Label>
         </Col>
         <Col xs="12" md="9">
-          <Input type="text" id="text-input" name="contactno" placeholder="Your Contact Number" value={props.data.Personal.contactno} onChange={props.this.inputChanged} />
+          <Input type="text" name="contactno" placeholder="Your Contact Number" value={props.data.contactno} onChange={props.this.inputChanged} />
         </Col>
       </Row>
 
@@ -82,18 +82,18 @@ function CompAbout(props) {
           <Label htmlFor="text-input">Website</Label>
         </Col>
         <Col xs="12" md="9">
-          <Input type="text" id="text-input" name="website" placeholder="Your Website Address" value={props.data.Personal.website} onChange={props.this.inputChanged} />
+          <Input type="text" name="website" placeholder="Your Website Address" value={props.data.website} onChange={props.this.inputChanged} />
         </Col>
       </Row>
 
-      <Row>
+      {/* <Row>
         <Col md="2">
           <Label htmlFor="text-input">Skills</Label>
         </Col>
         <Col xs="12" md="9">
-          <Input type="textarea" id="text-input" name="skills" placeholder="Your Skills. Seperated by Commas" value={props.data.Personal.skills} onChange={props.this.inputChanged} />
+          <Input type="textarea" id="text-input" name="skills" placeholder="Your Skills. Seperated by Commas" value={props.data.skills} onChange={props.this.inputChanged} />
         </Col>
-      </Row>
+      </Row> */}
 
 
       <Row>
@@ -112,9 +112,10 @@ function CompSkills(props) {
       {
         Object.keys(props.data).map((item, i) => (
           <Button
+            key={i}
             size="lg"
             className="btn-facebook btn-brand text mr-1 mb-1">
-            <span>{item}</span>
+            <span>{item}</span><a className="card-header-action btn btn-close" >  <i className="icon-close" onClick={props.this.delChildOfuser.bind(props.this, "skills", item)}></i></a>
           </Button>
         ))
       }
@@ -122,7 +123,7 @@ function CompSkills(props) {
       <Row>
         <Col xs="12" md="9">
           <form ref={input => props.this.addSkillForm = input} onSubmit={(e) => { props.this.addSkill(e) }}>
-            <Input type="text" id="text-input" name="new_skill" placeholder="Enter New Skills Here" onChange={props.this.Base_inputChanged} />
+            <Input type="text" id="text-input" name="new_skill" placeholder="Enter New Skills Here" onChange={props.this.Base_inputChanged_lowercase} />
           </form>
         </Col>
       </Row>
@@ -131,42 +132,51 @@ function CompSkills(props) {
   )
 }
 
-function CompSocial_Display(props) {
-  return (
-    <div>
-      {
-        Object.keys(props.data.Social).map((item, i) => (
-          <Row key={i}>
-            <Col md="1">
-              <div className="avatar">
-                <img src={'assets/img/avatars/1.jpg'} className="img-avatar" alt="admin@bootstrapmaster.com" />
-                <span className="avatar-status badge-success"></span>
-              </div>
+function Compsocial_Display(props) {
+  if (props.data.social)
+    return (
+      <div>
+        {
+          Object.keys(props.data.social).map((item, i) => (
+            <Row key={i}>
+              <Col md="1">
+                <div className="avatar">
+                  <img src={'assets/img/avatars/1.jpg'} className="img-avatar" alt="admin@bootstrapmaster.com" />
+                  <span className="avatar-status badge-success"></span>
+                </div>
 
-            </Col>
-            <Col md="8">
-              <div><strong>{props.data.Social[item].platform}</strong></div>
-              <div className="small text-muted">
-                {props.data.Social[item].link}
-              </div>
-            </Col>
-            <Col md="1">
-              <div className="card-header-actions" >
-                <a className="card-header-action btn btn-close" ><i className="icon-close" onClick={props.this.delItem.bind(props.this, i)}></i></a>
-              </div>
-            </Col>
-          </Row>
-        ))}
-    </div>
-  );
+              </Col>
+              <Col md="8">
+                <div><strong>{props.data.social[item].platform}</strong></div>
+                <div className="small text-muted">
+                  {props.data.social[item].link}
+                </div>
+              </Col>
+              <Col md="1">
+                <div className="card-header-actions" >
+                  <a className="card-header-action btn btn-close" ><i className="icon-close" onClick={props.this.delItem.bind(props.this, i)}></i></a>
+                </div>
+              </Col>
+            </Row>
+          ))}
+      </div>
+    );
+  else {
+    return (
+      <div>
+        You have No Records, Please Add some
+        </div>
+    )
+  }
 }
 
 
 function CompCertificate_Display(props) {
+  if(props.data.certifications)
   return (
     <div>
       {
-        Object.keys(props.data.Certifications).map((item, i) => (
+        Object.keys(props.data.certifications).map((item, i) => (
           <Row key={i}>
             <Col md="1">
               <div className="avatar">
@@ -176,9 +186,9 @@ function CompCertificate_Display(props) {
 
             </Col>
             <Col md="8">
-              <div><strong>{props.data.Certifications[item].name}</strong></div>
+              <div><strong>{props.data.certifications[item].name}</strong></div>
               <div className="small text-muted">
-                {props.data.Certifications[item].org}
+                {props.data.certifications[item].org}
               </div>
             </Col>
             <Col md="1">
@@ -190,13 +200,20 @@ function CompCertificate_Display(props) {
         ))}
     </div>
   );
+  else
+    return (
+      <div>
+        You have No Records, Please Add some
+        </div>
+    )
 }
 
 function CompPublication_Display(props) {
+  if(props.data.publications)
   return (
     <div>
       {
-        Object.keys(props.data.Publications).map((item, i) => (
+        Object.keys(props.data.publications).map((item, i) => (
           <Row key={i}>
             <Col md="1">
               <div className="avatar">
@@ -206,9 +223,9 @@ function CompPublication_Display(props) {
 
             </Col>
             <Col md="8">
-              <div><strong>{props.data.Publications[item].pub}</strong></div>
+              <div><strong>{props.data.publications[item].pub}</strong></div>
               <div className="small text-muted">
-                {props.data.Publications[item].name}
+                {props.data.publications[item].name}
               </div>
             </Col>
             <Col md="1">
@@ -220,14 +237,21 @@ function CompPublication_Display(props) {
         ))}
     </div>
   );
+  else
+    return (
+      <div>
+        You have No Records, Please Add some
+        </div>
+    )
 }
 
 
 function CompOrganization_Display(props) {
+  if(props.data.organizations)
   return (
     <div>
       {
-        Object.keys(props.data.Organizations).map((item, i) => (
+        Object.keys(props.data.organizations).map((item, i) => (
           <Row key={i}>
             <Col md="1">
               <div className="avatar">
@@ -237,9 +261,9 @@ function CompOrganization_Display(props) {
 
             </Col>
             <Col md="8">
-              <div><strong>{props.data.Organizations[item].name}</strong></div>
+              <div><strong>{props.data.organizations[item].name}</strong></div>
               {/* <div className="small text-muted">
-                {props.data.Organizations[item].org}
+                {props.data.organizations[item].org}
               </div> */}
             </Col>
             <Col md="1">
@@ -251,16 +275,23 @@ function CompOrganization_Display(props) {
         ))}
     </div>
   );
+  else
+    return (
+      <div>
+        You have No Records, Please Add some
+        </div>
+    )
 }
 
 
 
 
-function CompEducation_Display(props) {
+function Compeducation_Display(props) {
+  if(props.data.education)
   return (
     <div>
       {
-        Object.keys(props.data.Education).map((item, i) => (
+        Object.keys(props.data.education).map((item, i) => (
           <Row key={i}>
             <Col md="1">
               <div className="avatar">
@@ -270,54 +301,67 @@ function CompEducation_Display(props) {
 
             </Col>
             <Col md="8">
-              <div><strong>{props.data.Education[item].deg}</strong></div>
+              <div><strong>{props.data.education[item].deg}</strong></div>
               <div className="small text-muted">
-                {props.data.Education[item].inst}
+                {props.data.education[item].inst}
               </div>
             </Col>
             <Col md="1">
               <div className="card-header-actions" >
-                <a className="card-header-action btn btn-close" ><i className="icon-close" onClick={props.this.delItem_Education.bind(props.this, i)}></i></a>
+                <a className="card-header-action btn btn-close" ><i className="icon-close" onClick={props.this.delItem_education.bind(props.this, i)}></i></a>
               </div>
             </Col>
           </Row>
         ))}
     </div>
   );
+  else
+    return (
+      <div>
+        You have No Records, Please Add some
+        </div>
+    )
 }
 
-function CompWork_Display(props) {
-  return (
-    <div>
-      {
-        Object.keys(props.data.Work).map((item, i) => (
-          <Row key={i}>
-            <Col md="1">
-              <div className="avatar">
-                <img src={'assets/img/avatars/1.jpg'} className="img-avatar" alt="admin@bootstrapmaster.com" />
-                <span className="avatar-status badge-success"></span>
-              </div>
+function Compwork_Display(props) {
+  if (props.data.work)
+    return (
+      <div>
+        {
+          Object.keys(props.data.work).map((item, i) => (
+            <Row key={i}>
+              <Col md="1">
+                <div className="avatar">
+                  <img src={'assets/img/avatars/1.jpg'} className="img-avatar" alt="admin@bootstrapmaster.com" />
+                  <span className="avatar-status badge-success"></span>
+                </div>
 
-            </Col>
-            <Col md="8">
-              <div><strong>{props.data.Work[item].com}</strong></div>
-              <div><strong>{props.data.Work[item].des}</strong></div>
-              <div><strong>{props.data.Work[item].dur}</strong></div>
-              <div className="small text-muted">{props.data.Work[item].det}</div>
-            </Col>
-            <Col md="1">
-              <div className="card-header-actions" >
-                <a className="card-header-action btn btn-close" ><i className="icon-close" onClick={props.this.delItem_Work.bind(props.this, i)}></i></a>
-              </div>
-            </Col>
-          </Row>
-        ))}
-    </div>
-  );
+              </Col>
+              <Col md="8">
+                <div><strong>{props.data.work[item].com}</strong></div>
+                <div><strong>{props.data.work[item].des}</strong></div>
+                <div><strong>{props.data.work[item].dur}</strong></div>
+                <div className="small text-muted">{props.data.work[item].det}</div>
+              </Col>
+              <Col md="1">
+                <div className="card-header-actions" >
+                  <a className="card-header-action btn btn-close" ><i className="icon-close" onClick={props.this.delItem_work.bind(props.this, i)}></i></a>
+                </div>
+              </Col>
+            </Row>
+          ))}
+      </div>
+    );
+  else
+    return (
+      <div>
+        You have No Records, Please Add some
+        </div>
+    )
 }
 
 
-function CompSocial_AddForm(props) {
+function Compsocial_AddForm(props) {
   return (
     <div>
 
@@ -328,15 +372,15 @@ function CompSocial_AddForm(props) {
             <Label htmlFor="text-input">Platform Name</Label>
           </Col>
           <Col md="6">
-            <Dropdown isOpen={props.this.state.dropdownOpen_Social} toggle={props.this.toggleDD_Social}>
+            <Dropdown isOpen={props.this.state.dropdownOpen_social} toggle={props.this.toggleDD_social}>
               <DropdownToggle caret>
                 {props.this.state.new_platformName}
               </DropdownToggle>
               <DropdownMenu>
-                <DropdownItem name="Facebook" onClick={props.this.Social_ddChanged}>Facebook</DropdownItem>
-                <DropdownItem name="Twitter" onClick={props.this.Social_ddChanged}>Twitter</DropdownItem>
-                <DropdownItem name="Youtube" onClick={props.this.Social_ddChanged}>Youtube</DropdownItem>
-                <DropdownItem name="Linkedin" onClick={props.this.Social_ddChanged}>LinkedIn</DropdownItem>
+                <DropdownItem name="Facebook" onClick={props.this.social_ddChanged}>Facebook</DropdownItem>
+                <DropdownItem name="Twitter" onClick={props.this.social_ddChanged}>Twitter</DropdownItem>
+                <DropdownItem name="Youtube" onClick={props.this.social_ddChanged}>Youtube</DropdownItem>
+                <DropdownItem name="Linkedin" onClick={props.this.social_ddChanged}>LinkedIn</DropdownItem>
               </DropdownMenu>
             </Dropdown>
           </Col>
@@ -346,15 +390,15 @@ function CompSocial_AddForm(props) {
             <Label htmlFor="text-input">Profile Link</Label>
           </Col>
           <Col md="6">
-            <Input type="text" id="text-input" name="new_platformLink" placeholder="Link to your Social Profile" onChange={props.this.Base_inputChanged} />
+            <Input type="text" id="text-input" name="new_platformLink" placeholder="Link to your social Profile" onChange={props.this.Base_inputChanged} />
           </Col>
         </Row>
         <Row>
           <Col md="2">
-            <Button size="sm" color="primary" name="Social" onClick={props.this.addItem.bind(props.this)}><i className="fa fa-dot-circle-o"></i> Save Changes</Button>
+            <Button size="sm" color="primary" name="social" onClick={props.this.addItem.bind(props.this)}><i className="fa fa-dot-circle-o"></i> Save Changes</Button>
           </Col>
           <Col md="2">
-            <Button size="sm" color="danger" onClick={props.this.toggleFlag_Social}><i className="fa fa-close"></i> Cancel</Button>
+            <Button size="sm" color="danger" onClick={props.this.toggleFlag_social}><i className="fa fa-close"></i> Cancel</Button>
           </Col>
         </Row>
       </div>
@@ -363,17 +407,17 @@ function CompSocial_AddForm(props) {
   );
 }
 
-function CompEducation_AddForm(props) {
+function Compeducation_AddForm(props) {
   return (
     <div>
-      <form onSubmit={(e) => { props.this.addItem_Education(e) }}>
+      <form onSubmit={(e) => { props.this.addItem_education(e) }}>
         <div className="form-group">
           <Row>
             <Col md="3">
               <Label htmlFor="text-input">Degree/Course Title:</Label>
             </Col>
             <Col md="6">
-              <Input type="text" id="text-input" name="new_education_degree" placeholder="Link to your Social Profile" onChange={props.this.Base_inputChanged} />
+              <Input type="text" id="text-input" name="new_education_degree" placeholder="Link to your social Profile" onChange={props.this.Base_inputChanged} />
             </Col>
           </Row>
           <Row>
@@ -381,7 +425,7 @@ function CompEducation_AddForm(props) {
               <Label htmlFor="text-input">University/ Institute Name:</Label>
             </Col>
             <Col md="6">
-              <Input type="text" id="text-input" name="new_education_institute" placeholder="Link to your Social Profile" onChange={props.this.Base_inputChanged} />
+              <Input type="text" id="text-input" name="new_education_institute" placeholder="Link to your social Profile" onChange={props.this.Base_inputChanged} />
             </Col>
           </Row>
           <Row>
@@ -389,7 +433,7 @@ function CompEducation_AddForm(props) {
               <Button type="submit" size="sm" color="primary" ><i className="fa fa-dot-circle-o"></i> Save Changes</Button>
             </Col>
             <Col md="2">
-              <Button size="sm" color="danger" onClick={props.this.toggleFlag_Education}><i className="fa fa-close"></i> Cancel</Button>
+              <Button size="sm" color="danger" onClick={props.this.toggleFlag_education}><i className="fa fa-close"></i> Cancel</Button>
             </Col>
           </Row>
         </div>
@@ -408,7 +452,7 @@ function CompPublication_AddForm(props) {
               <Label htmlFor="text-input">Publisher/ Journal:</Label>
             </Col>
             <Col md="6">
-              <Input type="text" id="text-input" name="new_publication_publisher" placeholder="Link to your Social Profile" onChange={props.this.Base_inputChanged} />
+              <Input type="text" id="text-input" name="new_publication_publisher" placeholder="Link to your social Profile" onChange={props.this.Base_inputChanged} />
             </Col>
           </Row>
           <Row>
@@ -416,7 +460,7 @@ function CompPublication_AddForm(props) {
               <Label htmlFor="text-input">Publication Title:</Label>
             </Col>
             <Col md="6">
-              <Input type="text" id="text-input" name="new_publication_name" placeholder="Link to your Social Profile" onChange={props.this.Base_inputChanged} />
+              <Input type="text" id="text-input" name="new_publication_name" placeholder="Link to your social Profile" onChange={props.this.Base_inputChanged} />
             </Col>
           </Row>
           <Row>
@@ -445,7 +489,7 @@ function CompCertificate_AddForm(props) {
               <Label htmlFor="text-input">Certification Title:</Label>
             </Col>
             <Col md="6">
-              <Input type="text" id="text-input" name="new_certification_name" placeholder="Link to your Social Profile" onChange={props.this.Base_inputChanged} />
+              <Input type="text" id="text-input" name="new_certification_name" placeholder="Link to your social Profile" onChange={props.this.Base_inputChanged} />
             </Col>
           </Row>
           <Row>
@@ -453,7 +497,7 @@ function CompCertificate_AddForm(props) {
               <Label htmlFor="text-input">Organization Name:</Label>
             </Col>
             <Col md="6">
-              <Input type="text" id="text-input" name="new_certification_org" placeholder="Link to your Social Profile" onChange={props.this.Base_inputChanged} />
+              <Input type="text" id="text-input" name="new_certification_org" placeholder="Link to your social Profile" onChange={props.this.Base_inputChanged} />
             </Col>
           </Row>
           <Row>
@@ -480,7 +524,7 @@ function CompOrganization_AddForm(props) {
               <Label htmlFor="text-input">Organization Name:</Label>
             </Col>
             <Col md="6">
-              <Input type="text" id="text-input" name="new_organization_name" placeholder="Link to your Social Profile" onChange={props.this.Base_inputChanged} />
+              <Input type="text" id="text-input" name="new_organization_name" placeholder="Link to your social Profile" onChange={props.this.Base_inputChanged} />
             </Col>
           </Row>
 
@@ -499,10 +543,10 @@ function CompOrganization_AddForm(props) {
 }
 
 
-function CompWork_AddForm(props) {
+function Compwork_AddForm(props) {
   return (
     <div>
-      <form onSubmit={(e) => { props.this.addItem_Work(e) }}>
+      <form onSubmit={(e) => { props.this.addItem_work(e) }}>
         <div className="form-group">
 
           <Row>
@@ -540,7 +584,7 @@ function CompWork_AddForm(props) {
               <Label htmlFor="text-input">Details:</Label>
             </Col>
             <Col md="6">
-              <Input type="textarea" id="text-input" name="new_work_details" placeholder="Enter Work Details" onChange={props.this.Base_inputChanged} />
+              <Input type="textarea" id="text-input" name="new_work_details" placeholder="Enter work Details" onChange={props.this.Base_inputChanged} />
             </Col>
           </Row>
 
@@ -549,7 +593,7 @@ function CompWork_AddForm(props) {
               <Button type="submit" size="sm" color="primary" ><i className="fa fa-dot-circle-o"></i> Save Changes</Button>
             </Col>
             <Col md="2">
-              <Button size="sm" color="danger" onClick={props.this.toggleFlag_Education}><i className="fa fa-close"></i> Cancel</Button>
+              <Button size="sm" color="danger" onClick={props.this.toggleFlag_education}><i className="fa fa-close"></i> Cancel</Button>
             </Col>
           </Row>
 
@@ -562,31 +606,31 @@ function CompWork_AddForm(props) {
 }
 
 
-function CompSocial(props) {
-  if (props.data.Social)
-    return (
-      <div>
-        <Row >
-          <Col md="3">
-            <h5>Social Profiles and Channels</h5>
-          </Col>
-          <Col>
-            {props.this.state.Flag_Social_View ? null : <Button type="submit" size="sm" onClick={props.this.toggleFlag_Social} color="primary" ><i className="fa fa-dot-circle-o"></i> Add New</Button>}
+function Compsocial(props) {
+  // if (props.data.social)
+  return (
+    <div>
+      <Row >
+        <Col md="3">
+          <h5>Social Profiles and Channels</h5>
+        </Col>
+        <Col>
+          {props.this.state.Flag_social_View ? null : <Button type="submit" size="sm" onClick={props.this.toggleFlag_social} color="primary" ><i className="fa fa-dot-circle-o"></i> Add New</Button>}
 
-          </Col>
-        </Row>
+        </Col>
+      </Row>
 
-        {props.this.state.Flag_Social_View ? <CompSocial_AddForm this={props.this} /> : <CompSocial_Display data={props.data} this={props.this} />}
+      {props.this.state.Flag_social_View ? <Compsocial_AddForm this={props.this} /> : <Compsocial_Display data={props.data} this={props.this} />}
 
-      </div>
-    );
-  else {
-    // return (<CompSocial_AddForm this={props.this} />)
-  }
+    </div>
+  );
+  // else {
+  //   // return (<Compsocial_AddForm this={props.this} />)
+  // }
 }
 
-function CompEducation(props) {
-  if (props.data.Education)
+function Compeducation(props) {
+  
     return (
       <div>
         <Row >
@@ -594,22 +638,20 @@ function CompEducation(props) {
             <h5>Education & Degrees</h5>
           </Col>
           <Col>
-            {props.this.state.Flag_Education_View ? null : <Button type="submit" size="sm" onClick={props.this.toggleFlag_Education} color="primary" ><i className="fa fa-dot-circle-o"></i> Add New</Button>}
+            {props.this.state.Flag_education_View ? null : <Button type="submit" size="sm" onClick={props.this.toggleFlag_education} color="primary" ><i className="fa fa-dot-circle-o"></i> Add New</Button>}
 
           </Col>
         </Row>
 
-        {props.this.state.Flag_Education_View ? <CompEducation_AddForm this={props.this} /> : <CompEducation_Display data={props.data} this={props.this} />}
+        {props.this.state.Flag_education_View ? <Compeducation_AddForm this={props.this} /> : <Compeducation_Display data={props.data} this={props.this} />}
 
       </div>
     );
-  else {
-    // return (<CompSocial_AddForm this={props.this} />)
-  }
+  
 }
 
 function CompCertificate(props) {
-  if (props.data.Certifications)
+  // if (props.data.certifications)
     return (
       <div>
         <Row >
@@ -626,13 +668,13 @@ function CompCertificate(props) {
 
       </div>
     );
-  else {
-    // return (<CompSocial_AddForm this={props.this} />)
-  }
+  // else {
+  //   // return (<Compsocial_AddForm this={props.this} />)
+  // }
 }
 
 function CompPublication(props) {
-  if (props.data.Publications)
+  // if (props.data.publications)
     return (
       <div>
         <Row >
@@ -649,14 +691,14 @@ function CompPublication(props) {
 
       </div>
     );
-  else {
-    // return (<CompSocial_AddForm this={props.this} />)
-  }
+  // else {
+  //   // return (<Compsocial_AddForm this={props.this} />)
+  // }
 }
 
 
 function CompOrganization(props) {
-  if (props.data.Organizations)
+  // if (props.data.organizations)
     return (
       <div>
         <Row >
@@ -673,34 +715,34 @@ function CompOrganization(props) {
 
       </div>
     );
-  else {
-    // return (<CompSocial_AddForm this={props.this} />)
-  }
+  // else {
+  //   // return (<Compsocial_AddForm this={props.this} />)
+  // }
 }
 
 
 
-function CompWork(props) {
-  if (props.data.Work)
-    return (
-      <div>
-        <Row >
-          <Col md="3">
-            <h5>Work & Experience</h5>
-          </Col>
-          <Col>
-            {props.this.state.Flag_Work_View ? null : <Button type="submit" size="sm" onClick={props.this.toggleFlag_Work} color="primary" ><i className="fa fa-dot-circle-o"></i> Add New</Button>}
+function Compwork(props) {
+  // if (props.data.work)
+  return (
+    <div>
+      <Row >
+        <Col md="3">
+          <h5>Work & Experience</h5>
+        </Col>
+        <Col>
+          {props.this.state.Flag_work_View ? null : <Button type="submit" size="sm" onClick={props.this.toggleFlag_work} color="primary" ><i className="fa fa-dot-circle-o"></i> Add New</Button>}
 
-          </Col>
-        </Row>
+        </Col>
+      </Row>
 
-        {props.this.state.Flag_Work_View ? <CompWork_AddForm this={props.this} /> : <CompWork_Display data={props.data} this={props.this} />}
+      {props.this.state.Flag_work_View ? <Compwork_AddForm this={props.this} /> : <Compwork_Display data={props.data} this={props.this} />}
 
-      </div>
-    );
-  else {
-    // return (<CompSocial_AddForm this={props.this} />)
-  }
+    </div>
+  );
+  // else {
+  //   // return (<Compsocial_AddForm this={props.this} />)
+  // }
 }
 
 class Aform extends Component {
@@ -724,11 +766,11 @@ class Aform extends Component {
       new_skill: '',
 
       // activeTabLG_Parent: 1,
-      dropdownOpen_Social: false,
+      dropdownOpen_social: false,
 
-      Flag_Social_View: false,
-      Flag_Education_View: false,
-      Flag_Work_View: false,
+      Flag_social_View: false,
+      Flag_education_View: false,
+      Flag_work_View: false,
       Flag_Certification_View: false,
       Flag_Organization_View: false,
       Flag_Publication_View: false,
@@ -736,23 +778,20 @@ class Aform extends Component {
 
       accordion: [false, false, false, false, false, false, false, false],
 
-      User: {
-        Email: "",
-        Personal: {
-          name: "",
-          title: "",
-          tagline: "",
-          contactno: "",
-          website: "",
-          skills: "",
-          Social: [],
-          Education: [],
-          Certifications: [],
-          Organizations: [],
-          Publications: [],
-          Services: [],
-          Work: []
-        },
+      user: {
+        email: "",
+        name: "",
+        title: "",
+        tagline: "",
+        contactno: "",
+        website: "",
+        social: [],
+        education: [],
+        certifications: [],
+        organizations: [],
+        publications: [],
+        services: [],
+        work: [],
         skills: {}
       }
     }
@@ -760,34 +799,35 @@ class Aform extends Component {
     console.log('Aform Log Entry')
     this.inputChanged = this.inputChanged.bind(this);
     this.Base_inputChanged = this.Base_inputChanged.bind(this);
-    // this.Education_inputChanged = this.Education_inputChanged.bind(this);
+    this.Base_inputChanged_lowercase = this.Base_inputChanged_lowercase.bind(this);
+    // this.education_inputChanged = this.education_inputChanged.bind(this);
 
     this.Submit_About = this.Submit_About.bind(this);
-    // this.Submit_Social = this.Submit_Social.bind(this);
-    // this.Submit_Education = this.Submit_Education.bind(this);
+    // this.Submit_social = this.Submit_social.bind(this);
+    // this.Submit_education = this.Submit_education.bind(this);
 
     this.delItem = this.delItem.bind(this);
-    this.delItem_Education = this.delItem_Education.bind(this);
-    this.delItem_Work = this.delItem_Work.bind(this);
+    this.delItem_education = this.delItem_education.bind(this);
+    this.delItem_work = this.delItem_work.bind(this);
     this.delItem_Certificate = this.delItem_Certificate.bind(this);
     this.delItem_Organization = this.delItem_Organization.bind(this);
     this.delItem_Publication = this.delItem_Publication.bind(this);
 
     this.addItem = this.addItem.bind(this);
-    this.addItem_Education = this.addItem_Education.bind(this);
-    this.addItem_Work = this.addItem_Work.bind(this);
+    this.addItem_education = this.addItem_education.bind(this);
+    this.addItem_work = this.addItem_work.bind(this);
     this.addItem_Certificate = this.addItem_Certificate.bind(this);
     this.addItem_Organization = this.addItem_Organization.bind(this);
     this.addItem_Publication = this.addItem_Publication.bind(this);
     this.addSkill = this.addSkill.bind(this);
 
-    this.toggleDD_Social = this.toggleDD_Social.bind(this);
-    this.Social_ddChanged = this.Social_ddChanged.bind(this);
+    this.toggleDD_social = this.toggleDD_social.bind(this);
+    this.social_ddChanged = this.social_ddChanged.bind(this);
     // this.toggleLG_Parent = this.toggleLG_Parent.bind(this);
 
-    this.toggleFlag_Social = this.toggleFlag_Social.bind(this);
-    this.toggleFlag_Education = this.toggleFlag_Education.bind(this);
-    this.toggleFlag_Work = this.toggleFlag_Work.bind(this);
+    this.toggleFlag_social = this.toggleFlag_social.bind(this);
+    this.toggleFlag_education = this.toggleFlag_education.bind(this);
+    this.toggleFlag_work = this.toggleFlag_work.bind(this);
     this.toggleFlag_Certificate = this.toggleFlag_Certificate.bind(this);
     this.toggleFlag_Organization = this.toggleFlag_Organization.bind(this);
     this.toggleFlag_Publication = this.toggleFlag_Publication.bind(this);
@@ -802,14 +842,16 @@ class Aform extends Component {
       console.log('Snapshot', snapshot.val())
       let snap = snapshot.val()
       this.setState({
-        User: {
-          // ...this.state.User,
-          Email: snap.Email,
-          Personal: {
-            ...this.state.User.Personal,
-            ...snap.Personal
-          },
-          skills: { ...snap.skills }
+        // user: {
+        //   email: snap.email,
+        //   Personal: {
+        //     ...snap.Personal
+        //   },
+        //   skills: { ...snap.skills }
+        // }
+        user: {
+          ...this.state.user,...snap
+          //Dont Overwrite the user Object, Just update the new Values in Snap
         }
       })
     }, (errorObject) => {
@@ -819,18 +861,18 @@ class Aform extends Component {
 
   inputChanged(e) {
 
-    let temp = Object.assign({}, this.state.User)
+    let temp = Object.assign({}, this.state.user)
 
-    if (e.target.name === 'Email') {
-      temp[e.target.name] = e.target.value
-      this.setState({ User: temp })
-    } else {
-      temp.Personal[e.target.name] = e.target.value
-      this.setState({ User: temp })
-    }
+    // if (e.target.name === 'email') {
+    temp[e.target.name] = e.target.value
+    this.setState({ user: temp })
+    // } else {
+    //   temp.Personal[e.target.name] = e.target.value
+    //   this.setState({ user: temp })
+    // }
   }
 
-  Social_ddChanged(e) {
+  social_ddChanged(e) {
     this.setState({
       new_platformName: e.target.name
     })
@@ -839,8 +881,8 @@ class Aform extends Component {
 
   Submit_About(e) {
     e.preventDefault();
-    var dbref = fire.database().ref(`users/${localStorage.getItem('user')}/Personal`);
-    dbref.set(this.state.User.Personal)
+    var dbref = fire.database().ref(`users/${localStorage.getItem('user')}`);
+    dbref.set(this.state.user)
       .then(() => {
       })
       .catch(error => {
@@ -848,24 +890,24 @@ class Aform extends Component {
       });
   }
 
-  // Submit_Social(e) {
+  // Submit_social(e) {
 
-  //   var dbref = fire.database().ref(`users/${localStorage.getItem('user')}/Personal/Social`);
-  //   var newSocial = dbref.push()
-  //   newSocial.set({ platform: this.state.new_platformName, link: this.state.new_platformLink })
-
-  // }
-  // Submit_Education(e) {
-
-  //   var dbref = fire.database().ref(`users/${localStorage.getItem('user')}/Personal/Education`);
-  //   var newSocial = dbref.push()
-  //   newSocial.set({ platform: this.state.new_platformName, link: this.state.new_platformLink })
+  //   var dbref = fire.database().ref(`users/${localStorage.getItem('user')}/Personal/social`);
+  //   var newsocial = dbref.push()
+  //   newsocial.set({ platform: this.state.new_platformName, link: this.state.new_platformLink })
 
   // }
+  // Submit_education(e) {
 
-  toggleDD_Social() {
+  //   var dbref = fire.database().ref(`users/${localStorage.getItem('user')}/Personal/education`);
+  //   var newsocial = dbref.push()
+  //   newsocial.set({ platform: this.state.new_platformName, link: this.state.new_platformLink })
+
+  // }
+
+  toggleDD_social() {
     this.setState(prevState => ({
-      dropdownOpen_Social: !prevState.dropdownOpen_Social
+      dropdownOpen_social: !prevState.dropdownOpen_social
     }));
   }
 
@@ -887,15 +929,15 @@ class Aform extends Component {
     });
   }
 
-  toggleFlag_Social() {
+  toggleFlag_social() {
     this.setState(prevState => ({
-      Flag_Social_View: !prevState.Flag_Social_View
+      Flag_social_View: !prevState.Flag_social_View
     }));
   }
 
-  toggleFlag_Education() {
+  toggleFlag_education() {
     this.setState(prevState => ({
-      Flag_Education_View: !prevState.Flag_Education_View
+      Flag_education_View: !prevState.Flag_education_View
     }));
   }
 
@@ -917,9 +959,9 @@ class Aform extends Component {
     }));
   }
 
-  toggleFlag_Work() {
+  toggleFlag_work() {
     this.setState(prevState => ({
-      Flag_Work_View: !prevState.Flag_Work_View
+      Flag_work_View: !prevState.Flag_work_View
     }));
   }
 
@@ -928,44 +970,50 @@ class Aform extends Component {
     temp[e.target.name] = e.target.value
     this.setState(temp)
   }
+  Base_inputChanged_lowercase(e) {
+    let temp = Object.assign({}, this.state)
+    temp[e.target.name] = e.target.value.toLowerCase();
+    this.setState(temp)
+  }
+
   //http://www.howtocreate.co.uk/referencedvariables.html
   addItem(e) {
     e.preventDefault();
     console.log(this.state)
     let temp = Object.assign({}, this.state)
     console.log('Temp Log', temp)
-    temp.User.Personal[e.target.name].push({ platform: this.state.new_platformName, link: this.state.new_platformLink })
+    temp.user[e.target.name].push({ platform: this.state.new_platformName, link: this.state.new_platformLink })
     console.log('Temp After push:', temp)
     this.setState(temp)
     console.log('State after Set State:', this.state)
-    var dbref = fire.database().ref(`users/${localStorage.getItem('user')}/Personal/Social`);
-    dbref.set(this.state.User.Personal.Social)
+    var dbref = fire.database().ref(`users/${localStorage.getItem('user')}/social`);
+    dbref.set(this.state.user.social)
       .then(() => {
       })
       .catch(error => {
         console.log(error)
       });
-    this.toggleFlag_Social()
+    this.toggleFlag_social()
   }
 
-  addItem_Education(e) {
+  addItem_education(e) {
     e.preventDefault();
     console.log(this.state)
     let temp = Object.assign({}, this.state)
     console.log('Temp Log', temp)
-    temp.User.Personal.Education.push({ deg: this.state.new_education_degree, inst: this.state.new_education_institute })
+    temp.user.education.push({ deg: this.state.new_education_degree, inst: this.state.new_education_institute })
     console.log('Temp After push:', temp)
     this.setState(temp)
     console.log('State after Set State:', this.state)
-    var dbref = fire.database().ref(`users/${localStorage.getItem('user')}/Personal/Education`);
-    dbref.set(this.state.User.Personal.Education)
+    var dbref = fire.database().ref(`users/${localStorage.getItem('user')}/education`);
+    dbref.set(this.state.user.education)
       .then(() => {
       })
       .catch(error => {
         console.log(error)
       });
 
-    this.toggleFlag_Education()
+    this.toggleFlag_education()
   }
 
 
@@ -974,12 +1022,12 @@ class Aform extends Component {
     console.log(this.state)
     let temp = Object.assign({}, this.state)
     console.log('Temp Log', temp)
-    temp.User.Personal.Organizations.push({ name: this.state.new_organization_name })
+    temp.user.organizations.push({ name: this.state.new_organization_name })
     console.log('Temp After push:', temp)
     this.setState(temp)
     console.log('State after Set State:', this.state)
-    var dbref = fire.database().ref(`users/${localStorage.getItem('user')}/Personal/Organizations`);
-    dbref.set(this.state.User.Personal.Organizations)
+    var dbref = fire.database().ref(`users/${localStorage.getItem('user')}/organizations`);
+    dbref.set(this.state.user.organizations)
       .then(() => {
       })
       .catch(error => {
@@ -992,15 +1040,12 @@ class Aform extends Component {
 
   addItem_Certificate(e) {
     e.preventDefault();
-    console.log(this.state)
     let temp = Object.assign({}, this.state)
-    console.log('Temp Log', temp)
-    temp.User.Personal.Certifications.push({ name: this.state.new_certification_name, org: this.state.new_certification_org })
-    console.log('Temp After push:', temp)
+    temp.user.certifications.push({ name: this.state.new_certification_name, org: this.state.new_certification_org })
     this.setState(temp)
     console.log('State after Set State:', this.state)
-    var dbref = fire.database().ref(`users/${localStorage.getItem('user')}/Personal/Certifications`);
-    dbref.set(this.state.User.Personal.Certifications)
+    var dbref = fire.database().ref(`users/${localStorage.getItem('user')}/certifications`);
+    dbref.set(this.state.user.certifications)
       .then(() => {
       })
       .catch(error => {
@@ -1016,12 +1061,12 @@ class Aform extends Component {
     console.log(this.state)
     let temp = Object.assign({}, this.state)
     console.log('Temp Log', temp)
-    temp.User.Personal.Publications.push({ pub: this.state.new_publication_publisher, name: this.state.new_publication_name })
+    temp.user.publications.push({ pub: this.state.new_publication_publisher, name: this.state.new_publication_name })
     console.log('Temp After push:', temp)
     this.setState(temp)
     console.log('State after Set State:', this.state)
-    var dbref = fire.database().ref(`users/${localStorage.getItem('user')}/Personal/Publications`);
-    dbref.set(this.state.User.Personal.Publications)
+    var dbref = fire.database().ref(`users/${localStorage.getItem('user')}/publications`);
+    dbref.set(this.state.user.publications)
       .then(() => {
       })
       .catch(error => {
@@ -1032,20 +1077,20 @@ class Aform extends Component {
   }
 
 
-  addItem_Work(e) {
+  addItem_work(e) {
     e.preventDefault();
     let temp = Object.assign({}, this.state)
-    temp.User.Personal.Work.push({ com: this.state.new_work_company, des: this.state.new_work_designation, dur: this.state.new_work_duration, det: this.state.new_work_details, })
+    temp.user.work.push({ com: this.state.new_work_company, des: this.state.new_work_designation, dur: this.state.new_work_duration, det: this.state.new_work_details, })
     this.setState(temp)
-    var dbref = fire.database().ref(`users/${localStorage.getItem('user')}/Personal/Work`);
-    dbref.set(this.state.User.Personal.Work)
+    var dbref = fire.database().ref(`users/${localStorage.getItem('user')}/work`);
+    dbref.set(this.state.user.work)
       .then(() => {
       })
       .catch(error => {
         console.log(error)
       });
 
-    this.toggleFlag_Work()
+    this.toggleFlag_work()
   }
 
   addSkill(e) {
@@ -1066,27 +1111,39 @@ class Aform extends Component {
   delItem(i) {
     console.log('DelItem Called', i);
     let temp = Object.assign({}, this.state)
-    temp.User.Personal.Social.splice(i, 1)
+    temp.user.social.splice(i, 1)
     console.log('Temp After push:', temp)
     this.setState(temp)
     console.log('State after Set State:', this.state)
-    var dbref = fire.database().ref(`users/${localStorage.getItem('user')}/Personal/Social`);
-    dbref.set(this.state.User.Personal['Social'])
+    var dbref = fire.database().ref(`users/${localStorage.getItem('user')}/social`);
+    dbref.set(this.state.user['social'])
       .then(() => {
       })
       .catch(error => {
         console.log(error)
       });
   }
-  delItem_Education(i) {
+
+  delChildOfuser(target, item) {
+    console.log('DelItem Called', item);
+    var dbref = fire.database().ref(`users/${localStorage.getItem('user')}/${target}/${item}`);
+    dbref.remove()
+      .then(() => {
+      })
+      .catch(error => {
+        console.log(error)
+      });
+  }
+
+  delItem_education(i) {
     console.log('DelItem Called', i);
     let temp = Object.assign({}, this.state)
-    temp.User.Personal.Education.splice(i, 1)
+    temp.user.education.splice(i, 1)
     console.log('Temp After push:', temp)
     this.setState(temp)
     console.log('State after Set State:', this.state)
-    var dbref = fire.database().ref(`users/${localStorage.getItem('user')}/Personal/Education`);
-    dbref.set(this.state.User.Personal.Education)
+    var dbref = fire.database().ref(`users/${localStorage.getItem('user')}/education`);
+    dbref.set(this.state.user.education)
       .then(() => {
       })
       .catch(error => {
@@ -1098,12 +1155,12 @@ class Aform extends Component {
   delItem_Certificate(i) {
     console.log('DelItem Called', i);
     let temp = Object.assign({}, this.state)
-    temp.User.Personal.Certifications.splice(i, 1)
+    temp.user.certifications.splice(i, 1)
     console.log('Temp After push:', temp)
     this.setState(temp)
     console.log('State after Set State:', this.state)
-    var dbref = fire.database().ref(`users/${localStorage.getItem('user')}/Personal/Certifications`);
-    dbref.set(this.state.User.Personal.Certifications)
+    var dbref = fire.database().ref(`users/${localStorage.getItem('user')}/certifications`);
+    dbref.set(this.state.user.certifications)
       .then(() => {
       })
       .catch(error => {
@@ -1114,12 +1171,12 @@ class Aform extends Component {
   delItem_Publication(i) {
     console.log('DelItem Called', i);
     let temp = Object.assign({}, this.state)
-    temp.User.Personal.Publications.splice(i, 1)
+    temp.user.publications.splice(i, 1)
     console.log('Temp After push:', temp)
     this.setState(temp)
     console.log('State after Set State:', this.state)
-    var dbref = fire.database().ref(`users/${localStorage.getItem('user')}/Personal/Publications`);
-    dbref.set(this.state.User.Personal.Publications)
+    var dbref = fire.database().ref(`users/${localStorage.getItem('user')}/publications`);
+    dbref.set(this.state.user.publications)
       .then(() => {
       })
       .catch(error => {
@@ -1130,12 +1187,12 @@ class Aform extends Component {
   delItem_Organization(i) {
     console.log('DelItem Called', i);
     let temp = Object.assign({}, this.state)
-    temp.User.Personal.Organizations.splice(i, 1)
+    temp.user.organizations.splice(i, 1)
     console.log('Temp After push:', temp)
     this.setState(temp)
     console.log('State after Set State:', this.state)
-    var dbref = fire.database().ref(`users/${localStorage.getItem('user')}/Personal/Organizations`);
-    dbref.set(this.state.User.Personal.Organizations)
+    var dbref = fire.database().ref(`users/${localStorage.getItem('user')}/organizations`);
+    dbref.set(this.state.user.organizations)
       .then(() => {
       })
       .catch(error => {
@@ -1144,15 +1201,15 @@ class Aform extends Component {
   }
 
 
-  delItem_Work(i) {
+  delItem_work(i) {
     console.log('DelItem Called', i);
     let temp = Object.assign({}, this.state)
-    temp.User.Personal.Work.splice(i, 1)
+    temp.user.work.splice(i, 1)
     console.log('Temp After push:', temp)
     this.setState(temp)
     console.log('State after Set State:', this.state)
-    var dbref = fire.database().ref(`users/${localStorage.getItem('user')}/Personal/Work`);
-    dbref.set(this.state.User.Personal.Work)
+    var dbref = fire.database().ref(`users/${localStorage.getItem('user')}/work`);
+    dbref.set(this.state.user.work)
       .then(() => {
       })
       .catch(error => {
@@ -1194,7 +1251,7 @@ class Aform extends Component {
                   </CardHeader>
                   <Collapse isOpen={this.state.accordion[0]} data-parent="#accordion" id="collapseOne" aria-labelledby="headingOne">
                     <CardBody>
-                      <CompAbout data={this.state.User} this={this} />
+                      <CompAbout data={this.state.user} this={this} />
                     </CardBody>
                   </Collapse>
                 </Card>
@@ -1208,7 +1265,7 @@ class Aform extends Component {
                   </CardHeader>
                   <Collapse isOpen={this.state.accordion[1]} data-parent="#accordion" id="collapseOne" aria-labelledby="headingOne">
                     <CardBody>
-                      <CompSkills data={this.state.User.skills} this={this} />
+                      <CompSkills data={this.state.user.skills} this={this} />
                     </CardBody>
                   </Collapse>
                 </Card>
@@ -1221,7 +1278,7 @@ class Aform extends Component {
                   </CardHeader>
                   <Collapse isOpen={this.state.accordion[2]} data-parent="#accordion" id="collapseTwo">
                     <CardBody>
-                      <CompSocial data={this.state.User.Personal} this={this} />
+                      <Compsocial data={this.state.user} this={this} />
                     </CardBody>
                   </Collapse>
                 </Card>
@@ -1236,7 +1293,7 @@ class Aform extends Component {
                   </CardHeader>
                   <Collapse isOpen={this.state.accordion[3]} data-parent="#accordion" id="collapseThree">
                     <CardBody>
-                      <CompEducation data={this.state.User.Personal} this={this} />
+                      <Compeducation data={this.state.user} this={this} />
                     </CardBody>
                   </Collapse>
                 </Card>
@@ -1250,7 +1307,7 @@ class Aform extends Component {
                   </CardHeader>
                   <Collapse isOpen={this.state.accordion[4]} data-parent="#accordion" id="collapseThree">
                     <CardBody>
-                      <CompWork data={this.state.User.Personal} this={this} />
+                      <Compwork data={this.state.user} this={this} />
                     </CardBody>
                   </Collapse>
                 </Card>
@@ -1264,7 +1321,7 @@ class Aform extends Component {
                   </CardHeader>
                   <Collapse isOpen={this.state.accordion[5]} data-parent="#accordion" id="collapseThree">
                     <CardBody>
-                      <CompCertificate data={this.state.User.Personal} this={this} />
+                      <CompCertificate data={this.state.user} this={this} />
                     </CardBody>
                   </Collapse>
                 </Card>
@@ -1277,7 +1334,7 @@ class Aform extends Component {
                   </CardHeader>
                   <Collapse isOpen={this.state.accordion[6]} data-parent="#accordion" id="collapseThree">
                     <CardBody>
-                      <CompOrganization data={this.state.User.Personal} this={this} />
+                      <CompOrganization data={this.state.user} this={this} />
                     </CardBody>
                   </Collapse>
                 </Card>
@@ -1291,7 +1348,7 @@ class Aform extends Component {
                   </CardHeader>
                   <Collapse isOpen={this.state.accordion[7]} data-parent="#accordion" id="collapseThree">
                     <CardBody>
-                      <CompPublication data={this.state.User.Personal} this={this} />
+                      <CompPublication data={this.state.user} this={this} />
                     </CardBody>
                   </Collapse>
                 </Card>

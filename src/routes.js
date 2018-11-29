@@ -204,6 +204,11 @@ const Search = Loadable({
   loading: Loading,
 });
 
+const Jobpost = Loadable({
+  loader: () => import('./views/Jobpost/Jobpost'),
+  loading: Loading,
+});
+
 // const BaseLayout = Loadable({
 //   loader: () => import('./containers/BaseLayout'),
 //   loading: Loading,
@@ -220,6 +225,7 @@ const routes = [
   // { path: '/profile:uid', name: 'Profile_uid', component: Profile },
   { path: '/aform', name: 'Aform', component: Aform },
   { path: '/search', name: 'Search', component: Search },
+  { path: '/jobpost', name: 'JobPost', component: Jobpost },
   { path: '/theme', exact: true, name: 'Theme', component: Colors },
   { path: '/theme/colors', name: 'Colors', component: Colors },
   { path: '/theme/typography', name: 'Typography', component: Typography },
