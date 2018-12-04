@@ -47,7 +47,7 @@ function CompJob_Posted(props) {
               {props.this.state.user_jobs[item].k}
               <div className="card-header-actions">
 
-                <a href="#" className="card-header-action btn btn-setting"><i className="icon-settings"></i></a>
+                <a className="card-header-action btn btn-setting" onClick={props.this.editJob.bind(props.this, props.this.state.user_jobs[item].k)}><i className="icon-settings"></i></a>
                 <a className="card-header-action btn btn-minimize" data-target="#collapseExample" ><i className="icon-arrow-up"></i></a>
                 <a className="card-header-action btn btn-close" onClick={props.this.DeleteChildOf_Jobs.bind(props.this, props.this.state.user_jobs[item].k)}><i className="icon-close"></i></a>
               </div>
@@ -76,7 +76,7 @@ function CompJob_Home(props) {
         <Col md="9">
         </Col>
         <Col md="3">
-          <Button type="submit" align="right" size="md" color="primary" onClick={props.this.ChangeState_FORM}><i className="fa fa-dot-circle-o"></i> Post A Job</Button>
+          <Button type="submit" align="right" size="md" color="primary" onClick={props.this.createJob}><i className="fa fa-dot-circle-o"></i> Post A Job</Button>
         </Col>
       </Row>
       <h5>Your Job Section</h5>
@@ -146,12 +146,12 @@ function CompJob_Form(props) {
             </DropdownToggle>
             <DropdownMenu>
               <DropdownItem name="fresh" onClick={props.this.DropDownChanged_Experience} value="Fresh Eligible">Fresh Eligible</DropdownItem>
-              <DropdownItem name="1y" onClick={props.this.DropDownChanged_Experience} value="1 year or More">1 year or More </DropdownItem>
-              <DropdownItem name="2y" onClick={props.this.DropDownChanged_Experience} value="2 years or More">2 years or More </DropdownItem>
-              <DropdownItem name="3y" onClick={props.this.DropDownChanged_Experience} value="3 years or More">3 years or More </DropdownItem>
-              <DropdownItem name="5y" onClick={props.this.DropDownChanged_Experience} value="5 years or More">5 years or More </DropdownItem>
-              <DropdownItem name="10y" onClick={props.this.DropDownChanged_Experience} value="10 years or More">10 years or More </DropdownItem>
-              <DropdownItem name="20y" onClick={props.this.DropDownChanged_Experience} value="20 years or More">20 years or More </DropdownItem>
+              <DropdownItem name="1y" onClick={props.this.DropDownChanged_Experience} value="1 year or More">1 year or More</DropdownItem>
+              <DropdownItem name="2y" onClick={props.this.DropDownChanged_Experience} value="2 years or More">2 years or More</DropdownItem>
+              <DropdownItem name="3y" onClick={props.this.DropDownChanged_Experience} value="3 years or More">3 years or More</DropdownItem>
+              <DropdownItem name="5y" onClick={props.this.DropDownChanged_Experience} value="5 years or More">5 years or More</DropdownItem>
+              <DropdownItem name="10y" onClick={props.this.DropDownChanged_Experience} value="10 years or More">10 years or More</DropdownItem>
+              <DropdownItem name="15y" onClick={props.this.DropDownChanged_Experience} value="15 years or More">15 years or More</DropdownItem>
             </DropdownMenu>
           </Dropdown>
         </Col>
@@ -311,7 +311,10 @@ function CompJob_Form(props) {
       {/* <Input type="date" id="date-input" name="date-input" placeholder="date" /> */}
       <Row>
         <Col md="2">
-          <Button type="submit" align="right" size="sm" color="primary" onClick={props.this.Submit_Job}><i className="fa fa-dot-circle-o"></i> Post Job</Button>
+          <Button type="submit" align="right" size="md" color="primary" onClick={props.this.Submit_Job}><i className="fa fa-dot-circle-o"></i> Save </Button>
+        </Col>
+        <Col md="2">
+          <Button type="submit" align="right" size="md" color="dark" onClick={props.this.CancelJob}><i className="fa fa-dot-circle-o"></i> Cancel</Button>
         </Col>
       </Row>
     </div>
@@ -360,7 +363,9 @@ class Jobpost extends Component {
       DropDownText_SalaryCurrency: "PKR",
       job_view: "HOME",
       accordionPosted: [false, false, false],
-      user_jobs: []
+      user_jobs: [],
+      ji: "",
+      jedit: false
     };
 
     this.TextInputChanged = this.TextInputChanged.bind(this)
@@ -378,12 +383,18 @@ class Jobpost extends Component {
     this.DropDownChanged_Qualification = this.DropDownChanged_Qualification.bind(this);
     this.DropDownToggle_SalaryCurrency = this.DropDownToggle_SalaryCurrency.bind(this);
     this.DropDownChanged_SalaryCurrency = this.DropDownChanged_SalaryCurrency.bind(this);
+    // this.DropDownSet_EditJob = this.DropDownSet_EditJob.bind(this)
 
     this.ChangeState_FORM = this.ChangeState_FORM.bind(this);
     this.ChangeState_HOME = this.ChangeState_HOME.bind(this);
 
     this.ReadUserJobs = this.ReadUserJobs.bind(this);
     this.toggleAccordionPosted = this.toggleAccordionPosted.bind(this);
+
+    this.editJob = this.editJob.bind(this)
+    this.createJob = this.createJob.bind(this)
+    this.CancelJob = this.CancelJob.bind(this)
+    this.Initialize = this.Initialize.bind(this)
   }
 
   componentDidMount() {
@@ -399,7 +410,18 @@ class Jobpost extends Component {
     // })
 
     //Read Current Jobs of the User
+
     this.ReadUserJobs()
+
+
+    this.Initialize()
+
+
+  }
+
+  Initialize() {
+
+
 
     var today = new Date();
     var dd = today.getDate();
@@ -414,20 +436,43 @@ class Jobpost extends Component {
     today = yyyy + '-' + mm + '-' + dd;
     console.log(today);
 
-    // let temp = Object.assign({}, this.state.job)
-    // temp["date"] = today
+    var defaultJob = {
+      user: localStorage.getItem('user'), //User
+      titl: "", //Job Title
+      jcom: "", //Company Name
+      jexp: "fresh",
+      jdeg: "no",
+      skls: [],
+      slry: "",
+      crcy: "PKR",
+      jloc: "",
+      ctct: "",
+      apdl: "",
+      resp: "",
+      agel: 0,
+      oreq: "",
+      tmgs: "",
+      pbtn: "",
+      odet: "",
+      date: today
+    }
+
     this.setState({
       job: {
-        ...this.state.job, ...{ user: localStorage.getItem('user'), date: today }
-      }
+        // ...this.state.job, ...{ user: localStorage.getItem('user'), date: today }
+        ...this.state.job, ...defaultJob
+      },
+      DropDownText_SalaryCurrency: "PKR",
+      DropDownText_Experience: "Fresh Eligible",
+      DropDownText_Qualification: "No Degree Requirement",
+      ji: "",
+      jedit: false
     })
 
-
     console.log("Current State:", this.state)
-
-
-
   }
+
+
 
   ReadUserJobs() {
     const userJobs = fire.database().ref(`users/${localStorage.getItem('user')}/jobs`)
@@ -499,6 +544,12 @@ class Jobpost extends Component {
     })
   }
 
+  // DropDownSet_EditJob(snap) {
+
+
+
+
+  // }
 
   addSkill(e) {
     e.preventDefault();
@@ -526,7 +577,7 @@ class Jobpost extends Component {
   DeleteChildOf_Skills(item) {
     console.log('DelItem Called', item);
     let temp = Object.assign({}, this.state)
-    temp.job.skls.splice(item)
+    temp.job.skls.splice(item,1)
     this.setState(temp)
   }
 
@@ -592,7 +643,16 @@ class Jobpost extends Component {
 
     //Saving Job
     var dbref = fire.database().ref(`jobs`);
-    var key = dbref.push().getKey()
+    var key = ""
+
+    //Get Key Depending upon New Job or Edit Job
+    if (this.state.jedit === true) {
+      key = this.state.ji
+    }
+    else {
+      key = dbref.push().getKey()
+    }
+
     dbref.child(key).set(this.state.job)
       .then(() => {
         console.log("Posted")
@@ -604,13 +664,16 @@ class Jobpost extends Component {
     console.log("Key", key)
 
     //Saving Job Id in User
-    dbref = fire.database().ref(`users/${localStorage.getItem('user')}/jobs`)
-    dbref.child(key).set(true)
-      .then(() => {
-      })
-      .catch(error => {
-        console.log(error)
-      });
+    if (this.state.jedit === false) {
+      dbref = fire.database().ref(`users/${localStorage.getItem('user')}/jobs`)
+      dbref.child(key).set(true)
+        .then(() => {
+        })
+        .catch(error => {
+          console.log(error)
+        });
+    }
+
 
     //Saving Job Id in skills_jobs 
     for (var i = 0; i < this.state.job.skls.length; i++) {
@@ -635,6 +698,100 @@ class Jobpost extends Component {
     });
   }
 
+  createJob() {
+    this.Initialize()
+    this.ChangeState_FORM()
+  }
+
+  CancelJob(){
+    this.Initialize()
+    this.ChangeState_HOME()
+  }
+
+  editJob(jobId) {
+    var jobref = fire.database().ref(`jobs/${jobId}`)
+    jobref.on("value", (snapshot) => {
+      console.log('Snapshot', snapshot.val())
+      let snap = snapshot.val()
+
+      //Set DropDown Texts:
+      var crcy
+      var jexp
+      var jdeg
+
+      if (snap.crcy === "PKR") {
+        crcy = "PKR"
+      }
+      else {
+        crcy = "USD"
+      }
+
+      if (snap.jexp === "fresh") {
+        jexp = "Fresh Eligible"
+      }
+      else if (snap.jexp === "1y") {
+        jexp = "1 year or More"
+      }
+      else if (snap.jexp === "2y") {
+        jexp = "2 year or More"
+      }
+      else if (snap.jexp === "3y") {
+        jexp = "3 year or More"
+      }
+      else if (snap.jexp === "5y") {
+        jexp = "5 year or More"
+      }
+      else if (snap.jexp === "10y") {
+        jexp = "10 year or More"
+      }
+      else if (snap.jexp === "15y") {
+        jexp = "15 year or More"
+      }
+
+
+      if (snap.jdeg === "no") {
+        jdeg = "No Degree Requirement"
+      }
+      else if (snap.jdeg === "bs") {
+        jdeg = "Bachelors"
+      }
+      else if (snap.jdeg === "ms") {
+        jdeg = "Masters"
+      }
+      else if (snap.jdeg === "pd") {
+        jdeg = "Ph.D"
+      }
+
+      /////////////////////////////////////////////////////
+
+      this.setState({
+        // user: {
+        //   email: snap.email,
+        //   Personal: {
+        //     ...snap.Personal
+        //   },TextTrackCue
+        //   skills: { ...snap.skills }
+        // }
+        job: {
+          ...this.state.job, ...snap
+          //Dont Overwrite the user Object, Just update the new Values in Snap
+        },
+        ji: jobId,
+        jedit: true,
+        DropDownText_SalaryCurrency: crcy,
+        DropDownText_Experience: jexp,
+        DropDownText_Qualification: jdeg
+
+      })
+    }, (errorObject) => {
+      console.log("The read failed: " + errorObject.code);
+    });
+
+
+    this.ChangeState_FORM()
+    // this.DropDownSet_EditJob()
+  }
+
 
   render() {
 
@@ -645,9 +802,9 @@ class Jobpost extends Component {
           <Col md="2">
 
             <Button outline color="primary" size="lg" block href="#/basel/profile">Profile</Button>
-            <Button outline color="primary" size="lg" block  href="#/basel/jobpost">Job Section</Button>
-            <Button outline color="primary" size="lg" block  href="#/basel/aform">Settings</Button>
-            
+            <Button outline color="primary" size="lg" block href="#/basel/jobpost">Job Section</Button>
+            <Button outline color="primary" size="lg" block href="#/basel/aform">Settings</Button>
+
           </Col>
 
           <Col md="7">
