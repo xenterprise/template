@@ -1221,7 +1221,7 @@ class Aform extends Component {
 
   render() {
     return (
-      <div className="animated fadeIn">
+      <div>
 
         {/* <Container fluid> */}
         <Row>

@@ -555,14 +555,14 @@ class Profile extends Component {
   render() {
 
     return (
-      <div className="animated fadeIn">
+      <div>
 
-        <Row>
+        {/* <Row>
           <h1>
             {this.state.profile_user}
           </h1>
           {}
-        </Row>
+        </Row> */}
         <Row>
           <Col md="2">
 

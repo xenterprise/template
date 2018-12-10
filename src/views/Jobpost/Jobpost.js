@@ -40,25 +40,24 @@ function CompJob_Posted(props) {
       {
         Object.keys(props.this.state.user_jobs).map((item, i) => (
           <div key={i}>
-            {/* <span>{props.this.state.user_jobs[item].k}</span> */}
-            {/* <Card> */}
             <CardHeader>
               {props.this.state.user_jobs[item].v.titl}
               {props.this.state.user_jobs[item].k}
               <div className="card-header-actions">
-
                 <a className="card-header-action btn btn-setting" onClick={props.this.editJob.bind(props.this, props.this.state.user_jobs[item].k)}><i className="icon-settings"></i></a>
                 <a className="card-header-action btn btn-minimize" data-target="#collapseExample" ><i className="icon-arrow-up"></i></a>
                 <a className="card-header-action btn btn-close" onClick={props.this.DeleteChildOf_Jobs.bind(props.this, props.this.state.user_jobs[item].k)}><i className="icon-close"></i></a>
               </div>
             </CardHeader>
-            {/* </Card> */}
           </div>
         ))
       }
     </div>
   )
-}
+} 
+
+
+
 
 function CompJob_Applied(props) {
   return (
@@ -139,7 +138,7 @@ function CompJob_Form(props) {
         <Col md="2">
           <Label htmlFor="text-input">Experience Required</Label>
         </Col>
-        <Col md="9">
+        <Col md="4">
           <Dropdown isOpen={props.this.state.DropDownOpen_Experience} toggle={props.this.DropDownToggle_Experience}>
             <DropdownToggle caret>
               {props.this.state.DropDownText_Experience}
@@ -155,13 +154,11 @@ function CompJob_Form(props) {
             </DropdownMenu>
           </Dropdown>
         </Col>
-      </Row>
 
-      <Row>
         <Col md="2">
           <Label htmlFor="text-input">Qualification</Label>
         </Col>
-        <Col md="9">
+        <Col md="4">
           <Dropdown isOpen={props.this.state.DropDownOpen_Qualification} toggle={props.this.DropDownToggle_Qualification}>
             <DropdownToggle caret>
               {props.this.state.DropDownText_Qualification}
@@ -220,16 +217,14 @@ function CompJob_Form(props) {
             </DropdownMenu>
           </Dropdown>
         </Col>
-        <Col md="8">
+        <Col md="2">
           <Input type="text" name="slry" placeholder="Salary Offered" value={props.this.state.job.slry} onChange={props.this.TextInputChanged} />
         </Col>
-      </Row>
 
-      <Row>
         <Col md="2">
           <Label htmlFor="text-input">Appointment Location</Label>
         </Col>
-        <Col xs="12" md="9">
+        <Col md="4">
           <Input type="text" name="jloc" placeholder="Appointment Location City/ Country" value={props.this.state.job.jloc} onChange={props.this.TextInputChanged} />
         </Col>
       </Row>
@@ -266,8 +261,15 @@ function CompJob_Form(props) {
         <Col md="2">
           <Label htmlFor="text-input">Age Limit</Label>
         </Col>
-        <Col xs="12" md="9">
+        <Col md="4">
           <Input type="text" name="agel" placeholder="Enter the Age Limit" value={props.this.state.job.agel} onChange={props.this.TextInputChanged} />
+        </Col>
+
+        <Col md="2">
+          <Label htmlFor="text-input">Job Timings</Label>
+        </Col>
+        <Col md="4">
+          <Input type="text" name="tmgs" placeholder="Mention Timings, Regular 9-5 or Shifts based" value={props.this.state.job.tmgs} onChange={props.this.TextInputChanged} />
         </Col>
       </Row>
 
@@ -277,16 +279,6 @@ function CompJob_Form(props) {
         </Col>
         <Col xs="12" md="9">
           <Input type="textarea" name="oreq" placeholder="Mention in detail any other requirements, like, tools used etc" value={props.this.state.job.oreq} onChange={props.this.TextInputChanged} />
-        </Col>
-      </Row>
-
-
-      <Row>
-        <Col md="2">
-          <Label htmlFor="text-input">Timings</Label>
-        </Col>
-        <Col xs="12" md="9">
-          <Input type="text" name="tmgs" placeholder="Mention Timings, Regular 9-5 or Shifts based" value={props.this.state.job.tmgs} onChange={props.this.TextInputChanged} />
         </Col>
       </Row>
 
@@ -577,7 +569,7 @@ class Jobpost extends Component {
   DeleteChildOf_Skills(item) {
     console.log('DelItem Called', item);
     let temp = Object.assign({}, this.state)
-    temp.job.skls.splice(item,1)
+    temp.job.skls.splice(item, 1)
     this.setState(temp)
   }
 
@@ -703,14 +695,14 @@ class Jobpost extends Component {
     this.ChangeState_FORM()
   }
 
-  CancelJob(){
+  CancelJob() {
     this.Initialize()
     this.ChangeState_HOME()
   }
 
   editJob(jobId) {
     var jobref = fire.database().ref(`jobs/${jobId}`)
-    jobref.on("value", (snapshot) => {
+    jobref.once("value", (snapshot) => {
       console.log('Snapshot', snapshot.val())
       let snap = snapshot.val()
 
@@ -796,7 +788,8 @@ class Jobpost extends Component {
   render() {
 
     return (
-      <div className="animated fadeIn">
+      // className="animated fadeIn"
+      <div >
 
         <Row>
           <Col md="2">

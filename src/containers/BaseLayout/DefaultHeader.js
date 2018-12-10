@@ -6,6 +6,7 @@ import { AppAsideToggler, AppHeaderDropdown, AppNavbarBrand, AppSidebarToggler }
 import logo from '../../assets/img/brand/logor.png'
 import sygnet from '../../assets/img/brand/sygnet.svg'
 import fire from '../../config/Fire'
+import Search from '../../views/Search/Search'
 
 const propTypes = {
   children: PropTypes.node,
@@ -15,6 +16,8 @@ const defaultProps = {};
 
 class DefaultHeader extends Component {
   render() {
+
+    // console.log("Props", this.props)
 
     // eslint-disable-next-line
     const { children, ...attributes } = this.props;
@@ -48,15 +51,8 @@ class DefaultHeader extends Component {
             <NavLink href="#">Settings</NavLink>
           </NavItem> */}
 
-          <NavItem className="px-3">
-            <InputGroup>
-              <Input valid id="appendedInputButtons" size="48" type="text" placeholder="Search for People, Jobs & other opportunities" />
-              <InputGroupAddon addonType="append">
-                <Button color="primary">Search</Button>
-                <Button color="secondary">Options</Button>
-              </InputGroupAddon>
-            </InputGroup>
-          </NavItem>
+
+          <Search history = {this.props.history}/>
         </Nav>
 
 

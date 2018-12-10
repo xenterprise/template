@@ -395,3 +395,64 @@ const uiSchemaCore = {
     //     }
     //   },
     // });
+
+
+//     if (this.state.sview) {
+      
+//       // return <Redirect to={'/basel/sview/' + this.state.idUser }/>
+//       return <Redirect to={{
+//         pathname: '/basel/sview/',
+//         state: { text: this.state.text }
+//     }}
+// />
+
+//     }
+
+
+  // componentDidMount() {
+
+  // }
+
+
+  // componentDidUpdate() {
+  //   if (this.state.sview) {
+  //     this.setState({
+  //       sview: false
+  //     })
+  //   }
+  // }
+
+  
+    // this.setState({
+    //   sview: true
+    // })
+
+
+    
+    // if(this.props.location.state){
+    //   console.log("*****Redirected*****")
+    //   console.log('Param ', this.props.location.state.text)
+    // }
+    // else{
+    //   console.log("*****Directly Loaded*****")
+    // }
+    
+
+    
+    // if(this.props.location.state.text!== nextProps.location.state.text){
+    //   console.log("Next props", nextProps.location.state.text)
+    // }
+
+
+//componentDidMount() {
+  //   // console.log("DID Mount: ", this.props.match.params.searchText)
+  //   this.searchJobs(this.props.match.params.searchText)
+  // }
+
+  // componentWillReceiveProps(nextProps){
+
+  //   if(this.props.match.params.searchText !== nextProps.match.params.searchText){
+  //     // console.log("Next props", nextProps.match.params.searchText)
+  //     searchJobs(nextProps.match.params.searchText)
+  //   }
+  // }

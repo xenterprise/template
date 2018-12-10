@@ -18,11 +18,19 @@ import DefaultHeader from './DefaultHeader';
 import Profile from '../../views/Profile/Profile';
 
 class BaseLayout extends Component {
+
+  
   render() {
+
+    // console.log("Props", this.props)
+
+
+
+
     return (
       <div className="app">
         <AppHeader fixed>
-          <DefaultHeader />
+          <DefaultHeader history={this.props.history} />
         </AppHeader>
         <br />
         <div className="app-body">
