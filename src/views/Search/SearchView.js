@@ -34,18 +34,57 @@ import { getStyle, hexToRgba } from '@coreui/coreui/dist/js/coreui-utilities'
 import fire from '../../config/Fire'
 
 
+
 function SearchResultJobs(props) {
-  console.log("ANy Functoma")
   return (
     <div>
       {
         Object.keys(props.this.state.jobDetails).map((item, i) => (
           <div key={i}>
-            <CardHeader>
+            <Card>
+              <CardHeader>
+                {/* onClick={() => props.this.toggleAccordionPosted(0)} */}
+                {/* aria-expanded={props.this.state.accordionPosted[0]} aria-controls="collapseOne" */}
 
-              {item.jexp}
+                <Row>
+                  <Col md="9">
+                    <Button block color="link" className="text-left m-0 p-0"  >
+                      <h5 className="m-0 p-0">{props.this.state.jobDetails[item].jd.titl}</h5>
+                    </Button>
+                  </Col>
+                  <Col md="3">
+                    <h6>{props.this.state.jobDetails[item].jd.crcy}:{props.this.state.jobDetails[item].jd.slry}</h6>
+                    
+                  </Col>
+                </Row>
 
-            </CardHeader>
+
+              </CardHeader>
+              <CardBody>
+                <Row>
+                  <Col md="6">
+                  <p><strong>Company: </strong>{props.this.state.jobDetails[item].jd.jcom}</p>
+                  </Col>
+                  <Col md="6">
+                  <p><strong>Last Date to Apply: </strong>{props.this.state.jobDetails[item].jd.apdl}</p>
+                  </Col>
+                </Row>
+                
+                <span><p><strong>Job Description: </strong>{props.this.state.jobDetails[item].jd.resp}</p></span>
+                {/* <p>{props.this.state.jobDetails[item].jd.date}</p> */}
+                
+                {
+                  Object.keys(props.this.state.jobDetails[item].jd.skls).map((skill_item, i) => (
+                    <Button
+                      key={i}
+                      size="sm"
+                      className="btn-facebook btn-brand text mr-1 mb-1">
+                      <span>{props.this.state.jobDetails[item].jd.skls[skill_item].s}</span>
+                    </Button>
+                  ))
+                }
+              </CardBody>
+            </Card>
           </div>
         ))
       }
@@ -79,11 +118,6 @@ class SearchView extends Component {
     }
   }
 
-  componentDidUpdate() {
-    // this.loadJobDetails()
-  }
-
-
   componentWillReceiveProps(nextProps) {
     console.log("Next props", nextProps.location.state.text)
     this.searchJobs(nextProps.location.state.text)
@@ -102,83 +136,62 @@ class SearchView extends Component {
     let tags = query.split("~")
 
     let finalJobIds = []
+    let promises = []
 
     for (var i = 0; i < tags.length; i++) {
 
-      console.log("Var i:", i, tags.length)
-      // Populating the JobsArray matching All searched keywords with skills
-      var skills_jobs = fire.database().ref(`skills_jobs/${tags[i]}`)
-      skills_jobs.on('value', snap => {
-        // if (snap.val() === true) {
-        // jobsArray.push(snap.key)
-        unique = snap.val()
-        // }
-        //Removing duplicate entries
-        // unique = [...new Set(unique)];
-        console.log("JobsArray: ", unique, snap.val())
+      promises.push(new Promise((resolve, reject) => {
+        console.log("Var i:", i, tags.length)
 
-        //Assign filtered jobs to the qJobs in State
-        // let temp = Object.assign({}, this.state)
-        // temp.qJobs = unique
+        var skills_jobs = fire.database().ref(`skills_jobs/${tags[i]}`)
+        // promises.push(
+        skills_jobs.on('value', snap => {
+          unique = snap.val()
+          console.log("JobsArray: ", unique, snap.val())
+          Object.keys(unique).forEach((key, index) => {
 
-
-        Object.keys(unique).forEach((key, index) => {
-
-          if (unique[key] === true) {
-            finalJobIds.push(key)
-          }
+            console.log(key, index, unique[key])
+            if (unique[key] === true) {
+              finalJobIds.push(key)
+            }
+          })
+          resolve(0)
         })
-
-        // 
-
-        // this.setState({
-        //   jobDetails: tempDetails
-        // })
-
-        // this.setState(temp, () => {
-
-
-        //   for (var j = 0; j < this.state.qJobs.length; j++) {
-
-        //     var Jobs = fire.database().ref(`jobs/${this.state.qJobs[j]}`)
-        //     Jobs.on('value', snap => {
-
-        //       if (snap.val() !== null) {
-        //         tempDetails.push({ i: snap.key, d: snap.val() })
-        //         unique = [...new Set(tempDetails.map(tempDetails))]
-
-        //         // console.log("TDTDTDTD: ", tempDetails)
-        //         // console.log("UNUNUNUN: ", unique)
-
-        //         let temp = Object.assign({}, this.state)
-        //         temp.jobDetails = unique
-        //         this.setState(temp)
-        //         // console.log("CCCC:", this.state.jobDetails)
-        //       }
-        //     })
-        //   }
-
-
-        // })
+        // )
       })
+      )
     }
 
-    let jobIdsWithoutDuplication = [...new Set(finalJobIds)];
 
-    jobIdsWithoutDuplication.map((idd, indexx) => {
+    Promise.all(promises)
+      .then(() => {
+        let jobIdsWithoutDuplication = [...new Set(finalJobIds)];
+        console.log(jobIdsWithoutDuplication)
+        let newpr = []
+        jobIdsWithoutDuplication.map((idd, indexx) => {
+          newpr.push(new Promise((resolve, reject) => {
+            var Jobs = fire.database().ref(`jobs/${idd}`)
+            Jobs.on('value', snap => {
+              tempDetails.push({ jid: snap.key, jd: snap.val() })
+              resolve(0)
+            })
+          })
+          )
+        })
+        Promise.all(newpr)
+          .then(() => {
+            console.log("All Prms cler", tempDetails)
+            this.setState({
+              jobDetails: tempDetails
+            })
 
-      var Jobs = fire.database().ref(`jobs/${idd}`)
-      Jobs.on('value', snap => {
-
-        if (snap.val() !== null) {
-          tempDetails.push(snap.val())
-        }
+          })
 
       })
-    })
 
 
-    console.log("TEMP Details", tempDetails)
+
+
 
   }
 
@@ -219,14 +232,15 @@ class SearchView extends Component {
           </Col>
 
           <Col md="7">
-            <Card>
-              <CardBody>
-                <h1> This is Search Results View </h1><br />
-                <h1> Searched For {this.state.query} </h1>
-                {this.state.jobDetails.length > 0 ? <SearchResultJobs this={this} /> : null}
-              </CardBody>
-            </Card>
+            {/* <Card>
+              <CardBody> */}
+
+            <h1> You Searched For {this.state.query} </h1>
+            <SearchResultJobs this={this} />
+            {/* </CardBody>
+            </Card> */}
           </Col>
+
 
           <Col md="3">
             <Card>

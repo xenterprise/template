@@ -40,7 +40,7 @@ class Search extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      text: "",
+      text: "node~react",
       sview: false
     }
     this.TextInputChanged_lowercase = this.TextInputChanged_lowercase.bind(this)
