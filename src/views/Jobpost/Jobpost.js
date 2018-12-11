@@ -41,11 +41,10 @@ function CompJob_Posted(props) {
         Object.keys(props.this.state.user_jobs).map((item, i) => (
           <div key={i}>
             <CardHeader>
-              {props.this.state.user_jobs[item].v.titl}
-              {props.this.state.user_jobs[item].k}
+              {props.this.state.user_jobs[item].v.titl} at {props.this.state.user_jobs[item].v.jcom}
               <div className="card-header-actions">
                 <a className="card-header-action btn btn-setting" onClick={props.this.editJob.bind(props.this, props.this.state.user_jobs[item].k)}><i className="icon-settings"></i></a>
-                <a className="card-header-action btn btn-minimize" data-target="#collapseExample" ><i className="icon-arrow-up"></i></a>
+                {/* <a className="card-header-action btn btn-minimize" data-target="#collapseExample" ><i className="icon-arrow-up"></i></a> */}
                 <a className="card-header-action btn btn-close" onClick={props.this.DeleteChildOf_Jobs.bind(props.this, props.this.state.user_jobs[item].k)}><i className="icon-close"></i></a>
               </div>
             </CardHeader>
@@ -62,7 +61,20 @@ function CompJob_Posted(props) {
 function CompJob_Applied(props) {
   return (
     <div>
-
+      {
+        Object.keys(props.this.state.app_user_jobs).map((item, i) => (
+          <div key={i}>
+            <CardHeader>
+              {props.this.state.app_user_jobs[item].v.titl} at {props.this.state.app_user_jobs[item].v.jcom}
+              {/* <div className="card-header-actions"> */}
+                {/* <a className="card-header-action btn btn-setting" onClick={props.this.editJob.bind(props.this, props.this.state.app_user_jobs[item].k)}><i className="icon-settings"></i></a> */}
+                {/* <a className="card-header-action btn btn-minimize" data-target="#collapseExample" ><i className="icon-arrow-up"></i></a> */}
+                {/* <a className="card-header-action btn btn-close" onClick={props.this.DeleteChildOf_Jobs.bind(props.this, props.this.state.app_user_jobs[item].k)}><i className="icon-close"></i></a> */}
+              {/* </div> */}
+            </CardHeader>
+          </div>
+        ))
+      }
     </div>
   )
 }
@@ -87,7 +99,7 @@ function CompJob_Home(props) {
         </CardHeader>
         <Collapse isOpen={props.this.state.accordionPosted[0]} data-parent="#accordion" id="collapseOne" aria-labelledby="headingOne">
           <CardBody>
-            Content 0
+          <CompJob_Applied this={props.this} />
           </CardBody>
         </Collapse>
       </Card>
@@ -356,6 +368,7 @@ class Jobpost extends Component {
       job_view: "HOME",
       accordionPosted: [false, false, false],
       user_jobs: [],
+      app_user_jobs:[],
       ji: "",
       jedit: false
     };
@@ -477,6 +490,19 @@ class Jobpost extends Component {
         let temp = Object.assign({}, this.state)
         temp.user_jobs.push({ k: jobSnap.key, v: jobSnap.val() })
         this.setState(temp)
+      })
+    })
+
+    const app_userJobs = fire.database().ref(`users/${localStorage.getItem('user')}/app_jobs`)
+    const app_jobDetails = fire.database().ref(`jobs`)
+
+    app_userJobs.on('child_added', snap => {
+      let app_jobRef = app_jobDetails.child(snap.key)
+      app_jobRef.once('value').then(app_jobSnap => {
+        // console.log("Job Details", jobSnap.val())
+        let app_temp = Object.assign({}, this.state)
+        app_temp.app_user_jobs.push({ k: app_jobSnap.key, v: app_jobSnap.val() })
+        this.setState(app_temp)
       })
     })
   }

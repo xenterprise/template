@@ -1234,13 +1234,13 @@ class Aform extends Component {
           </Col>
 
           <Col md="7">
-            <Row>
+            {/* <Row>
               <Col>
-                <CardBody>
-                  <h4>Profile Settings</h4>
-                </CardBody>
+                <CardBody> */}
+                  <h4>Resume & Profile Settings</h4>
+                {/* </CardBody>
               </Col>
-            </Row>
+            </Row> */}
             <CardBody>
               <div id="accordion">
 

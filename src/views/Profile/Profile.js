@@ -556,13 +556,6 @@ class Profile extends Component {
 
     return (
       <div>
-
-        {/* <Row>
-          <h1>
-            {this.state.profile_user}
-          </h1>
-          {}
-        </Row> */}
         <Row>
           <Col md="2">
 

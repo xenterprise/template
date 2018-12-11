@@ -63,7 +63,7 @@ class DefaultHeader extends Component {
           </NavItem>
 
           <NavItem className="px-3">
-            <NavLink href="#/basel/jobpost">Username</NavLink>
+            <NavLink href="#/basel/jobpost">{localStorage.getItem('user')}</NavLink>
           </NavItem>
 
           <AppHeaderDropdown direction="down">

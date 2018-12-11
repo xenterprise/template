@@ -48,13 +48,14 @@ function SearchResultJobs(props) {
 
                 <Row>
                   <Col md="9">
-                    <Button block color="link" className="text-left m-0 p-0"  >
+                    <Button block target="_blank" id="job_title" color="link" className="text-left m-0 p-0" href={'#/basel/job/' + props.this.state.jobDetails[item].jid} >
                       <h5 className="m-0 p-0">{props.this.state.jobDetails[item].jd.titl}</h5>
                     </Button>
+                    
                   </Col>
                   <Col md="3">
                     <h6>{props.this.state.jobDetails[item].jd.crcy}:{props.this.state.jobDetails[item].jd.slry}</h6>
-                    
+
                   </Col>
                 </Row>
 
@@ -63,16 +64,16 @@ function SearchResultJobs(props) {
               <CardBody>
                 <Row>
                   <Col md="6">
-                  <p><strong>Company: </strong>{props.this.state.jobDetails[item].jd.jcom}</p>
+                    <p><strong>Company: </strong>{props.this.state.jobDetails[item].jd.jcom}</p>
                   </Col>
                   <Col md="6">
-                  <p><strong>Last Date to Apply: </strong>{props.this.state.jobDetails[item].jd.apdl}</p>
+                    <p><strong>Last Date to Apply: </strong>{props.this.state.jobDetails[item].jd.apdl}</p>
                   </Col>
                 </Row>
-                
+
                 <span><p><strong>Job Description: </strong>{props.this.state.jobDetails[item].jd.resp}</p></span>
                 {/* <p>{props.this.state.jobDetails[item].jd.date}</p> */}
-                
+
                 {
                   Object.keys(props.this.state.jobDetails[item].jd.skls).map((skill_item, i) => (
                     <Button
@@ -98,7 +99,7 @@ class SearchView extends Component {
     this.state = {
       query: "",
       qJobs: [],
-      jobDetails: []
+      jobDetails: [],
     }
     this.searchJobs = this.searchJobs.bind(this)
     this.loadJobDetails = this.loadJobDetails.bind(this)
@@ -117,6 +118,9 @@ class SearchView extends Component {
       // console.log("*****Directly Loaded*****")
     }
   }
+
+  
+
 
   componentWillReceiveProps(nextProps) {
     console.log("Next props", nextProps.location.state.text)
