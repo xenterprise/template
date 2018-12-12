@@ -23,7 +23,7 @@ import {
   Label,
   InputGroup,
   Input,
-  InputGroupAddon,
+  InputGroupAddon, UncontrolledTooltip,
   Collapse
 } from 'reactstrap';
 import { Nav, NavItem, NavLink, TabContent, TabPane, ListGroup, ListGroupItem, ListGroupItemHeading, ListGroupItemText, } from 'reactstrap';
@@ -43,9 +43,21 @@ function CompJob_Posted(props) {
             <CardHeader>
               {props.this.state.user_jobs[item].v.titl} at {props.this.state.user_jobs[item].v.jcom}
               <div className="card-header-actions">
-                <a className="card-header-action btn btn-setting" onClick={props.this.editJob.bind(props.this, props.this.state.user_jobs[item].k)}><i className="icon-settings"></i></a>
+                {/* <a className="card-header-action btn btn-setting" id="ViewApplicants" onClick={props.this.editJob.bind(props.this, props.this.state.user_jobs[item].k)}><i className="fa fa-group fa-lg"></i></a> */}
+                <a target="_blank" className="card-header-action btn btn-setting" id="ViewJob" href={'#/basel/job/' + props.this.state.user_jobs[item].k}><i className="fa fa-external-link fa-lg"></i></a>
+                <a className="card-header-action btn btn-setting" id="EditJob" onClick={props.this.editJob.bind(props.this, props.this.state.user_jobs[item].k)}><i className="fa fa-gear fa-lg"></i></a>
+                {/* <UncontrolledTooltip placement="top" target="ViewApplicants">
+                  View Applicants
+                </UncontrolledTooltip> */}
+                <UncontrolledTooltip placement="top" target="ViewJob">
+                  View Job Post
+                </UncontrolledTooltip>
+                <UncontrolledTooltip placement="top" target="EditJob">
+                  Edit Job Post
+                </UncontrolledTooltip>
+
                 {/* <a className="card-header-action btn btn-minimize" data-target="#collapseExample" ><i className="icon-arrow-up"></i></a> */}
-                <a className="card-header-action btn btn-close" onClick={props.this.DeleteChildOf_Jobs.bind(props.this, props.this.state.user_jobs[item].k)}><i className="icon-close"></i></a>
+                {/* <a className="card-header-action btn btn-close" onClick={props.this.DeleteChildOf_Jobs.bind(props.this, props.this.state.user_jobs[item].k)}><i className="icon-close"></i></a> */}
               </div>
             </CardHeader>
           </div>
@@ -53,7 +65,7 @@ function CompJob_Posted(props) {
       }
     </div>
   )
-} 
+}
 
 
 
@@ -67,9 +79,9 @@ function CompJob_Applied(props) {
             <CardHeader>
               {props.this.state.app_user_jobs[item].v.titl} at {props.this.state.app_user_jobs[item].v.jcom}
               {/* <div className="card-header-actions"> */}
-                {/* <a className="card-header-action btn btn-setting" onClick={props.this.editJob.bind(props.this, props.this.state.app_user_jobs[item].k)}><i className="icon-settings"></i></a> */}
-                {/* <a className="card-header-action btn btn-minimize" data-target="#collapseExample" ><i className="icon-arrow-up"></i></a> */}
-                {/* <a className="card-header-action btn btn-close" onClick={props.this.DeleteChildOf_Jobs.bind(props.this, props.this.state.app_user_jobs[item].k)}><i className="icon-close"></i></a> */}
+              {/* <a className="card-header-action btn btn-setting" onClick={props.this.editJob.bind(props.this, props.this.state.app_user_jobs[item].k)}><i className="icon-settings"></i></a> */}
+              {/* <a className="card-header-action btn btn-minimize" data-target="#collapseExample" ><i className="icon-arrow-up"></i></a> */}
+              {/* <a className="card-header-action btn btn-close" onClick={props.this.DeleteChildOf_Jobs.bind(props.this, props.this.state.app_user_jobs[item].k)}><i className="icon-close"></i></a> */}
               {/* </div> */}
             </CardHeader>
           </div>
@@ -99,7 +111,7 @@ function CompJob_Home(props) {
         </CardHeader>
         <Collapse isOpen={props.this.state.accordionPosted[0]} data-parent="#accordion" id="collapseOne" aria-labelledby="headingOne">
           <CardBody>
-          <CompJob_Applied this={props.this} />
+            <CompJob_Applied this={props.this} />
           </CardBody>
         </Collapse>
       </Card>
@@ -368,7 +380,7 @@ class Jobpost extends Component {
       job_view: "HOME",
       accordionPosted: [false, false, false],
       user_jobs: [],
-      app_user_jobs:[],
+      app_user_jobs: [],
       ji: "",
       jedit: false
     };
@@ -484,26 +496,30 @@ class Jobpost extends Component {
     const jobDetails = fire.database().ref(`jobs`)
 
     userJobs.on('child_added', snap => {
-      let jobRef = jobDetails.child(snap.key)
-      jobRef.once('value').then(jobSnap => {
-        // console.log("Job Details", jobSnap.val())
-        let temp = Object.assign({}, this.state)
-        temp.user_jobs.push({ k: jobSnap.key, v: jobSnap.val() })
-        this.setState(temp)
-      })
+      if (snap.val() === true) {
+        let jobRef = jobDetails.child(snap.key)
+        jobRef.once('value').then(jobSnap => {
+          // console.log("Job Details", jobSnap.val())
+          let temp = Object.assign({}, this.state)
+          temp.user_jobs.push({ k: jobSnap.key, v: jobSnap.val() })
+          this.setState(temp)
+        })
+      }
     })
 
     const app_userJobs = fire.database().ref(`users/${localStorage.getItem('user')}/app_jobs`)
     const app_jobDetails = fire.database().ref(`jobs`)
 
     app_userJobs.on('child_added', snap => {
-      let app_jobRef = app_jobDetails.child(snap.key)
-      app_jobRef.once('value').then(app_jobSnap => {
-        // console.log("Job Details", jobSnap.val())
-        let app_temp = Object.assign({}, this.state)
-        app_temp.app_user_jobs.push({ k: app_jobSnap.key, v: app_jobSnap.val() })
-        this.setState(app_temp)
-      })
+      if (snap.val() === true) {
+        let app_jobRef = app_jobDetails.child(snap.key)
+        app_jobRef.once('value').then(app_jobSnap => {
+          // console.log("Job Details", jobSnap.val())
+          let app_temp = Object.assign({}, this.state)
+          app_temp.app_user_jobs.push({ k: app_jobSnap.key, v: app_jobSnap.val() })
+          this.setState(app_temp)
+        })
+      }
     })
   }
 
@@ -596,7 +612,8 @@ class Jobpost extends Component {
     console.log('DelItem Called', item);
     let temp = Object.assign({}, this.state)
     temp.job.skls.splice(item, 1)
-    this.setState(temp)
+    // this.setState(temp)
+    this.setState({ ...this.state, temp })
   }
 
   DeleteChildOf_Jobs(key) {
@@ -604,6 +621,7 @@ class Jobpost extends Component {
 
     console.log("NOW VALUE OF KEY IS ", key)
     const userJobs = fire.database().ref(`users/${localStorage.getItem('user')}/jobs`)
+    const app_userJobs = fire.database().ref(`users/${localStorage.getItem('user')}/app_jobs`)
     const jobDetails = fire.database().ref(`jobs`)
     let jobRef = jobDetails.child(key)
 
@@ -627,8 +645,9 @@ class Jobpost extends Component {
         });
     }
 
-    userJobs.child(key).remove()
-    jobDetails.child(key).remove()
+    userJobs.child(key).set(false)
+    app_userJobs.child(key).set(false)
+    // jobDetails.child(key).remove()
 
     console.log("Delete State", this.state)
 
@@ -703,6 +722,15 @@ class Jobpost extends Component {
           console.log(error)
         });
     }
+    //Saving the Enable/Disable status of a Job
+      dbref = fire.database().ref(`jobs/${key}/ActiveStatus`)
+      dbref.set(true)
+        .then(() => {
+        })
+        .catch(error => {
+          console.log(error)
+        })
+
     this.setState({ job_view: "DONE" })
   }
 
@@ -827,11 +855,11 @@ class Jobpost extends Component {
           </Col>
 
           <Col md="7">
-            <Card>
-              <CardBody>
+            {/* <Card>
+              <CardBody> */}
                 {this.state.job_view === "FORM" ? <CompJob_Form this={this} /> : <CompJob_Home this={this} />}
-              </CardBody>
-            </Card>
+              {/* </CardBody>
+            </Card> */}
           </Col>
 
           <Col md="3">

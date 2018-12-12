@@ -56,7 +56,7 @@ function JobDisplayComponent(props) {
 
               {props.this.state.jobDetails.jd.resp}
               <br /><br />
-              {
+      {(props.this.state.jobDetails.jd.skls)?
                 Object.keys(props.this.state.jobDetails.jd.skls).map((skill_item, i) => (
                   <Button
                     key={i}
@@ -65,7 +65,7 @@ function JobDisplayComponent(props) {
                     <span>{props.this.state.jobDetails.jd.skls[skill_item].s}</span>
                   </Button>
                 ))
-              }
+              :null}
               <br /><br />
               <Row>
                 <Col md="6">

@@ -192,11 +192,6 @@ class SearchView extends Component {
           })
 
       })
-
-
-
-
-
   }
 
   loadJobDetails() {
