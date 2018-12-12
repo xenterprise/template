@@ -454,7 +454,7 @@ class Jobpost extends Component {
     console.log(today);
 
     var defaultJob = {
-      user: localStorage.getItem('user'), //User
+      user: fire.auth().currentUser.uid, //User
       titl: "", //Job Title
       jcom: "", //Company Name
       jexp: "fresh",
@@ -476,7 +476,7 @@ class Jobpost extends Component {
 
     this.setState({
       job: {
-        // ...this.state.job, ...{ user: localStorage.getItem('user'), date: today }
+        // ...this.state.job, ...{ user: fire.auth().currentUser.uid, date: today }
         ...this.state.job, ...defaultJob
       },
       DropDownText_SalaryCurrency: "PKR",
@@ -492,7 +492,7 @@ class Jobpost extends Component {
 
 
   ReadUserJobs() {
-    const userJobs = fire.database().ref(`users/${localStorage.getItem('user')}/jobs`)
+    const userJobs = fire.database().ref(`users/${fire.auth().currentUser.uid}/jobs`)
     const jobDetails = fire.database().ref(`jobs`)
 
     userJobs.on('child_added', snap => {
@@ -507,7 +507,7 @@ class Jobpost extends Component {
       }
     })
 
-    const app_userJobs = fire.database().ref(`users/${localStorage.getItem('user')}/app_jobs`)
+    const app_userJobs = fire.database().ref(`users/${fire.auth().currentUser.uid}/app_jobs`)
     const app_jobDetails = fire.database().ref(`jobs`)
 
     app_userJobs.on('child_added', snap => {
@@ -620,8 +620,8 @@ class Jobpost extends Component {
     // Delete Child of Job
 
     console.log("NOW VALUE OF KEY IS ", key)
-    const userJobs = fire.database().ref(`users/${localStorage.getItem('user')}/jobs`)
-    const app_userJobs = fire.database().ref(`users/${localStorage.getItem('user')}/app_jobs`)
+    const userJobs = fire.database().ref(`users/${fire.auth().currentUser.uid}/jobs`)
+    const app_userJobs = fire.database().ref(`users/${fire.auth().currentUser.uid}/app_jobs`)
     const jobDetails = fire.database().ref(`jobs`)
     let jobRef = jobDetails.child(key)
 
@@ -702,7 +702,7 @@ class Jobpost extends Component {
 
     //Saving Job Id in User
     if (this.state.jedit === false) {
-      dbref = fire.database().ref(`users/${localStorage.getItem('user')}/jobs`)
+      dbref = fire.database().ref(`users/${fire.auth().currentUser.uid}/jobs`)
       dbref.child(key).set(true)
         .then(() => {
         })

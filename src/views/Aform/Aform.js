@@ -837,7 +837,8 @@ class Aform extends Component {
 
 
   componentDidMount() {
-    var dbref = fire.database().ref(`users/${localStorage.getItem('user')}`)
+    // var dbref = fire.database().ref(`users/${fire.auth().currentUser.uid}`)
+    var dbref = fire.database().ref(`users/${fire.auth().currentUser.uid}`)
     dbref.on("value", (snapshot) => {
       console.log('Snapshot', snapshot.val())
       let snap = snapshot.val()
@@ -881,7 +882,7 @@ class Aform extends Component {
 
   Submit_About(e) {
     e.preventDefault();
-    var dbref = fire.database().ref(`users/${localStorage.getItem('user')}`);
+    var dbref = fire.database().ref(`users/${fire.auth().currentUser.uid}`);
     dbref.set(this.state.user)
       .then(() => {
       })
@@ -892,14 +893,14 @@ class Aform extends Component {
 
   // Submit_social(e) {
 
-  //   var dbref = fire.database().ref(`users/${localStorage.getItem('user')}/Personal/social`);
+  //   var dbref = fire.database().ref(`users/${fire.auth().currentUser.uid}/Personal/social`);
   //   var newsocial = dbref.push()
   //   newsocial.set({ platform: this.state.new_platformName, link: this.state.new_platformLink })
 
   // }
   // Submit_education(e) {
 
-  //   var dbref = fire.database().ref(`users/${localStorage.getItem('user')}/Personal/education`);
+  //   var dbref = fire.database().ref(`users/${fire.auth().currentUser.uid}/Personal/education`);
   //   var newsocial = dbref.push()
   //   newsocial.set({ platform: this.state.new_platformName, link: this.state.new_platformLink })
 
@@ -986,7 +987,7 @@ class Aform extends Component {
     console.log('Temp After push:', temp)
     this.setState(temp)
     console.log('State after Set State:', this.state)
-    var dbref = fire.database().ref(`users/${localStorage.getItem('user')}/social`);
+    var dbref = fire.database().ref(`users/${fire.auth().currentUser.uid}/social`);
     dbref.set(this.state.user.social)
       .then(() => {
       })
@@ -1005,7 +1006,7 @@ class Aform extends Component {
     console.log('Temp After push:', temp)
     this.setState(temp)
     console.log('State after Set State:', this.state)
-    var dbref = fire.database().ref(`users/${localStorage.getItem('user')}/education`);
+    var dbref = fire.database().ref(`users/${fire.auth().currentUser.uid}/education`);
     dbref.set(this.state.user.education)
       .then(() => {
       })
@@ -1026,7 +1027,7 @@ class Aform extends Component {
     console.log('Temp After push:', temp)
     this.setState(temp)
     console.log('State after Set State:', this.state)
-    var dbref = fire.database().ref(`users/${localStorage.getItem('user')}/organizations`);
+    var dbref = fire.database().ref(`users/${fire.auth().currentUser.uid}/organizations`);
     dbref.set(this.state.user.organizations)
       .then(() => {
       })
@@ -1044,7 +1045,7 @@ class Aform extends Component {
     temp.user.certifications.push({ name: this.state.new_certification_name, org: this.state.new_certification_org })
     this.setState(temp)
     console.log('State after Set State:', this.state)
-    var dbref = fire.database().ref(`users/${localStorage.getItem('user')}/certifications`);
+    var dbref = fire.database().ref(`users/${fire.auth().currentUser.uid}/certifications`);
     dbref.set(this.state.user.certifications)
       .then(() => {
       })
@@ -1065,7 +1066,7 @@ class Aform extends Component {
     console.log('Temp After push:', temp)
     this.setState(temp)
     console.log('State after Set State:', this.state)
-    var dbref = fire.database().ref(`users/${localStorage.getItem('user')}/publications`);
+    var dbref = fire.database().ref(`users/${fire.auth().currentUser.uid}/publications`);
     dbref.set(this.state.user.publications)
       .then(() => {
       })
@@ -1082,7 +1083,7 @@ class Aform extends Component {
     let temp = Object.assign({}, this.state)
     temp.user.work.push({ com: this.state.new_work_company, des: this.state.new_work_designation, dur: this.state.new_work_duration, det: this.state.new_work_details, })
     this.setState(temp)
-    var dbref = fire.database().ref(`users/${localStorage.getItem('user')}/work`);
+    var dbref = fire.database().ref(`users/${fire.auth().currentUser.uid}/work`);
     dbref.set(this.state.user.work)
       .then(() => {
       })
@@ -1097,7 +1098,7 @@ class Aform extends Component {
     e.preventDefault();
     console.log('Add Skill Form Submitted', this.state.new_skill)
 
-    var dbref = fire.database().ref(`users/${localStorage.getItem('user')}/skills`)
+    var dbref = fire.database().ref(`users/${fire.auth().currentUser.uid}/skills`)
     dbref.child(this.state.new_skill).set(true)
       .then(() => {
       })
@@ -1115,7 +1116,7 @@ class Aform extends Component {
     console.log('Temp After push:', temp)
     this.setState(temp)
     console.log('State after Set State:', this.state)
-    var dbref = fire.database().ref(`users/${localStorage.getItem('user')}/social`);
+    var dbref = fire.database().ref(`users/${fire.auth().currentUser.uid}/social`);
     dbref.set(this.state.user['social'])
       .then(() => {
       })
@@ -1126,7 +1127,7 @@ class Aform extends Component {
 
   delChildOfuser(target, item) {
     console.log('DelItem Called', item);
-    var dbref = fire.database().ref(`users/${localStorage.getItem('user')}/${target}/${item}`);
+    var dbref = fire.database().ref(`users/${fire.auth().currentUser.uid}/${target}/${item}`);
     dbref.remove()
       .then(() => {
       })
@@ -1142,7 +1143,7 @@ class Aform extends Component {
     console.log('Temp After push:', temp)
     this.setState(temp)
     console.log('State after Set State:', this.state)
-    var dbref = fire.database().ref(`users/${localStorage.getItem('user')}/education`);
+    var dbref = fire.database().ref(`users/${fire.auth().currentUser.uid}/education`);
     dbref.set(this.state.user.education)
       .then(() => {
       })
@@ -1159,7 +1160,7 @@ class Aform extends Component {
     console.log('Temp After push:', temp)
     this.setState(temp)
     console.log('State after Set State:', this.state)
-    var dbref = fire.database().ref(`users/${localStorage.getItem('user')}/certifications`);
+    var dbref = fire.database().ref(`users/${fire.auth().currentUser.uid}/certifications`);
     dbref.set(this.state.user.certifications)
       .then(() => {
       })
@@ -1175,7 +1176,7 @@ class Aform extends Component {
     console.log('Temp After push:', temp)
     this.setState(temp)
     console.log('State after Set State:', this.state)
-    var dbref = fire.database().ref(`users/${localStorage.getItem('user')}/publications`);
+    var dbref = fire.database().ref(`users/${fire.auth().currentUser.uid}/publications`);
     dbref.set(this.state.user.publications)
       .then(() => {
       })
@@ -1191,7 +1192,7 @@ class Aform extends Component {
     console.log('Temp After push:', temp)
     this.setState(temp)
     console.log('State after Set State:', this.state)
-    var dbref = fire.database().ref(`users/${localStorage.getItem('user')}/organizations`);
+    var dbref = fire.database().ref(`users/${fire.auth().currentUser.uid}/organizations`);
     dbref.set(this.state.user.organizations)
       .then(() => {
       })
@@ -1208,7 +1209,7 @@ class Aform extends Component {
     console.log('Temp After push:', temp)
     this.setState(temp)
     console.log('State after Set State:', this.state)
-    var dbref = fire.database().ref(`users/${localStorage.getItem('user')}/work`);
+    var dbref = fire.database().ref(`users/${fire.auth().currentUser.uid}/work`);
     dbref.set(this.state.user.work)
       .then(() => {
       })

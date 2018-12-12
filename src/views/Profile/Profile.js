@@ -497,7 +497,7 @@ class Profile extends Component {
       dropdownOpen: false,
       radioSelected: 2,
       activeTab: '1',
-      profile_user: localStorage.getItem('user'),
+      profile_user: fire.auth().currentUser.uid,
       user: {}
     };
 
@@ -532,7 +532,7 @@ class Profile extends Component {
       profile_user: this.props.match.params.id
     })
 
-    var dbref = fire.database().ref(`users/${localStorage.getItem('user')}`)
+    var dbref = fire.database().ref(`users/${fire.auth().currentUser.uid}`)
     dbref.on("value", (snapshot) => {
       console.log('Snapshot', snapshot.val())
       let snap = snapshot.val()

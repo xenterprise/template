@@ -63,7 +63,7 @@ class DefaultHeader extends Component {
           </NavItem>
 
           <NavItem className="px-3">
-            <NavLink href="#/basel/jobpost">{localStorage.getItem('user')}</NavLink>
+            <NavLink href="#/basel/jobpost">{fire.auth().currentUser.uid}</NavLink>
           </NavItem>
 
           <AppHeaderDropdown direction="down">

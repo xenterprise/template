@@ -47,7 +47,7 @@ class Login extends Component {
       })
     }
 
-    console.log(localStorage.getItem('user'))
+    // console.log(fire.auth().currentUser.uid)
   }
 
   // authListener() {

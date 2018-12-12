@@ -120,7 +120,7 @@ class JobDetails extends Component {
 
     let promises = []
     promises.push(new Promise((resolve, reject) => {
-      let dbref = fire.database().ref(`users/${localStorage.getItem('user')}/app_jobs`)
+      let dbref = fire.database().ref(`users/${fire.auth().currentUser.uid}/app_jobs`)
       dbref.child(this.props.match.params.juid).set(true)
         .then(() => {
         })
@@ -132,7 +132,7 @@ class JobDetails extends Component {
 
     promises.push(new Promise((resolve, reject) => {
       let dbref2 = fire.database().ref(`jobs_users/${this.props.match.params.juid}`)
-      dbref2.child(localStorage.getItem('user')).set(true)
+      dbref2.child(fire.auth().currentUser.uid).set(true)
         .then(() => {
         })
         .catch(error => {
