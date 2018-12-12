@@ -42,9 +42,10 @@ function CompApplicants_All(props) {
           Object.keys(props.this.state.ApplicantDetails).map((item, i) => (
             <div key={i}>
               <CardHeader>
-                {props.this.state.ApplicantDetails[item].ad.name} - {props.this.state.ApplicantDetails[item].lb}
+                {props.this.state.ApplicantDetails[item].ad.name}
                 <div className="card-header-actions">
-                {props.this.state.ApplicantDetails[item].lb==="sl"?<Badge className="mr-1" color="primary">Primary</Badge>:null}
+                {props.this.state.ApplicantDetails[item].lb==="rj"?<Badge className="mr-1" color="danger">Rejected</Badge>:
+                 props.this.state.ApplicantDetails[item].lb==="sl"?<Badge className="mr-1" color="primary">Shortlisted</Badge>:null}
                 <a className="card-header-action btn btn-setting" id="a"><i className="fa fa-check fa-lg"></i></a>
                 <a className="card-header-action btn btn-setting" id="a"><i className="fa fa-close fa-lg"></i></a>
                 </div>
