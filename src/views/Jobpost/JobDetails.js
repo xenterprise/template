@@ -141,6 +141,18 @@ class JobDetails extends Component {
       resolve(0)
     }))
 
+    promises.push(new Promise((resolve, reject) => {
+      let dbref3 = fire.database().ref(`jobs_users_labels/${this.props.match.params.juid}`)
+      dbref3.child(fire.auth().currentUser.uid).set("no")
+        .then(() => {
+        })
+        .catch(error => {
+          console.log(error)
+        });
+      resolve(0)
+    }))
+
+
     Promise.all(promises)
       .then(() => {
         console.log("Applied")

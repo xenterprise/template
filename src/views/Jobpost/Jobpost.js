@@ -34,6 +34,121 @@ import { getStyle, hexToRgba } from '@coreui/coreui/dist/js/coreui-utilities'
 
 import fire from '../../config/Fire'
 
+function CompApplicants_All(props) {
+  if (props.this.state.app_juid !== "")
+    return (
+      <div>
+        {
+          Object.keys(props.this.state.ApplicantDetails).map((item, i) => (
+            <div key={i}>
+              <CardHeader>
+                {props.this.state.ApplicantDetails[item].ad.name} - {props.this.state.ApplicantDetails[item].lb}
+                <div className="card-header-actions">
+                {props.this.state.ApplicantDetails[item].lb==="sl"?<Badge className="mr-1" color="primary">Primary</Badge>:null}
+                <a className="card-header-action btn btn-setting" id="a"><i className="fa fa-check fa-lg"></i></a>
+                <a className="card-header-action btn btn-setting" id="a"><i className="fa fa-close fa-lg"></i></a>
+                </div>
+              </CardHeader>
+            </div>
+          ))
+        }
+      </div>
+    )
+  else {
+    return (
+      <div>
+        Hello Else
+
+      </div>
+    )
+  }
+
+}
+function CompApplicants_Shortlisted(props) {
+  return (
+    <div>
+      {
+
+      }
+    </div>
+  )
+}
+function CompApplicants_Rejected(props) {
+  return (
+    <div>
+      {
+
+      }
+    </div>
+  )
+}
+
+function CompApplicants(props) {
+  if (props.this.state.app_juid !== "")
+    return (
+      <div>
+
+        <Row>
+          <Col md="9">
+          </Col>
+          <Col md="3">
+            <Button type="submit" align="right" size="md" color="dark" onClick={props.this.ChangeState_HOME}><i className="fa fa-dot-circle-o"></i> Go Back</Button>
+          </Col>
+        </Row>
+        <h5>Applicants Section</h5>
+        <Card>
+          <CardHeader id="headingOne">
+            <Button block color="link" className="text-left m-0 p-0" onClick={() => props.this.toggleAccordionPosted(2)} aria-expanded={props.this.state.accordionPosted[0]} aria-controls="collapseOne">
+              <h5 className="m-0 p-0">All Applicants for this Job</h5>
+            </Button>
+          </CardHeader>
+          <Collapse isOpen={props.this.state.accordionPosted[2]} data-parent="#accordion" id="collapseOne" aria-labelledby="headingOne">
+            <CardBody>
+              <CompApplicants_All this={props.this} />
+            </CardBody>
+          </Collapse>
+        </Card>
+
+
+        <Card>
+          <CardHeader id="headingTwo">
+            <Button block color="link" className="text-left m-0 p-0" onClick={() => props.this.toggleAccordionPosted(3)} aria-expanded={props.this.state.accordionPosted[1]} aria-controls="collapseTwo">
+              <h5 className="m-0 p-0">Shortlisted Applicants</h5>
+            </Button>
+          </CardHeader>
+          <Collapse isOpen={props.this.state.accordionPosted[3]} data-parent="#accordion" id="collapseTwo">
+            <CardBody>
+              {/* <CompJob_Posted this={props.this} /> */}
+            </CardBody>
+          </Collapse>
+        </Card>
+
+        <Card>
+          <CardHeader id="headingTwo">
+            <Button block color="link" className="text-left m-0 p-0" onClick={() => props.this.toggleAccordionPosted(4)} aria-expanded={props.this.state.accordionPosted[1]} aria-controls="collapseTwo">
+              <h5 className="m-0 p-0">Rejected Applicants</h5>
+            </Button>
+          </CardHeader>
+          <Collapse isOpen={props.this.state.accordionPosted[4]} data-parent="#accordion" id="collapseTwo">
+            <CardBody>
+              {/* <CompJob_Posted this={props.this} /> */}
+            </CardBody>
+          </Collapse>
+        </Card>
+
+
+      </div>
+    )
+  else {
+    return (
+      <div>
+
+      </div>
+    )
+  }
+}
+
+
 function CompJob_Posted(props) {
   return (
     <div>
@@ -43,12 +158,12 @@ function CompJob_Posted(props) {
             <CardHeader>
               {props.this.state.user_jobs[item].v.titl} at {props.this.state.user_jobs[item].v.jcom}
               <div className="card-header-actions">
-                {/* <a className="card-header-action btn btn-setting" id="ViewApplicants" onClick={props.this.editJob.bind(props.this, props.this.state.user_jobs[item].k)}><i className="fa fa-group fa-lg"></i></a> */}
+                <a target="_blank" className="card-header-action btn btn-setting" id="ViewApplicants" onClick={props.this.ShowApplicants.bind(props.this, props.this.state.user_jobs[item].k)}><i className="fa fa-group fa-lg"></i></a>
                 <a target="_blank" className="card-header-action btn btn-setting" id="ViewJob" href={'#/basel/job/' + props.this.state.user_jobs[item].k}><i className="fa fa-external-link fa-lg"></i></a>
                 <a className="card-header-action btn btn-setting" id="EditJob" onClick={props.this.editJob.bind(props.this, props.this.state.user_jobs[item].k)}><i className="fa fa-gear fa-lg"></i></a>
-                {/* <UncontrolledTooltip placement="top" target="ViewApplicants">
+                <UncontrolledTooltip placement="top" target="ViewApplicants">
                   View Applicants
-                </UncontrolledTooltip> */}
+                </UncontrolledTooltip>
                 <UncontrolledTooltip placement="top" target="ViewJob">
                   View Job Post
                 </UncontrolledTooltip>
@@ -378,11 +493,13 @@ class Jobpost extends Component {
       DropDownOpen_SalaryCurrency: false,
       DropDownText_SalaryCurrency: "PKR",
       job_view: "HOME",
-      accordionPosted: [false, false, false],
+      accordionPosted: [false, false, false, false, false],
       user_jobs: [],
       app_user_jobs: [],
       ji: "",
-      jedit: false
+      jedit: false,
+      app_juid: "",
+      ApplicantDetails: []
     };
 
     this.TextInputChanged = this.TextInputChanged.bind(this)
@@ -412,6 +529,8 @@ class Jobpost extends Component {
     this.createJob = this.createJob.bind(this)
     this.CancelJob = this.CancelJob.bind(this)
     this.Initialize = this.Initialize.bind(this)
+
+    this.ShowApplicants = this.ShowApplicants.bind(this)
   }
 
   componentDidMount() {
@@ -483,7 +602,8 @@ class Jobpost extends Component {
       DropDownText_Experience: "Fresh Eligible",
       DropDownText_Qualification: "No Degree Requirement",
       ji: "",
-      jedit: false
+      jedit: false,
+      job_view: "HOME",
     })
 
     console.log("Current State:", this.state)
@@ -578,12 +698,62 @@ class Jobpost extends Component {
     })
   }
 
-  // DropDownSet_EditJob(snap) {
+  ShowApplicants(juid) {
 
+    let tempDetails = []
+    let promises = []
+    let AllApplicants = []
+    let all
+    this.setState({
+      job_view: "APPL", app_juid: juid
+    })
 
+    promises.push(new Promise((resolve, reject) => {
+      var AllApplicantsRef = fire.database().ref(`jobs_users/${juid}`)
+      AllApplicantsRef.on('value', snap => {
+        all = snap.val()
+        console.log("ApplicantsArray: ", all, snap.val())
+        Object.keys(all).forEach((key, index) => {
+          console.log(key, index, all[key])
+          if (all[key] === true) {
+            AllApplicants.push(key)
+          }
+        })
+        resolve(0)
+      })
+    }))
 
+    Promise.all(promises)
+      .then(() => {
 
-  // }
+        console.log("Entered into Then")
+        let newpr = []
+        AllApplicants.map((idd, indexx) => {
+          newpr.push(new Promise((resolve, reject) => {
+            var Applicants_data = fire.database().ref(`users/${idd}`)
+            var Applicants_labels = fire.database().ref(`jobs_users_labels/${juid}/${idd}`)
+            Applicants_data.on('value', snap => {
+              Applicants_labels.on('value', Label_snap => {
+                tempDetails.push({ aid: snap.key, ad: snap.val(), lb: Label_snap.val()})
+                console.log("TDTD:", Label_snap.val())
+              })
+              resolve(0)
+            })
+          })
+          )
+        })
+        Promise.all(newpr)
+          .then(() => {
+            console.log("All Prms cler", tempDetails)
+            this.setState({
+              ApplicantDetails: tempDetails
+            })
+
+          })
+
+      })
+
+  }
 
   addSkill(e) {
     e.preventDefault();
@@ -723,13 +893,13 @@ class Jobpost extends Component {
         });
     }
     //Saving the Enable/Disable status of a Job
-      dbref = fire.database().ref(`jobs/${key}/ActiveStatus`)
-      dbref.set(true)
-        .then(() => {
-        })
-        .catch(error => {
-          console.log(error)
-        })
+    dbref = fire.database().ref(`jobs/${key}/ActiveStatus`)
+    dbref.set(true)
+      .then(() => {
+      })
+      .catch(error => {
+        console.log(error)
+      })
 
     this.setState({ job_view: "DONE" })
   }
@@ -857,8 +1027,10 @@ class Jobpost extends Component {
           <Col md="7">
             {/* <Card>
               <CardBody> */}
-                {this.state.job_view === "FORM" ? <CompJob_Form this={this} /> : <CompJob_Home this={this} />}
-              {/* </CardBody>
+            {this.state.job_view === "FORM" ? <CompJob_Form this={this} />
+              : this.state.job_view === "APPL" ? <CompApplicants this={this} />
+                : <CompJob_Home this={this} />}
+            {/* </CardBody>
             </Card> */}
           </Col>
 
