@@ -91,10 +91,6 @@ class Login extends Component {
                   </Row>
                 {/* </CardHeader> */}
                 <CardBody className="p-4">
-
-
-
-
                   <Form onSubmit={this.formSubmit}>
                     <Row className="justify-content-center"><h2>Login</h2></Row>
   

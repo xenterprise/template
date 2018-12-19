@@ -224,6 +224,10 @@ const Applicants = Loadable({
   loading: Loading,
 });
 
+const Image = Loadable({
+  loader: () => import('./views/Pages/Img/Image'),
+  loading: Loading,
+});
 
 
 
@@ -238,6 +242,7 @@ const routes = [
   // { path: '/', exact: true, name: 'Home', component: DefaultLayout },
   // { path: '/basel', exact: true, name: 'BaseLayout', component: BaseLayout },
   { path: '/dashboard', name: 'Dashboard', component: Dashboard },
+  { path: '/img', name: 'Image', component: Image },
   // { path: '/home', name: 'Home', component: Home },
   { path: '/profile',exact: true, name: 'Profile', component: Profile },
   { path: '/profile/:id', exact: true, name: 'Profile Details', component: Profile },
