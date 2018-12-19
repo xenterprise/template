@@ -20,10 +20,12 @@ import {
   Fade,
   Collapse, Dropdown, DropdownToggle, DropdownMenu, DropdownItem, Progress, Table, TabContent, TabPane
 } from 'reactstrap';
+
 // import Form from "react-jsonschema-form";
 // import axios from 'axios';
 // import { auth, db } from '../../firebase';
 import fire from '../../config/Fire'
+import GlobalAlert from '../Alerts/ga'
 
 // const log = (type) => console.log.bind(console, type);
 
@@ -123,7 +125,7 @@ function CompSkills(props) {
       <Row>
         <Col xs="12" md="9">
           <form ref={input => props.this.addSkillForm = input} onSubmit={(e) => { props.this.addSkill(e) }}>
-            <Input type="text" id="text-input" name="new_skill" placeholder="Enter New Skills Here" onChange={props.this.Base_inputChanged_lowercase} />
+            <Input type="text" id="text-input" name="new_skill" placeholder="Type New Skills Here & press Enter" onChange={props.this.Base_inputChanged_lowercase} />
           </form>
         </Col>
       </Row>
@@ -141,8 +143,9 @@ function Compsocial_Display(props) {
             <Row key={i}>
               <Col md="1">
                 <div className="avatar">
-                  <img src={'assets/img/avatars/1.jpg'} className="img-avatar" alt="admin@bootstrapmaster.com" />
-                  <span className="avatar-status badge-success"></span>
+                <h1><i className="fa fa-snowflake-o"></i></h1>
+                  {/* <img src={'assets/img/avatars/1.jpg'} className="img-avatar" alt="admin@bootstrapmaster.com" />
+                  <span className="avatar-status badge-success"></span> */}
                 </div>
 
               </Col>
@@ -180,8 +183,9 @@ function CompCertificate_Display(props) {
             <Row key={i}>
               <Col md="1">
                 <div className="avatar">
-                  <img src={'assets/img/avatars/1.jpg'} className="img-avatar" alt="admin@bootstrapmaster.com" />
-                  <span className="avatar-status badge-success"></span>
+                <h1><i className="fa fa-certificate"></i></h1>
+                  {/* <img src={'assets/img/avatars/1.jpg'} className="img-avatar" alt="admin@bootstrapmaster.com" />
+                  <span className="avatar-status badge-success"></span> */}
                 </div>
 
               </Col>
@@ -217,8 +221,9 @@ function CompPublication_Display(props) {
             <Row key={i}>
               <Col md="1">
                 <div className="avatar">
-                  <img src={'assets/img/avatars/1.jpg'} className="img-avatar" alt="admin@bootstrapmaster.com" />
-                  <span className="avatar-status badge-success"></span>
+                <h1><i className="fa fa-globe"></i></h1>
+                  {/* <img src={'assets/img/avatars/1.jpg'} className="img-avatar" alt="admin@bootstrapmaster.com" />
+                  <span className="avatar-status badge-success"></span> */}
                 </div>
 
               </Col>
@@ -255,8 +260,9 @@ function CompOrganization_Display(props) {
             <Row key={i}>
               <Col md="1">
                 <div className="avatar">
-                  <img src={'assets/img/avatars/1.jpg'} className="img-avatar" alt="admin@bootstrapmaster.com" />
-                  <span className="avatar-status badge-success"></span>
+                <h1><i className="fa fa-users"></i></h1>
+                  {/* <img src={'assets/img/avatars/1.jpg'} className="img-avatar" alt="admin@bootstrapmaster.com" />
+                  <span className="avatar-status badge-success"></span> */}
                 </div>
 
               </Col>
@@ -295,8 +301,9 @@ function Compeducation_Display(props) {
             <Row key={i}>
               <Col md="1">
                 <div className="avatar">
-                  <img src={'assets/img/avatars/1.jpg'} className="img-avatar" alt="admin@bootstrapmaster.com" />
-                  <span className="avatar-status badge-success"></span>
+                <h1><i className="fa fa-graduation-cap"></i></h1>
+                  {/* <img src={'assets/img/avatars/1.jpg'} className="img-avatar" alt="admin@bootstrapmaster.com" />
+                  <span className="avatar-status badge-success"></span> */}
                 </div>
 
               </Col>
@@ -332,8 +339,9 @@ function Compwork_Display(props) {
             <Row key={i}>
               <Col md="1">
                 <div className="avatar">
-                  <img src={'assets/img/avatars/1.jpg'} className="img-avatar" alt="admin@bootstrapmaster.com" />
-                  <span className="avatar-status badge-success"></span>
+                <h1><i className="fa fa-snowflake-o"></i></h1>
+                  {/* <img src={'assets/img/avatars/1.jpg'} className="img-avatar" alt="admin@bootstrapmaster.com" />
+                  <span className="avatar-status badge-success"></span> */}
                 </div>
 
               </Col>
@@ -833,6 +841,7 @@ class Aform extends Component {
     this.toggleFlag_Publication = this.toggleFlag_Publication.bind(this);
 
     this.toggleAccordion = this.toggleAccordion.bind(this);
+    this.toggleSectionOpenClose = this.toggleSectionOpenClose.bind(this)
   }
 
 
@@ -885,6 +894,7 @@ class Aform extends Component {
     var dbref = fire.database().ref(`users/${fire.auth().currentUser.uid}`);
     dbref.set(this.state.user)
       .then(() => {
+        this.toggleSectionOpenClose(0)
       })
       .catch(error => {
         console.log(error)
@@ -1219,6 +1229,13 @@ class Aform extends Component {
   }
 
 
+  toggleSectionOpenClose(seq){
+    let temp = this.state
+   
+      temp.accordion[seq] = !temp.accordion[seq]
+      this.setState(temp)
+  
+  }
 
   render() {
     return (
@@ -1226,30 +1243,34 @@ class Aform extends Component {
 
         {/* <Container fluid> */}
         <Row>
+
           <Col md="2">
-
-            <Button outline color="primary" size="lg" block href="#/basel/profile">Profile</Button>
-            <Button outline color="primary" size="lg" block  href="#/basel/jobpost">Job Section</Button>
-            <Button outline color="primary" size="lg" block  href="#/basel/aform">Settings</Button>
-
+            {/* <Button outline color="primary" size="lg" block href="#/basel/sview">Explore Jobs</Button> */}
+            <Button outline className="text-left" color="primary" size="lg" block href="#/basel/profile"><i className="fa fa-user"></i> Profile</Button>
+            <Button outline className="text-left" color="primary" size="lg" block href="#/basel/jobpost"><i className="fa fa-briefcase"></i> My Jobs</Button>
+            <Button outline className="text-left" color="primary" size="lg" block href="#/basel/aform"><i className="fa fa-edit"></i> Edit Profile</Button>
           </Col>
 
           <Col md="7">
             {/* <Row>
               <Col>
                 <CardBody> */}
-                  <h4>Resume & Profile Settings</h4>
-                {/* </CardBody>
+            <div>
+              {fire.auth().currentUser.emailVerified ? null : <GlobalAlert AlertId="A" />}
+              <h4>Resume & Profile Settings</h4>
+            </div>
+
+            {/* </CardBody>
               </Col>
             </Row> */}
-            <CardBody>
+            {/* <CardBody> */}
               <div id="accordion">
 
 
                 <Card>
                   <CardHeader id="headingOne">
                     <Button block color="link" className="text-left m-0 p-0" onClick={() => this.toggleAccordion(0)} aria-expanded={this.state.accordion[0]} aria-controls="collapseOne">
-                      <h5 className="m-0 p-0">About</h5>
+                      <h5 className="m-0 p-0"><i className="fa fa-user"></i> About</h5>
                     </Button>
                   </CardHeader>
                   <Collapse isOpen={this.state.accordion[0]} data-parent="#accordion" id="collapseOne" aria-labelledby="headingOne">
@@ -1263,7 +1284,7 @@ class Aform extends Component {
                 <Card>
                   <CardHeader id="headingOne">
                     <Button block color="link" className="text-left m-0 p-0" onClick={() => this.toggleAccordion(1)} aria-expanded={this.state.accordion[1]} aria-controls="collapseOne">
-                      <h5 className="m-0 p-0">Skills</h5>
+                      <h5 className="m-0 p-0"><i className="fa fa-check-circle"></i> Skills</h5>
                     </Button>
                   </CardHeader>
                   <Collapse isOpen={this.state.accordion[1]} data-parent="#accordion" id="collapseOne" aria-labelledby="headingOne">
@@ -1276,7 +1297,7 @@ class Aform extends Component {
                 <Card>
                   <CardHeader id="headingTwo">
                     <Button block color="link" className="text-left m-0 p-0" onClick={() => this.toggleAccordion(2)} aria-expanded={this.state.accordion[2]} aria-controls="collapseTwo">
-                      <h5 className="m-0 p-0">Social</h5>
+                      <h5 className="m-0 p-0"><i className="fa fa-snowflake-o"></i> Social</h5>
                     </Button>
                   </CardHeader>
                   <Collapse isOpen={this.state.accordion[2]} data-parent="#accordion" id="collapseTwo">
@@ -1291,7 +1312,7 @@ class Aform extends Component {
                 <Card>
                   <CardHeader id="headingThree">
                     <Button block color="link" className="text-left m-0 p-0" onClick={() => this.toggleAccordion(3)} aria-expanded={this.state.accordion[3]} aria-controls="collapseThree">
-                      <h5 className="m-0 p-0">Education</h5>
+                      <h5 className="m-0 p-0"><i className="fa fa-graduation-cap"></i> Education</h5>
                     </Button>
                   </CardHeader>
                   <Collapse isOpen={this.state.accordion[3]} data-parent="#accordion" id="collapseThree">
@@ -1305,7 +1326,7 @@ class Aform extends Component {
                 <Card>
                   <CardHeader id="headingFour">
                     <Button block color="link" className="text-left m-0 p-0" onClick={() => this.toggleAccordion(4)} aria-expanded={this.state.accordion[4]} aria-controls="collapseThree">
-                      <h5 className="m-0 p-0">Work</h5>
+                      <h5 className="m-0 p-0"><i className="fa fa-briefcase"></i> Work</h5>
                     </Button>
                   </CardHeader>
                   <Collapse isOpen={this.state.accordion[4]} data-parent="#accordion" id="collapseThree">
@@ -1319,7 +1340,7 @@ class Aform extends Component {
                 <Card>
                   <CardHeader id="headingFive">
                     <Button block color="link" className="text-left m-0 p-0" onClick={() => this.toggleAccordion(5)} aria-expanded={this.state.accordion[5]} aria-controls="collapseThree">
-                      <h5 className="m-0 p-0">Certifications</h5>
+                      <h5 className="m-0 p-0"><i className="fa fa-certificate"></i> Certifications</h5>
                     </Button>
                   </CardHeader>
                   <Collapse isOpen={this.state.accordion[5]} data-parent="#accordion" id="collapseThree">
@@ -1332,7 +1353,7 @@ class Aform extends Component {
                 <Card>
                   <CardHeader id="headingSix">
                     <Button block color="link" className="text-left m-0 p-0" onClick={() => this.toggleAccordion(6)} aria-expanded={this.state.accordion[6]} aria-controls="collapseThree">
-                      <h5 className="m-0 p-0">Organizations</h5>
+                      <h5 className="m-0 p-0"><i className="fa fa-users"></i> Organizations</h5>
                     </Button>
                   </CardHeader>
                   <Collapse isOpen={this.state.accordion[6]} data-parent="#accordion" id="collapseThree">
@@ -1346,7 +1367,7 @@ class Aform extends Component {
                 <Card>
                   <CardHeader id="headingSeven">
                     <Button block color="link" className="text-left m-0 p-0" onClick={() => this.toggleAccordion(7)} aria-expanded={this.state.accordion[7]} aria-controls="collapseThree">
-                      <h5 className="m-0 p-0">Publications</h5>
+                      <h5 className="m-0 p-0"><i className="fa fa-globe"></i> Publications</h5>
                     </Button>
                   </CardHeader>
                   <Collapse isOpen={this.state.accordion[7]} data-parent="#accordion" id="collapseThree">
@@ -1358,13 +1379,13 @@ class Aform extends Component {
 
 
               </div>
-            </CardBody>
+            {/* </CardBody> */}
             {/* </Card> */}
           </Col>
           <Col md="3">
             <Card>
               <CardBody>
-                <h4> Latest Trends</h4>
+                <h4><i className="fa fa-line-chart"></i> Latest Trends</h4>
               </CardBody>
             </Card>
           </Col>

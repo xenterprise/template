@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Bar, Line } from 'react-chartjs-2';
 import {
+  Alert, 
   Badge,
   Button,
   ButtonDropdown,
@@ -42,12 +43,22 @@ function CompApplicants_All(props) {
           Object.keys(props.this.state.ApplicantDetails).map((item, i) => (
             <div key={i}>
               <CardHeader>
-                {props.this.state.ApplicantDetails[item].ad.name}
+                <Button color="link" size="md" href={'#/basel/profile/' + props.this.state.ApplicantDetails[item].aid}>{props.this.state.ApplicantDetails[item].ad.name}</Button>
                 <div className="card-header-actions">
                 {props.this.state.ApplicantDetails[item].lb==="rj"?<Badge className="mr-1" color="danger">Rejected</Badge>:
                  props.this.state.ApplicantDetails[item].lb==="sl"?<Badge className="mr-1" color="primary">Shortlisted</Badge>:null}
-                <a className="card-header-action btn btn-setting" id="a"><i className="fa fa-check fa-lg"></i></a>
-                <a className="card-header-action btn btn-setting" id="a"><i className="fa fa-close fa-lg"></i></a>
+                <a className="card-header-action btn btn-setting" id="sl" onClick={props.this.SetApplicantLabel.bind(props.this, props.this.state.app_juid, props.this.state.ApplicantDetails[item].aid, "sl")}><i className="fa fa-check fa-lg"></i></a>
+                <a className="card-header-action btn btn-setting" id="rj" onClick={props.this.SetApplicantLabel.bind(props.this, props.this.state.app_juid, props.this.state.ApplicantDetails[item].aid, "rj")}><i className="fa fa-close fa-lg"></i></a>
+                <a className="card-header-action btn btn-setting" id="no" onClick={props.this.SetApplicantLabel.bind(props.this, props.this.state.app_juid, props.this.state.ApplicantDetails[item].aid, "no")}><i className="fa fa-circle-o fa-lg"></i></a>
+                <UncontrolledTooltip placement="top" target="sl">
+                  Shortlist Label
+                </UncontrolledTooltip>
+                <UncontrolledTooltip placement="top" target="rj">
+                  Rejected Label
+                </UncontrolledTooltip>
+                <UncontrolledTooltip placement="top" target="no">
+                  No Label
+                </UncontrolledTooltip>
                 </div>
               </CardHeader>
             </div>
@@ -66,13 +77,35 @@ function CompApplicants_All(props) {
 
 }
 function CompApplicants_Shortlisted(props) {
-  return (
-    <div>
-      {
+  if (props.this.state.app_juid !== "")
+    return (
+      <div>
+        {
+          Object.keys(props.this.state.ApplicantDetails).map((item, i) => (
+            
+            <div key={i}>
+              <CardHeader>
+                {props.this.state.ApplicantDetails[item].lb==="sl"? props.this.state.ApplicantDetails[item].ad.name :null}
 
-      }
-    </div>
-  )
+                <div className="card-header-actions">
+                
+                <a className="card-header-action btn btn-setting" id="a" onClick={props.this.SetApplicantLabel.bind(props.this, props.this.state.app_juid, props.this.state.ApplicantDetails[item].aid, "sl")}><i className="fa fa-check fa-lg"></i></a>
+                <a className="card-header-action btn btn-setting" id="a" onClick={props.this.SetApplicantLabel.bind(props.this, props.this.state.app_juid, props.this.state.ApplicantDetails[item].aid, "rj")}><i className="fa fa-close fa-lg"></i></a>
+                </div>
+              </CardHeader>
+            </div>
+          ))
+        }
+      </div>
+    )
+  else {
+    return (
+      <div>
+        Hello Else
+
+      </div>
+    )
+  }
 }
 function CompApplicants_Rejected(props) {
   return (
@@ -96,6 +129,9 @@ function CompApplicants(props) {
             <Button type="submit" align="right" size="md" color="dark" onClick={props.this.ChangeState_HOME}><i className="fa fa-dot-circle-o"></i> Go Back</Button>
           </Col>
         </Row>
+        <Alert color="primary">
+                  You can Mark Applicants as Shortlisted or Rejected, These labels are just for your ease and no notification is sent to any Applicant
+                </Alert>
         <h5>Applicants Section</h5>
         <Card>
           <CardHeader id="headingOne">
@@ -111,7 +147,7 @@ function CompApplicants(props) {
         </Card>
 
 
-        <Card>
+        {/* <Card>
           <CardHeader id="headingTwo">
             <Button block color="link" className="text-left m-0 p-0" onClick={() => props.this.toggleAccordionPosted(3)} aria-expanded={props.this.state.accordionPosted[1]} aria-controls="collapseTwo">
               <h5 className="m-0 p-0">Shortlisted Applicants</h5>
@@ -119,7 +155,6 @@ function CompApplicants(props) {
           </CardHeader>
           <Collapse isOpen={props.this.state.accordionPosted[3]} data-parent="#accordion" id="collapseTwo">
             <CardBody>
-              {/* <CompJob_Posted this={props.this} /> */}
             </CardBody>
           </Collapse>
         </Card>
@@ -132,10 +167,9 @@ function CompApplicants(props) {
           </CardHeader>
           <Collapse isOpen={props.this.state.accordionPosted[4]} data-parent="#accordion" id="collapseTwo">
             <CardBody>
-              {/* <CompJob_Posted this={props.this} /> */}
             </CardBody>
           </Collapse>
-        </Card>
+        </Card> */}
 
 
       </div>
@@ -157,6 +191,7 @@ function CompJob_Posted(props) {
         Object.keys(props.this.state.user_jobs).map((item, i) => (
           <div key={i}>
             <CardHeader>
+            <i className="fa fa-map-o"></i> 
               {props.this.state.user_jobs[item].v.titl} at {props.this.state.user_jobs[item].v.jcom}
               <div className="card-header-actions">
                 <a target="_blank" className="card-header-action btn btn-setting" id="ViewApplicants" onClick={props.this.ShowApplicants.bind(props.this, props.this.state.user_jobs[item].k)}><i className="fa fa-group fa-lg"></i></a>
@@ -193,6 +228,7 @@ function CompJob_Applied(props) {
         Object.keys(props.this.state.app_user_jobs).map((item, i) => (
           <div key={i}>
             <CardHeader>
+            <i className="fa fa-map"></i> 
               {props.this.state.app_user_jobs[item].v.titl} at {props.this.state.app_user_jobs[item].v.jcom}
               {/* <div className="card-header-actions"> */}
               {/* <a className="card-header-action btn btn-setting" onClick={props.this.editJob.bind(props.this, props.this.state.app_user_jobs[item].k)}><i className="icon-settings"></i></a> */}
@@ -218,11 +254,11 @@ function CompJob_Home(props) {
           <Button type="submit" align="right" size="md" color="primary" onClick={props.this.createJob}><i className="fa fa-dot-circle-o"></i> Post A Job</Button>
         </Col>
       </Row>
-      <h5>Your Job Section</h5>
+      <h5>My Job Section</h5>
       <Card>
         <CardHeader id="headingOne">
           <Button block color="link" className="text-left m-0 p-0" onClick={() => props.this.toggleAccordionPosted(0)} aria-expanded={props.this.state.accordionPosted[0]} aria-controls="collapseOne">
-            <h5 className="m-0 p-0">Your Applied Jobs</h5>
+            <h5 className="m-0 p-0"><i className="fa fa-map"></i> My Applied Jobs</h5>
           </Button>
         </CardHeader>
         <Collapse isOpen={props.this.state.accordionPosted[0]} data-parent="#accordion" id="collapseOne" aria-labelledby="headingOne">
@@ -236,7 +272,7 @@ function CompJob_Home(props) {
       <Card>
         <CardHeader id="headingTwo">
           <Button block color="link" className="text-left m-0 p-0" onClick={() => props.this.toggleAccordionPosted(1)} aria-expanded={props.this.state.accordionPosted[1]} aria-controls="collapseTwo">
-            <h5 className="m-0 p-0">Your Posted Jobs</h5>
+            <h5 className="m-0 p-0"><i className="fa fa-map-o"></i> My Posted Jobs</h5>
           </Button>
         </CardHeader>
         <Collapse isOpen={props.this.state.accordionPosted[1]} data-parent="#accordion" id="collapseTwo">
@@ -390,7 +426,7 @@ function CompJob_Form(props) {
 
       <Row>
         <Col md="2">
-          <Label htmlFor="text-input">Responsibilities</Label>
+          <Label htmlFor="text-input">Job Description</Label>
         </Col>
         <Col xs="12" md="9">
           <Input type="textarea" name="resp" placeholder="Mention in detail the responsibilities required" value={props.this.state.job.resp} onChange={props.this.TextInputChanged} />
@@ -401,7 +437,7 @@ function CompJob_Form(props) {
         <Col md="2">
           <Label htmlFor="text-input">Age Limit</Label>
         </Col>
-        <Col md="4">
+        <Col md="2">
           <Input type="text" name="agel" placeholder="Enter the Age Limit" value={props.this.state.job.agel} onChange={props.this.TextInputChanged} />
         </Col>
 
@@ -532,6 +568,8 @@ class Jobpost extends Component {
     this.Initialize = this.Initialize.bind(this)
 
     this.ShowApplicants = this.ShowApplicants.bind(this)
+    this.SetApplicantLabel = this.SetApplicantLabel.bind(this)
+
   }
 
   componentDidMount() {
@@ -698,6 +736,18 @@ class Jobpost extends Component {
       }
     })
   }
+
+SetApplicantLabel(juid, auid, label){
+  let labelRef = fire.database().ref(`jobs_users_labels/${juid}`)
+  labelRef.child(auid).set(label)
+    .then(() => {
+    })
+    .catch(error => {
+      console.log(error)
+    });
+
+    this.ShowApplicants(juid)
+}
 
   ShowApplicants(juid) {
 
@@ -1019,9 +1069,10 @@ class Jobpost extends Component {
         <Row>
           <Col md="2">
 
-            <Button outline color="primary" size="lg" block href="#/basel/profile">Profile</Button>
-            <Button outline color="primary" size="lg" block href="#/basel/jobpost">Job Section</Button>
-            <Button outline color="primary" size="lg" block href="#/basel/aform">Settings</Button>
+            {/* <Button outline color="primary" size="lg" block href="#/basel/sview">Explore Jobs</Button> */}
+            <Button outline className="text-left" color="primary" size="lg" block href="#/basel/profile"><i className="fa fa-user"></i> Profile</Button>
+            <Button outline className="text-left" color="primary" size="lg" block href="#/basel/jobpost"><i className="fa fa-briefcase"></i> My Jobs</Button>
+            <Button outline className="text-left" color="primary" size="lg" block href="#/basel/aform"><i className="fa fa-edit"></i> Edit Profile</Button>
 
           </Col>
 
@@ -1038,7 +1089,7 @@ class Jobpost extends Component {
           <Col md="3">
             <Card>
               <CardBody>
-                <h4> Latest Trends</h4>
+              <h4><i className="fa fa-line-chart"></i> Latest Trends</h4>
               </CardBody>
             </Card>
           </Col>

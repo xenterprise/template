@@ -42,10 +42,10 @@ function JobDisplayComponent(props) {
               <Row>
                 <Col md="9">
                   <Button block id="job_title" color="link" className="text-left m-0 p-0" >
-                    <h5 className="m-0 p-0">{props.this.state.jobDetails.jd.titl}</h5>
+                    <h5 className="m-0 p-0"><i className="fa fa-briefcase"></i> {props.this.state.jobDetails.jd.titl}</h5>
                   </Button>
                   {/* <strong>{props.this.state.jobDetails.jd.jcom}</strong> */}
-                  <h6>{props.this.state.jobDetails.jd.jcom}</h6>
+                  <h6><i className="fa fa-id-card-o"></i> {props.this.state.jobDetails.jd.jcom}</h6>
                 </Col>
                 <Col md="3">
                   <Button block outline active color="success" aria-pressed="true" onClick={props.this.ApplyToJob}>Apply Now</Button>
@@ -168,9 +168,10 @@ class JobDetails extends Component {
         <Row>
           <Col md="2">
 
-            <Button outline color="primary" size="lg" block href="#/basel/profile">Profile</Button>
-            <Button outline color="primary" size="lg" block href="#/basel/jobpost">Job Section</Button>
-            <Button outline color="primary" size="lg" block href="#/basel/aform">Settings</Button>
+            {/* <Button outline color="primary" size="lg" block href="#/basel/sview">Explore Jobs</Button> */}
+            <Button outline className="text-left" color="primary" size="lg" block href="#/basel/profile"><i className="fa fa-user"></i> Profile</Button>
+            <Button outline className="text-left" color="primary" size="lg" block href="#/basel/jobpost"><i className="fa fa-briefcase"></i> My Jobs</Button>
+            <Button outline className="text-left" color="primary" size="lg" block href="#/basel/aform"><i className="fa fa-edit"></i> Edit Profile</Button>
 
           </Col>
 
@@ -187,7 +188,7 @@ class JobDetails extends Component {
           <Col md="3">
             <Card>
               <CardBody>
-                <h4> Latest Trends</h4>
+              <h4><i className="fa fa-line-chart"></i> Latest Trends</h4>
               </CardBody>
             </Card>
           </Col>

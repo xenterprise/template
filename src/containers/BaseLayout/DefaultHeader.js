@@ -15,6 +15,30 @@ const propTypes = {
 const defaultProps = {};
 
 class DefaultHeader extends Component {
+
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      user: {},
+    }
+  }
+
+  componentDidMount() {
+    var dbref = fire.database().ref(`users/${fire.auth().currentUser.uid}`)
+    dbref.on("value", (snapshot) => {
+      console.log('Snapshot', snapshot.val())
+      let snap = snapshot.val()
+      this.setState({
+        user: {
+          ...this.state.user, ...snap
+        }
+      })
+    }, (errorObject) => {
+      console.log("The read failed: " + errorObject.code);
+    });
+  }
+
   render() {
 
     // console.log("Props", this.props)
@@ -63,7 +87,7 @@ class DefaultHeader extends Component {
           </NavItem>
 
           <NavItem className="px-3">
-            <NavLink href="#/basel/jobpost">{fire.auth().currentUser.uid}</NavLink>
+            <NavLink href="#/basel/jobpost">{this.state.user.name}</NavLink>
           </NavItem>
 
           <AppHeaderDropdown direction="down">
@@ -72,17 +96,17 @@ class DefaultHeader extends Component {
             </DropdownToggle>
             <DropdownMenu right style={{ right: 'auto' }}>
               <DropdownItem header tag="div" className="text-center"><strong>Account</strong></DropdownItem>
-              <DropdownItem><i className="fa fa-bell-o"></i> Updates<Badge color="info">42</Badge></DropdownItem>
-              <DropdownItem><i className="fa fa-envelope-o"></i> Messages<Badge color="success">42</Badge></DropdownItem>
-              <DropdownItem><i className="fa fa-tasks"></i> Tasks<Badge color="danger">42</Badge></DropdownItem>
-              <DropdownItem><i className="fa fa-comments"></i> Comments<Badge color="warning">42</Badge></DropdownItem>
+              <DropdownItem href="#/basel/profile"><i className="fa fa-bell-o"></i> Profile<Badge color="info"></Badge></DropdownItem>
+              <DropdownItem href="#/basel/jobpost"><i className="fa fa-envelope-o"></i> My Jobs<Badge color="success"></Badge></DropdownItem>
+              <DropdownItem href="#/basel/aform"><i className="fa fa-tasks"></i> Edit profile<Badge color="danger"></Badge></DropdownItem>
+              {/* <DropdownItem><i className="fa fa-comments"></i> Comments<Badge color="warning">42</Badge></DropdownItem>
               <DropdownItem header tag="div" className="text-center"><strong>Settings</strong></DropdownItem>
               <DropdownItem><i className="fa fa-user"></i> Profile</DropdownItem>
               <DropdownItem><i className="fa fa-wrench"></i> Settings</DropdownItem>
               <DropdownItem><i className="fa fa-usd"></i> Payments<Badge color="secondary">42</Badge></DropdownItem>
               <DropdownItem><i className="fa fa-file"></i> Projects<Badge color="primary">42</Badge></DropdownItem>
               <DropdownItem divider />
-              <DropdownItem><i className="fa fa-shield"></i> Lock Account</DropdownItem>
+              <DropdownItem><i className="fa fa-shield"></i> Lock Account</DropdownItem> */}
               <DropdownItem onClick={() => fire.auth().signOut()}><i className="fa fa-lock"></i> Logout</DropdownItem>
               {/* <DropdownItem >
                 <div onClick={() => fire.auth().signOut()}>

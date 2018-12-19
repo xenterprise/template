@@ -1,11 +1,10 @@
 import React, { Component } from 'react';
-import { Alert, Button, Card, CardBody, CardFooter, Col, Container, Form, Input, InputGroup, InputGroupAddon, InputGroupText, Row } from 'reactstrap';
+import { Alert, Button, Card, CardHeader, CardBody, CardFooter, Col, Container, Form, Input, InputGroup, InputGroupAddon, InputGroupText, Row } from 'reactstrap';
 // import axios from 'axios'
 import { Redirect } from 'react-router-dom';
 // import {db} from '../../../firebase'
 // import { auth, db } from '../../../firebase';
 import fire from '../../../config/Fire';
-
 
 class Register extends Component {
 
@@ -14,7 +13,9 @@ class Register extends Component {
     this.state = {
       email: '',
       password: '',
-      msg: 'Create Your Account'
+      msg: 'Create Your Account',
+      showMessageFlag: false,
+      showMessageText: ""
     }
 
     this.userPacket = {
@@ -31,7 +32,8 @@ class Register extends Component {
         "Organizations": [],
         "Publications": [],
         "Services": [],
-        "Work": []
+        "Work": [],
+
       },
 
     }
@@ -46,6 +48,14 @@ class Register extends Component {
 
     fire.auth().createUserWithEmailAndPassword(this.state.email, this.state.password)
       .then(authUser => {
+        authUser.user.sendEmailVerification()
+          .then(verify => {
+            console.log("VERIFICATION EMAIL SENT", verify)
+            this.setState({
+              showMessageFlag: true,
+              showMessageText: "Verification Email is sent to your email address, Please click on the link in the email"
+            })
+          })
         var dbref = fire.database().ref(`users/${authUser.user.uid}`);
         dbref.set(this.userPacket)
           .then(() => {
@@ -69,15 +79,23 @@ class Register extends Component {
           <Row className="justify-content-center">
             <Col md="6">
               <Card className="mx-4">
+
+                <CardHeader>
+                  <Row className="justify-content-center">
+                    <Col >
+                      <div align="center">
+                        <img width="250px" src={'assets/img/avatars/acr.png'} alt="admin@bootstrapmaster.com" />
+                      </div>
+                    </Col>
+                  </Row>
+                </CardHeader>
                 <CardBody className="p-4">
                   <Form onSubmit={this.formSubmit}>
-                    <h1>Hi! Register here</h1>
-
-                    {this.state.msg == 'Create Your Account' ? this.state.msg
+                    <Row className="justify-content-center"><h2>Register here</h2></Row>
+                    {/* {this.state.msg == 'Create Your Account' ? this.state.msg
                       : this.state.msg == 'User Registered Successfully' ? <div><Alert color="success">{this.state.msg}</Alert><Redirect to="/login" /></div>
-                        : <Alert color="danger">{this.state.msg}</Alert>}
-
-
+                        : <Alert color="danger">{this.state.msg}</Alert>} */}
+                    {this.state.showMessageFlag ? <Alert color="success">{this.state.showMessageText}</Alert> : null}
                     {/* <InputGroup className="mb-3">
                       <InputGroupAddon addonType="prepend">
                         <InputGroupText>
@@ -88,7 +106,9 @@ class Register extends Component {
                     </InputGroup> */}
                     <InputGroup className="mb-3">
                       <InputGroupAddon addonType="prepend">
-                        <InputGroupText>@</InputGroupText>
+                        <InputGroupText>
+                          <i className="icon-lock"></i>
+                        </InputGroupText>
                       </InputGroupAddon>
                       <Input type="text" name="email" value={this.state.email} onChange={this.inputChanged} placeholder="Email" autoComplete="email" />
                     </InputGroup>

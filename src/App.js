@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { HashRouter, Route, Switch } from 'react-router-dom';
+import { HashRouter, Route, Switch, Redirect} from 'react-router-dom';
 import './App.css';
 // Styles
 // CoreUI Icons Set
@@ -26,25 +26,63 @@ import Profile from './views/Profile/Profile';
 import fire from './config/Fire'
 class App extends Component {
 
+
   constructor() {
     super();
     this.state = ({
       user: null,
+      UserEmailVerified: false
     });
     this.authListener = this.authListener.bind(this);
+    this.userSignedIn = false
   }
   //xjDYODTeBUbddeutfEUh7ytoHRp1
 
 
-  
+
   authListener() {
+
+    // fire.auth().onAuthStateChanged(function(user) {
+    //    (user.emailVerified) 
+    //    ? console.log('Email is verified') 
+    //    : console.log('Email is not verified') 
+    //   })
+
+
+
+
+
+
+
+
+
+
     fire.auth().onAuthStateChanged((user) => {
       if (user) {
-        localStorage.setItem('user', user.uid)
-        this.setState({user})
+        console.log("USER LOGGED IN ")
+        // localStorage.setItem('user', user.uid)
+        if (user.emailVerified) {
+          this.setState({
+            user: user,
+            UserEmailVerified: true
+          })
+        }
+        else {
+          this.setState({
+            user: user,
+            UserEmailVerified: false
+          })
+        }
+
+        // this.userSignedIn = true
       } else {
-        localStorage.setItem('user', null)
-        this.setState({user})
+        console.log("USER LOGGED OUT ")
+        // localStorage.setItem('user', null)
+        this.setState({
+          user: user,
+          UserEmailVerified: false
+        })
+        // this.userSignedIn = false
       }
 
     })
@@ -53,18 +91,19 @@ class App extends Component {
   componentDidMount() {
     this.authListener();
   }
-  
+
   render() {
     return (
+
       <HashRouter>
         <Switch>
-          <Route exact path="/login" name="Login Page" component={Login} />
-          <Route exact path="/register" name="Register Page" component={Register} />
+          <Route exact path="/login" name="Login Page" component={this.state.user ? BaseLayout : Login} />
+          <Route exact path="/register" name="Register Page" component={this.state.user ? BaseLayout : Register} />
           <Route exact path="/404" name="Page 404" component={Page404} />
           <Route exact path="/500" name="Page 500" component={Page500} />
           {/* <Route exact path="/profile/:uid" name="Profile" render ={props=> <Profile {...props} />} /> */}
           {/* <Route exact path="/" name="Hello" component={Hello} /> */}
-          <Route path="/basel" name="Basel" component={this.state.user?BaseLayout:Login} />
+          <Route path="/basel" name="Basel" component={this.state.user ? BaseLayout : Login} />
           {/* <Route exact path="/def" name="Home" component={DefaultLayout} /> */}
           <Route path="/" name="Home" component={DefaultLayout} />
         </Switch>

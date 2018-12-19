@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Route, Switch } from 'react-router-dom';
+import { Redirect, Route, Switch } from 'react-router-dom';
 import { Container } from 'reactstrap';
 import MyComponent from './MyComponent'
 
@@ -58,7 +58,8 @@ class BaseLayout extends Component {
                     
                   },
                 )}
-                {/* <Redirect from="/" to="/dashboard" /> */}
+                <Redirect from="/login" to="/basel/aform" />
+                <Redirect from="/register" to="/basel/aform" />
                 
               </Switch>
             </Container>

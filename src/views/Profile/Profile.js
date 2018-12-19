@@ -142,7 +142,7 @@ function Skills(props) {
           Object.keys(props.this.state.user.skills).map((item, i) => (
             <Button
               key={i}
-              size="lg"
+              size="md"
               className="btn-facebook btn-brand text mr-1 mb-1">
               <span>{item}</span>
             </Button>
@@ -527,12 +527,17 @@ class Profile extends Component {
   }
 
   componentDidMount() {
-    console.log('Param ', this.props.match.params.id)
+    console.log('Param USER ID', this.props.match.params.id)
     this.setState({
       profile_user: this.props.match.params.id
     })
 
-    var dbref = fire.database().ref(`users/${fire.auth().currentUser.uid}`)
+    if(this.props.match.params.id){
+      var dbref = fire.database().ref(`users/${this.props.match.params.id}`)
+    }
+    else{
+      var dbref = fire.database().ref(`users/${fire.auth().currentUser.uid}`)
+    }
     dbref.on("value", (snapshot) => {
       console.log('Snapshot', snapshot.val())
       let snap = snapshot.val()
@@ -559,9 +564,10 @@ class Profile extends Component {
         <Row>
           <Col md="2">
 
-            <Button outline color="primary" size="lg" block href="#/basel/profile">Profile</Button>
-            <Button outline color="primary" size="lg" block  href="#/basel/jobpost">Job Section</Button>
-            <Button outline color="primary" size="lg" block  href="#/basel/aform">Settings</Button>
+            {/* <Button outline color="primary" size="lg" block href="#/basel/sview">Explore Jobs</Button> */}
+            <Button outline className="text-left" color="primary" size="lg" block href="#/basel/profile"><i className="fa fa-user"></i> Profile</Button>
+            <Button outline className="text-left" color="primary" size="lg" block href="#/basel/jobpost"><i className="fa fa-briefcase"></i> My Jobs</Button>
+            <Button outline className="text-left" color="primary" size="lg" block href="#/basel/aform"><i className="fa fa-edit"></i> Edit Profile</Button>
 
           </Col>
 
@@ -574,7 +580,7 @@ class Profile extends Component {
 
             <Card>
               <CardHeader>
-                <h5>Skills</h5>
+              <h5><i className="fa fa-check-circle"></i> Skills</h5>
               </CardHeader>
               <CardBody >
                 <Skills this={this} />
@@ -583,7 +589,7 @@ class Profile extends Component {
 
             <Card>
               <CardHeader>
-                <h5>Work Experience & Projects</h5>
+                <h5><i className="fa fa-briefcase"></i> Work Experience & Projects</h5>
               </CardHeader>
               <CardBody>
                 <WorkExperience this={this} />
@@ -598,7 +604,7 @@ class Profile extends Component {
               <Col>
                 <Card>
                   <CardHeader>
-                    <h5>Education</h5>
+                    <h5><i className="fa fa-graduation-cap"></i> Education</h5>
                   </CardHeader>
                   <CardBody>
                     <ListGroup>
@@ -614,7 +620,7 @@ class Profile extends Component {
               <Col>
                 <Card>
                   <CardHeader>
-                    <h5>Organizations</h5>
+                    <h5><i className="fa fa-users"></i> Organizations</h5>
                   </CardHeader>
                   <CardBody>
                     <ListGroup>
@@ -628,7 +634,7 @@ class Profile extends Component {
               <Col>
                 <Card>
                   <CardHeader>
-                    <h5>Certifications</h5>
+                    <h5><i className="fa fa-certificate"></i> Certifications</h5>
                   </CardHeader>
                   <CardBody>
                     <ListGroup>
@@ -642,7 +648,7 @@ class Profile extends Component {
               <Col>
                 <Card>
                   <CardHeader>
-                    <h5>Publications</h5>
+                    <h5><i className="fa fa-globe"></i> Publications</h5>
                   </CardHeader>
                   <CardBody>
                     <ListGroup>
@@ -659,7 +665,7 @@ class Profile extends Component {
           <Col md="3">
             <Card>
               <CardBody>
-                <h4> Latest Trends</h4>
+                <h4><i className="fa fa-line-chart"></i> Latest Trends</h4>
               </CardBody>
             </Card>
           </Col>
