@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Redirect, Route, Switch } from 'react-router-dom';
-import { Container } from 'reactstrap';
+import { Row, Col, Button, Container } from 'reactstrap';
 // import MyComponent from './MyComponent'
 
 
@@ -17,9 +17,9 @@ import DefaultFooter from './DefaultFooter';
 import DefaultHeader from './DefaultHeader';
 import Profile from '../../views/Profile/Profile';
 
-class BaseLayout extends Component {
+class HomeLayout extends Component {
 
-  
+
   render() {
 
     // console.log("Props", this.props)
@@ -34,7 +34,7 @@ class BaseLayout extends Component {
         </AppHeader>
         <br />
         <div className="app-body">
-        
+
           {/* <AppSidebar fixed display="lg">
             <AppSidebarHeader />
             <AppSidebarForm />
@@ -44,12 +44,12 @@ class BaseLayout extends Component {
           </AppSidebar>  */}
           <main className="main">
             {/* <AppBreadcrumb appRoutes={routes}/> */}
-            
-            
-            <Container fluid>
+
+
+            {/* <Container fluid>
               <Switch>
                 {/* <Route path = '/basel/ali' exact component = {MyComponent} /> */}
-                {routes.map((route, idx) => {
+            {/* {routes.map((route, idx) => {
                   
                     return route.component ? (<Route key={idx} path={'/basel' + route.path} exact={route.exact} name={route.name} render={props => (
                       <route.component {...props} />
@@ -63,7 +63,28 @@ class BaseLayout extends Component {
                 <Redirect from="/home" to="/basel/aform" />
                 
               </Switch>
-            </Container>
+            </Container> */}
+
+            <div>
+
+              <Row>
+                <Col md="12">
+                  <img src="assets/img/bg/bg-gray.jpg" className="img-fluid" />
+                </Col>
+              </Row>
+
+              <Row>
+              <Col col="6" sm="12" md="12" xl className="mb-3 mb-xl-0">
+                <Button normal block color="dark" aria-pressed="true" href="#/register">Signup</Button>
+              </Col>
+              <Col col="6" sm="12" md="12" xl className="mb-3 mb-xl-0">
+                <Button normal block color="danger" aria-pressed="true" href="#/login">Login</Button>
+              </Col>
+              </Row>
+
+            </div>
+
+
           </main>
           {/* <AppAside fixed hidden>
             <DefaultAside />
@@ -77,4 +98,4 @@ class BaseLayout extends Component {
   }
 }
 
-export default BaseLayout;
+export default HomeLayout;

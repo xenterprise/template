@@ -84,7 +84,7 @@ class Login extends Component {
                   {/* <CardHeader> */}
                   <Row className="justify-content-center">
                     <Col >
-                      <div align="center">
+                      <div align="center" href="#/home">
                         <img width="250px" src={'assets/img/avatars/acr.png'} alt="admin@bootstrapmaster.com" />
                       </div>
                     </Col>
@@ -118,7 +118,7 @@ class Login extends Component {
                         </InputGroup>
                         <Row>
                           <Col xs="6">
-                            <Button color="primary" className="px-4">Login</Button>
+                            <Button color="dark" className="px-4">Login</Button>
                           </Col>
                           <Col xs="6" className="text-right">
                             <Button color="link" className="px-0">Forgot password?</Button>
@@ -127,12 +127,12 @@ class Login extends Component {
                       </Form>
                     </CardBody>
                   </Card>
-                  <Card className="text-white bg-primary py-5 d-md-down-none" style={{ width: 44 + '%' }}>
+                  <Card className="text-white bg-danger py-5 d-md-down-none" style={{ width: 44 + '%' }}>
                     <CardBody className="text-center">
                       <div>
                         <h2>Sign up</h2>
                         <p>Make your Profile<br />Get Hired</p>
-                        <Button color="primary" className="mt-3" active href="#/register">Create Account</Button>
+                        <Button normal color="dark" className="mt-3" active href="#/register">Create Account</Button>
                       </div>
                     </CardBody>
                   </Card>

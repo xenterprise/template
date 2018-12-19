@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Badge, DropdownItem, DropdownMenu, DropdownToggle, Nav, NavItem, NavLink, FormGroup, InputGroup, Input, InputGroupAddon, Button } from 'reactstrap';
+import { Row, Col, Badge, DropdownItem, DropdownMenu, DropdownToggle, Nav, NavItem, NavLink, FormGroup, InputGroup, Input, InputGroupAddon, Button } from 'reactstrap';
 import PropTypes from 'prop-types';
 
 import { AppAsideToggler, AppHeaderDropdown, AppNavbarBrand, AppSidebarToggler } from '@coreui/react';
@@ -26,23 +26,23 @@ class DefaultHeader extends Component {
   }
 
   componentDidMount() {
-    var dbref = fire.database().ref(`users/${fire.auth().currentUser.uid}`)
-    dbref.on("value", (snapshot) => {
-      console.log('Snapshot', snapshot.val())
-      let snap = snapshot.val()
-      this.setState({
-        user: {
-          ...this.state.user, ...snap
-        }
-      })
-    }, (errorObject) => {
-      console.log("The read failed: " + errorObject.code);
-    });
+    // var dbref = fire.database().ref(`users/${fire.auth().currentUser.uid}`)
+    // dbref.on("value", (snapshot) => {
+    //   console.log('Snapshot', snapshot.val())
+    //   let snap = snapshot.val()
+    //   this.setState({
+    //     user: {
+    //       ...this.state.user, ...snap
+    //     }
+    //   })
+    // }, (errorObject) => {
+    //   console.log("The read failed: " + errorObject.code);
+    // });
 
-    console.log("MY CURR URL: ", window.location.hash)
-    this.setState({
-      hash: window.location.hash
-    })
+    // console.log("MY CURR URL: ", window.location.hash)
+    // this.setState({
+    //   hash: window.location.hash
+    // })
   }
 
   render() {
@@ -62,10 +62,10 @@ class DefaultHeader extends Component {
           />
           {/* <AppSidebarToggler className="d-md-down-none" display="lg" /> */}
 
-          <Nav className="d-md-down-none" navbar>
+          {/* <Nav className="d-md-down-none" navbar>
             <NavItem className="px-3">
               <NavLink href="#/basel/profile">Profile</NavLink>
-            </NavItem>
+            </NavItem> */}
             {/* <NavItem className="px-3">
             <NavLink href="#/basel/search">Search</NavLink>
           </NavItem> */}
@@ -75,29 +75,40 @@ class DefaultHeader extends Component {
             {/* <NavItem className="px-3">
             <NavLink href="/">Dashboard</NavLink>
           </NavItem> */}
-            <NavItem className="px-3">
+            {/* <NavItem className="px-3">
               <NavLink href="#/basel/jobpost">Job</NavLink>
-            </NavItem>
+            </NavItem> */}
             {/* <NavItem className="px-3">
             <NavLink href="#">Settings</NavLink>
           </NavItem> */}
 
 
-            <Search history={this.props.history} />
-          </Nav>
+            {/* <Search history={this.props.history} />
+          </Nav> */}
 
 
           <Nav className="d-md-down-none ml-auto" navbar>
 
-            <NavItem className="d-md-down-none">
+            {/* <NavItem className="d-md-down-none">
               <h6>{localStorage.account}</h6>
-            </NavItem>
+            </NavItem> */}
 
-            <NavItem className="px-3">
+            {/* <NavItem className="px-3">
               <NavLink href="#/basel/jobpost">{this.state.user.name}</NavLink>
+            </NavItem> */}
+            <NavItem className="px-3">
+            <Row>
+            <Col col="6" sm="4" md="6" xl className="mb-3 mb-xl-0">
+                <Button normal block color="dark" aria-pressed="true" href="#/register">Signup</Button>
+              </Col>
+              <Col col="6" sm="4" md="6" xl className="mb-3 mb-xl-0">
+                <Button normal block color="danger" aria-pressed="true" href="#/login">Login</Button>
+              </Col>
+            </Row>
+            
             </NavItem>
 
-            <AppHeaderDropdown direction="down">
+            {/* <AppHeaderDropdown direction="down">
               <DropdownToggle nav>
                 <img src={'assets/img/avatars/6.jpg'} className="img-avatar" alt="admin@bootstrapmaster.com" />
               </DropdownToggle>
@@ -114,14 +125,15 @@ class DefaultHeader extends Component {
               <DropdownItem><i className="fa fa-file"></i> Projects<Badge color="primary">42</Badge></DropdownItem>
               <DropdownItem divider />
               <DropdownItem><i className="fa fa-shield"></i> Lock Account</DropdownItem> */}
-                <DropdownItem onClick={() => fire.auth().signOut()}><i className="fa fa-lock"></i> Logout</DropdownItem>
+                {/* <DropdownItem onClick={() => fire.auth().signOut()}><i className="fa fa-lock"></i> Logout</DropdownItem> */}
                 {/* <DropdownItem >
                 <div onClick={() => fire.auth().signOut()}>
                 <i className="fa fa-lock"></i>Another Action
                 </div>
               </DropdownItem> */}
-              </DropdownMenu>
-            </AppHeaderDropdown>
+              {/* </DropdownMenu>
+            </AppHeaderDropdown> */} 
+            {/* <p>Hello Right Section</p> */}
           </Nav>
           {/* <AppAsideToggler className="d-md-down-none" />
         <AppAsideToggler className="d-lg-none" mobile /> */}

@@ -84,7 +84,7 @@ class Register extends Component {
                   <Row className="justify-content-center">
                     <Col >
                       <div align="center">
-                        <img width="250px" src={'assets/img/avatars/acr.png'} alt="admin@bootstrapmaster.com" />
+                        <img width="250px" src={'assets/img/avatars/acr.png'} alt="admin@bootstrapmaster.com" href="#/home"/>
                       </div>
                     </Col>
                   </Row>
@@ -128,13 +128,13 @@ class Register extends Component {
                       </InputGroupAddon>
                       <Input type="password" name="repeat" value={this.state.repeat} onChange={this.inputChanged} placeholder="Repeat password" autoComplete="new-password" />
                     </InputGroup> */}
-                    <Button color="success" block onSubmit="">Create Account</Button>
+                    <Button color="dark" block onSubmit="">Create Account</Button>
                   </Form>
 
                 </CardBody>
                 <CardFooter className="p-4">
                   <p>Already have an account?</p>
-                  <Button color="info" block href="#/login">Login</Button>
+                  <Button color="danger" block href="#/login">Login</Button>
                   {/* <Row>
 
                     

@@ -15,9 +15,9 @@ class DefaultFooter extends Component {
 
     return (
       <React.Fragment>
-      <span><a href="https://apnicv.com"></a> &copy; 2018 ApniCv.com</span>
-      <span className="ml-auto">Powered by <a href="https://apnicv.com">ApniCv.com </a></span>
-    </React.Fragment>
+        <span><a href="https://apnicv.com"></a> &copy; 2018 ApniCv.com</span>
+        <span className="ml-auto">Powered by <a href="https://apnicv.com">ApniCv.com</a></span>
+      </React.Fragment>
     );
   }
 }

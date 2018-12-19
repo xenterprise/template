@@ -225,6 +225,8 @@ const Applicants = Loadable({
 });
 
 
+
+
 // const BaseLayout = Loadable({
 //   loader: () => import('./containers/BaseLayout'),
 //   loading: Loading,
@@ -236,6 +238,7 @@ const routes = [
   // { path: '/', exact: true, name: 'Home', component: DefaultLayout },
   // { path: '/basel', exact: true, name: 'BaseLayout', component: BaseLayout },
   { path: '/dashboard', name: 'Dashboard', component: Dashboard },
+  // { path: '/home', name: 'Home', component: Home },
   { path: '/profile',exact: true, name: 'Profile', component: Profile },
   { path: '/profile/:id', exact: true, name: 'Profile Details', component: Profile },
   // { path: '/profile:uid', name: 'Profile_uid', component: Profile },

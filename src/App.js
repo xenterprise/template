@@ -16,14 +16,17 @@ import './scss/style.css'
 // Containers
 import { DefaultLayout } from './containers';
 import { BaseLayout } from './containers';
+import { HomeLayout } from './containers';
 // Pages
 // import { Login, Page404, Page500, Register, Hello } from './views/Pages';
 import { Login, Page404, Page500, Register } from './views/Pages';
 import Profile from './views/Profile/Profile';
+// import Home from './views/Home/Home'
 
 // import { renderRoutes } from 'react-router-config';
 // import Fire from Config/Fire
 import fire from './config/Fire'
+
 class App extends Component {
 
 
@@ -100,10 +103,12 @@ class App extends Component {
           <Route exact path="/login" name="Login Page" component={this.state.user ? BaseLayout : Login} />
           <Route exact path="/register" name="Register Page" component={this.state.user ? BaseLayout : Register} />
           <Route exact path="/404" name="Page 404" component={Page404} />
+          {/* <Route exact path="/home" name="Home" component={this.state.user ? BaseLayout : HomeLayout} /> */}
           <Route exact path="/500" name="Page 500" component={Page500} />
           {/* <Route exact path="/profile/:uid" name="Profile" render ={props=> <Profile {...props} />} /> */}
           {/* <Route exact path="/" name="Hello" component={Hello} /> */}
           <Route path="/basel" name="Basel" component={this.state.user ? BaseLayout : Login} />
+          <Route path="/home" name="Home" component={this.state.user ? BaseLayout : HomeLayout} />
           {/* <Route exact path="/def" name="Home" component={DefaultLayout} /> */}
           <Route path="/" name="Home" component={DefaultLayout} />
         </Switch>
