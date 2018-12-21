@@ -99,7 +99,7 @@ class DefaultHeader extends Component {
 
             <AppHeaderDropdown direction="down">
               <DropdownToggle nav>
-                <img src={'assets/img/avatars/6.jpg'} className="img-avatar" alt="admin@bootstrapmaster.com" />
+                {fire.auth().currentUser?<img src={this.state.user.dpurl} className="img-avatar" alt="" />:null}
               </DropdownToggle>
               <DropdownMenu right style={{ right: 'auto' }}>
                 <DropdownItem header tag="div" className="text-center"><strong>Account</strong></DropdownItem>

@@ -50,6 +50,18 @@ function socialPlatformClassA(platform) {
     return "btn-facebook btn-brand icon mr-1 mb-1"
   } else if (platform === 'Twitter') {
     return "btn-twitter btn-brand icon mr-1 mb-1"
+  } else if (platform === 'Linkedin') {
+    return "btn-linkedin btn-brand icon mr-1 mb-1"
+  } else if (platform === 'Flickr') {
+    return "btn-flickr btn-brand icon mr-1 mb-1"
+  } else if (platform === 'Github') {
+    return "btn-github btn-brand icon mr-1 mb-1"
+  } else if (platform === 'Youtube') {
+    return "btn-youtube btn-brand icon mr-1 mb-1"
+  } else if (platform === 'Instagram') {
+    return "btn-instagram btn-brand icon mr-1 mb-1"
+  } else if (platform === 'Other') {
+    return "btn-spotify btn-brand icon mr-1 mb-1"
   }
 }
 
@@ -58,6 +70,18 @@ function socialPlatformClassB(platform) {
     return "fa fa-facebook"
   } else if (platform === 'Twitter') {
     return "fa fa-twitter"
+  } else if (platform === 'Linkedin') {
+    return "fa fa-linkedin"
+  } else if (platform === 'Flickr') {
+    return "fa fa-flickr"
+  } else if (platform === 'Github') {
+    return "fa fa-github"
+  } else if (platform === 'Youtube') {
+    return "fa fa-youtube"
+  } else if (platform === 'Instagram') {
+    return "fa fa-instagram"
+  } else if (platform === 'Other') {
+    return "fa fa-circle"
   }
 }
 
@@ -69,24 +93,33 @@ function PrimaryInfo(props) {
       <div>
         <Row>
           <Col md="5">
-            <div align="left">
-              <h4>{props.this.state.user.name}</h4>
-              <h5>{props.this.state.user.title}</h5>
-              <h6>{props.this.state.user.tagline}</h6>
+            <div className="highlighter-rouge" align="left">
+              <h4><i className="fa fa-user"></i> {props.this.state.user.name}</h4>
+              <h5><i className="fa fa-address-card-o"></i> {props.this.state.user.title}</h5>
+              <h6><i className="fa fa-address-card-o"></i> {props.this.state.user.tagline}</h6>
             </div>
 
           </Col>
           <Col md="2">
             <div align="center">
-              <img src={'assets/img/avatars/9.jpg'} className="img-avatar" alt="admin@bootstrapmaster.com" />
+              {fire.auth().currentUser ? <img src={props.this.state.user.dpurl} className="img-avatar" alt="" width="150" /> : null}
             </div>
           </Col>
           <Col md="5">
             <div align="right">
-              <h5>{props.this.state.user.email}</h5>
-              <h5>{props.this.state.user.contactno}</h5>
-              <h5>{props.this.state.user.website}</h5>
-              <h5>{props.this.state.user.username}</h5>
+
+              {/* <h5><i className="fa fa-envelope-open-o"></i> {props.this.state.user.email}</h5> */}
+              <h5><i className="fa fa-phone"></i> {props.this.state.user.contactno}</h5>
+              <h5><i className="fa fa-globe"></i> {props.this.state.user.website}</h5>
+              {/* <h5><i className="fa fa-user"></i> {props.this.state.user.username}</h5> */}
+
+            </div>
+          </Col>
+        </Row>
+        <br />
+        <Row>
+          <Col>
+            <div align="center">
               {props.this.state.user.social ? <SocialPlatforms this={props.this} /> : null}
             </div>
           </Col>
@@ -112,12 +145,12 @@ function SocialPlatforms(props) {
           Object.keys(props.this.state.user.social).map((item, i) => (
 
             <Button key={i}
-              href={"https://" + props.this.state.user.social[item].link}
-              target="_blank"
+              href={props.this.state.user.social[item].link.includes("http") ? props.this.state.user.social[item].link : "https://" + props.this.state.user.social[item].link}
+              target="_blank" size="sm"
               className={socialPlatformClassA(props.this.state.user.social[item].platform)}>
-              <i className={socialPlatformClassB(props.this.state.user.social[item].platform)}></i>
+              <i className={socialPlatformClassB(props.this.state.user.social[item].platform)}></i><span>{props.this.state.user.social[item].platform}</span>
             </Button>
-
+            // <Button size="sm" className="btn-facebook btn-brand mr-1 mb-1"><i className="fa fa-facebook"></i><span>Facebook</span></Button>
           ))
         }
       </div>
@@ -137,7 +170,7 @@ function SocialPlatforms(props) {
 function Skills(props) {
   if (props.this.state.user.skills) {
     return (
-      <div>
+      <div align="center">
         {
           Object.keys(props.this.state.user.skills).map((item, i) => (
             <Button
@@ -173,7 +206,7 @@ function WorkExperience(props) {
                 <Col key={i} xs="12" sm="6" md="6">
                   <Card className="border-primary">
                     <CardHeader>
-                      <h4>{props.this.state.user.work[item].com}</h4>
+                      <h4><i className="fa fa-briefcase"></i> {props.this.state.user.work[item].com}</h4>
                       <h6>{props.this.state.user.work[item].des}</h6>
                       <p>{props.this.state.user.work[item].dur}</p>
                     </CardHeader>
@@ -218,7 +251,7 @@ function Education(props) {
         {
           Object.keys(props.this.state.user.education).map((item, i) => (
             <ListGroupItem key={i}>
-              <h5>{props.this.state.user.education[item].deg}</h5>
+              <h5><i className="fa fa-graduation-cap"></i> {props.this.state.user.education[item].deg}</h5>
               <p>{props.this.state.user.education[item].inst}</p>
             </ListGroupItem>
           ))
@@ -244,7 +277,7 @@ function Organizations(props) {
         {
           Object.keys(props.this.state.user.organizations).map((item, i) => (
             <ListGroupItem key={i}>
-              <h5>{props.this.state.user.organizations[item].name}</h5>
+              <h5><i className="fa fa-users"></i> {props.this.state.user.organizations[item].name}</h5>
             </ListGroupItem>
           ))
         }
@@ -269,7 +302,7 @@ function Certifications(props) {
         {
           Object.keys(props.this.state.user.certifications).map((item, i) => (
             <ListGroupItem key={i}>
-              <h5>{props.this.state.user.certifications[item].org}</h5>
+              <h5><i className="fa fa-certificate"></i> {props.this.state.user.certifications[item].org}</h5>
               <p>{props.this.state.user.certifications[item].name}</p>
             </ListGroupItem>
           ))
@@ -294,7 +327,7 @@ function Publications(props) {
         {
           Object.keys(props.this.state.user.publications).map((item, i) => (
             <ListGroupItem key={i}>
-              <h5>{props.this.state.user.publications[item].pub}</h5>
+              <h5><i className="fa fa-globe"></i> {props.this.state.user.publications[item].pub}</h5>
               <p>{props.this.state.user.publications[item].name}</p>
             </ListGroupItem>
           ))
@@ -532,10 +565,10 @@ class Profile extends Component {
       profile_user: this.props.match.params.id
     })
 
-    if(this.props.match.params.id){
+    if (this.props.match.params.id) {
       var dbref = fire.database().ref(`users/${this.props.match.params.id}`)
     }
-    else{
+    else {
       var dbref = fire.database().ref(`users/${fire.auth().currentUser.uid}`)
     }
     dbref.on("value", (snapshot) => {
@@ -565,99 +598,103 @@ class Profile extends Component {
           <Col md="2">
 
             {/* <Button outline color="primary" size="lg" block href="#/basel/sview">Explore Jobs</Button> */}
-            <Button outline className="text-left" color="primary" size="lg" block href="#/basel/profile"><i className="fa fa-user"></i> Profile</Button>
-            <Button outline className="text-left" color="primary" size="lg" block href="#/basel/jobpost"><i className="fa fa-briefcase"></i> My Jobs</Button>
-            <Button outline className="text-left" color="primary" size="lg" block href="#/basel/aform"><i className="fa fa-edit"></i> Edit Profile</Button>
+            <Button block className="text-left" color="primary" size="lg" block href="#/basel/profile"><i className="fa fa-user"></i> Profile</Button>
+            <Button block className="text-left" color="primary" size="lg" block href="#/basel/jobpost"><i className="fa fa-briefcase"></i> My Jobs</Button>
+            <Button block className="text-left" color="primary" size="lg" block href="#/basel/aform"><i className="fa fa-edit"></i> Edit Profile</Button>
 
           </Col>
 
           <Col md="7">
-            <Card>
-              <CardBody>
-                <PrimaryInfo this={this} />
-              </CardBody>
-            </Card>
-
-            <Card>
-              <CardHeader>
-              <h5><i className="fa fa-check-circle"></i> Skills</h5>
-              </CardHeader>
-              <CardBody >
-                <Skills this={this} />
-              </CardBody>
-            </Card>
-
-            <Card>
-              <CardHeader>
-                <h5><i className="fa fa-briefcase"></i> Work Experience & Projects</h5>
-              </CardHeader>
-              <CardBody>
-                <WorkExperience this={this} />
-              </CardBody>
-            </Card>
-
-
-
-
-
-            <Row>
-              <Col>
+            {/* <Card>
+              <CardBody> */}
                 <Card>
-                  <CardHeader>
-                    <h5><i className="fa fa-graduation-cap"></i> Education</h5>
-                  </CardHeader>
                   <CardBody>
-                    <ListGroup>
-                      <Education this={this} />
-                    </ListGroup>
+                    <PrimaryInfo this={this} />
                   </CardBody>
                 </Card>
-              </Col>
-            </Row>
+
+                <Card>
+                  <CardHeader>
+                    <h5><i className="fa fa-check-circle"></i> Skills</h5>
+                  </CardHeader>
+                  <CardBody >
+                    <Skills this={this} />
+                  </CardBody>
+                </Card>
+
+                <Card>
+                  <CardHeader>
+                    <h5><i className="fa fa-briefcase"></i> Work Experience & Projects</h5>
+                  </CardHeader>
+                  <CardBody>
+                    <WorkExperience this={this} />
+                  </CardBody>
+                </Card>
 
 
-            <Row>
-              <Col>
-                <Card>
-                  <CardHeader>
-                    <h5><i className="fa fa-users"></i> Organizations</h5>
-                  </CardHeader>
-                  <CardBody>
-                    <ListGroup>
-                      <Organizations this={this} />
-                    </ListGroup>
-                  </CardBody>
-                </Card>
-              </Col>
-            </Row>
-            <Row>
-              <Col>
-                <Card>
-                  <CardHeader>
-                    <h5><i className="fa fa-certificate"></i> Certifications</h5>
-                  </CardHeader>
-                  <CardBody>
-                    <ListGroup>
-                      <Certifications this={this} />
-                    </ListGroup>
-                  </CardBody>
-                </Card>
-              </Col>
-            </Row>
-            <Row>
-              <Col>
-                <Card>
-                  <CardHeader>
-                    <h5><i className="fa fa-globe"></i> Publications</h5>
-                  </CardHeader>
-                  <CardBody>
-                    <ListGroup>
-                      <Publications this={this} />
-                    </ListGroup>
-                  </CardBody>
-                </Card>
-              </Col>
-            </Row>
+
+
+
+                <Row>
+                  <Col>
+                    <Card>
+                      <CardHeader>
+                        <h5><i className="fa fa-graduation-cap"></i> Education</h5>
+                      </CardHeader>
+                      <CardBody>
+                        <ListGroup>
+                          <Education this={this} />
+                        </ListGroup>
+                      </CardBody>
+                    </Card>
+                  </Col>
+                </Row>
+
+
+                <Row>
+                  <Col>
+                    <Card>
+                      <CardHeader>
+                        <h5><i className="fa fa-users"></i> Organizations</h5>
+                      </CardHeader>
+                      <CardBody>
+                        <ListGroup>
+                          <Organizations this={this} />
+                        </ListGroup>
+                      </CardBody>
+                    </Card>
+                  </Col>
+                </Row>
+                <Row>
+                  <Col>
+                    <Card>
+                      <CardHeader>
+                        <h5><i className="fa fa-certificate"></i> Certifications</h5>
+                      </CardHeader>
+                      <CardBody>
+                        <ListGroup>
+                          <Certifications this={this} />
+                        </ListGroup>
+                      </CardBody>
+                    </Card>
+                  </Col>
+                </Row>
+                <Row>
+                  <Col>
+                    <Card>
+                      <CardHeader>
+                        <h5><i className="fa fa-globe"></i> Publications</h5>
+                      </CardHeader>
+                      <CardBody>
+                        <ListGroup>
+                          <Publications this={this} />
+                        </ListGroup>
+                      </CardBody>
+                    </Card>
+                  </Col>
+                </Row>
+              {/* </CardBody>
+            </Card> */}
           </Col>
 
 

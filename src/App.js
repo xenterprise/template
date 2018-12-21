@@ -34,7 +34,8 @@ class App extends Component {
     super();
     this.state = ({
       user: null,
-      UserEmailVerified: false
+      UserEmailVerified: false,
+      waiting: true
     });
     this.authListener = this.authListener.bind(this);
     this.userSignedIn = false
@@ -67,13 +68,15 @@ class App extends Component {
         if (user.emailVerified) {
           this.setState({
             user: user,
-            UserEmailVerified: true
+            UserEmailVerified: true,
+            waiting: false
           })
         }
         else {
           this.setState({
             user: user,
-            UserEmailVerified: false
+            UserEmailVerified: false,
+            waiting: false
           })
         }
 
@@ -96,24 +99,31 @@ class App extends Component {
   }
 
   render() {
-    return (
+    if(this.state.waiting) {
+      return(
+        <div></div>
+      )
+    }else {
+      return (
 
-      <HashRouter>
-        <Switch>
-          <Route exact path="/login" name="Login Page" component={this.state.user ? BaseLayout : Login} />
-          <Route exact path="/register" name="Register Page" component={this.state.user ? BaseLayout : Register} />
-          <Route exact path="/404" name="Page 404" component={Page404} />
-          {/* <Route exact path="/home" name="Home" component={this.state.user ? BaseLayout : HomeLayout} /> */}
-          <Route exact path="/500" name="Page 500" component={Page500} />
-          {/* <Route exact path="/profile/:uid" name="Profile" render ={props=> <Profile {...props} />} /> */}
-          {/* <Route exact path="/" name="Hello" component={Hello} /> */}
-          <Route path="/basel" name="Basel" component={this.state.user ? BaseLayout : Login} />
-          <Route path="/home" name="Home" component={this.state.user ? BaseLayout : HomeLayout} />
-          {/* <Route exact path="/def" name="Home" component={DefaultLayout} /> */}
-          <Route path="/" name="Home" component={DefaultLayout} />
-        </Switch>
-      </HashRouter>
-    );
+        <HashRouter>
+          <Switch>
+            <Route exact path="/login" name="Login Page" component={this.state.user ? BaseLayout : Login} />
+            <Route exact path="/register" name="Register Page" component={this.state.user ? BaseLayout : Register} />
+            <Route exact path="/404" name="Page 404" component={Page404} />
+            {/* <Route exact path="/home" name="Home" component={this.state.user ? BaseLayout : HomeLayout} /> */}
+            <Route exact path="/500" name="Page 500" component={Page500} />
+            {/* <Route exact path="/profile/:uid" name="Profile" render ={props=> <Profile {...props} />} /> */}
+            {/* <Route exact path="/" name="Hello" component={Hello} /> */}
+            <Route path="/basel" name="Basel" component={this.state.user ? BaseLayout : Login} />
+            <Route path="/home" name="Home" component={this.state.user ? BaseLayout : HomeLayout} />
+            {/* <Route exact path="/def" name="Home" component={DefaultLayout} /> */}
+            <Route path="/" name="Home" component={DefaultLayout} />
+          </Switch>
+        </HashRouter>
+      );
+    }
+    
   }
 }
 

@@ -26,6 +26,7 @@ import {
 // import { auth, db } from '../../firebase';
 import fire from '../../config/Fire'
 import GlobalAlert from '../Alerts/ga'
+import Image from '../Pages/Img/Image'
 
 // const log = (type) => console.log.bind(console, type);
 
@@ -39,7 +40,7 @@ function CompAbout(props) {
           <Label htmlFor="text-input">Name</Label>
         </Col>
         <Col xs="12" md="9">
-          <Input type="text" name="name" placeholder="Your Name Here" value={props.data.name} onChange={props.this.inputChanged} />
+          <Input required type="text" name="name" placeholder="Your Name Here" value={props.data.name} onChange={props.this.inputChanged} />
         </Col>
       </Row>
 
@@ -48,7 +49,7 @@ function CompAbout(props) {
           <Label htmlFor="text-input">Title</Label>
         </Col>
         <Col xs="12" md="9">
-          <Input type="text" name="title" placeholder="e.g., Engineer/ Teacher/ Astronaut" value={props.data.title} onChange={props.this.inputChanged} />
+          <Input type="text" required name="title"  value={props.data.title} onChange={props.this.inputChanged} />
         </Col>
       </Row>
 
@@ -57,7 +58,7 @@ function CompAbout(props) {
           <Label htmlFor="text-input">Tagline</Label>
         </Col>
         <Col xs="12" md="9">
-          <Input type="text" name="tagline" placeholder="Something about you briefly" value={props.data.tagline} onChange={props.this.inputChanged} />
+          <Input required type="text" name="tagline" placeholder="Something about you briefly" value={props.data.tagline} onChange={props.this.inputChanged} />
         </Col>
       </Row>
 
@@ -75,7 +76,7 @@ function CompAbout(props) {
           <Label htmlFor="text-input">Phone Number</Label>
         </Col>
         <Col xs="12" md="9">
-          <Input type="text" name="contactno" placeholder="Your Contact Number" value={props.data.contactno} onChange={props.this.inputChanged} />
+          <Input require type="text" name="contactno" placeholder="Your Contact Number" value={props.data.contactno} onChange={props.this.inputChanged} />
         </Col>
       </Row>
 
@@ -84,18 +85,18 @@ function CompAbout(props) {
           <Label htmlFor="text-input">Website</Label>
         </Col>
         <Col xs="12" md="9">
-          <Input type="text" name="website" placeholder="Your Website Address" value={props.data.website} onChange={props.this.inputChanged} />
+          <Input require type="text" name="website" placeholder="Your Website Address" value={props.data.website} onChange={props.this.inputChanged} />
         </Col>
       </Row>
 
-      {/* <Row>
+      <Row>
         <Col md="2">
-          <Label htmlFor="text-input">Skills</Label>
+          <Label htmlFor="text-input">Profile Picture</Label>
         </Col>
         <Col xs="12" md="9">
-          <Input type="textarea" id="text-input" name="skills" placeholder="Your Skills. Seperated by Commas" value={props.data.skills} onChange={props.this.inputChanged} />
+          <Image this={this}/>
         </Col>
-      </Row> */}
+      </Row>
 
 
       <Row>
@@ -115,7 +116,7 @@ function CompSkills(props) {
         Object.keys(props.data).map((item, i) => (
           <Button
             key={i}
-            size="lg"
+            size="sm"
             className="btn-facebook btn-brand text mr-1 mb-1">
             <span>{item}</span><a className="card-header-action btn btn-close" >  <i className="icon-close" onClick={props.this.delChildOfuser.bind(props.this, "skills", item)}></i></a>
           </Button>
@@ -339,7 +340,7 @@ function Compwork_Display(props) {
             <Row key={i}>
               <Col md="1">
                 <div className="avatar">
-                <h1><i className="fa fa-snowflake-o"></i></h1>
+                <h1><i className="fa fa-briefcase"></i></h1>
                   {/* <img src={'assets/img/avatars/1.jpg'} className="img-avatar" alt="admin@bootstrapmaster.com" />
                   <span className="avatar-status badge-success"></span> */}
                 </div>
@@ -387,8 +388,12 @@ function Compsocial_AddForm(props) {
               <DropdownMenu>
                 <DropdownItem name="Facebook" onClick={props.this.social_ddChanged}>Facebook</DropdownItem>
                 <DropdownItem name="Twitter" onClick={props.this.social_ddChanged}>Twitter</DropdownItem>
-                <DropdownItem name="Youtube" onClick={props.this.social_ddChanged}>Youtube</DropdownItem>
                 <DropdownItem name="Linkedin" onClick={props.this.social_ddChanged}>LinkedIn</DropdownItem>
+                <DropdownItem name="Flickr" onClick={props.this.social_ddChanged}>Flickr</DropdownItem>
+                <DropdownItem name="Github" onClick={props.this.social_ddChanged}>Github</DropdownItem>
+                <DropdownItem name="Youtube" onClick={props.this.social_ddChanged}>Youtube</DropdownItem>
+                <DropdownItem name="Instagram" onClick={props.this.social_ddChanged}>Instagram</DropdownItem>
+                <DropdownItem name="Other" onClick={props.this.social_ddChanged}>Other</DropdownItem>
               </DropdownMenu>
             </Dropdown>
           </Col>
@@ -425,7 +430,7 @@ function Compeducation_AddForm(props) {
               <Label htmlFor="text-input">Degree/Course Title:</Label>
             </Col>
             <Col md="6">
-              <Input type="text" id="text-input" name="new_education_degree" placeholder="Link to your social Profile" onChange={props.this.Base_inputChanged} />
+              <Input type="text" id="text-input" name="new_education_degree" placeholder="Degree Title" onChange={props.this.Base_inputChanged} />
             </Col>
           </Row>
           <Row>
@@ -433,7 +438,7 @@ function Compeducation_AddForm(props) {
               <Label htmlFor="text-input">University/ Institute Name:</Label>
             </Col>
             <Col md="6">
-              <Input type="text" id="text-input" name="new_education_institute" placeholder="Link to your social Profile" onChange={props.this.Base_inputChanged} />
+              <Input type="text" id="text-input" name="new_education_institute" placeholder="University / Institute" onChange={props.this.Base_inputChanged} />
             </Col>
           </Row>
           <Row>
@@ -460,7 +465,7 @@ function CompPublication_AddForm(props) {
               <Label htmlFor="text-input">Publisher/ Journal:</Label>
             </Col>
             <Col md="6">
-              <Input type="text" id="text-input" name="new_publication_publisher" placeholder="Link to your social Profile" onChange={props.this.Base_inputChanged} />
+              <Input type="text" id="text-input" name="new_publication_publisher" placeholder="Publisher/ Journal" onChange={props.this.Base_inputChanged} />
             </Col>
           </Row>
           <Row>
@@ -468,7 +473,7 @@ function CompPublication_AddForm(props) {
               <Label htmlFor="text-input">Publication Title:</Label>
             </Col>
             <Col md="6">
-              <Input type="text" id="text-input" name="new_publication_name" placeholder="Link to your social Profile" onChange={props.this.Base_inputChanged} />
+              <Input type="text" id="text-input" name="new_publication_name" placeholder="Publication Title" onChange={props.this.Base_inputChanged} />
             </Col>
           </Row>
           <Row>
@@ -497,7 +502,7 @@ function CompCertificate_AddForm(props) {
               <Label htmlFor="text-input">Certification Title:</Label>
             </Col>
             <Col md="6">
-              <Input type="text" id="text-input" name="new_certification_name" placeholder="Link to your social Profile" onChange={props.this.Base_inputChanged} />
+              <Input type="text" id="text-input" name="new_certification_name" placeholder="Title of Certificate" onChange={props.this.Base_inputChanged} />
             </Col>
           </Row>
           <Row>
@@ -505,7 +510,7 @@ function CompCertificate_AddForm(props) {
               <Label htmlFor="text-input">Organization Name:</Label>
             </Col>
             <Col md="6">
-              <Input type="text" id="text-input" name="new_certification_org" placeholder="Link to your social Profile" onChange={props.this.Base_inputChanged} />
+              <Input type="text" id="text-input" name="new_certification_org" placeholder="Organization / Institute" onChange={props.this.Base_inputChanged} />
             </Col>
           </Row>
           <Row>
@@ -532,7 +537,7 @@ function CompOrganization_AddForm(props) {
               <Label htmlFor="text-input">Organization Name:</Label>
             </Col>
             <Col md="6">
-              <Input type="text" id="text-input" name="new_organization_name" placeholder="Link to your social Profile" onChange={props.this.Base_inputChanged} />
+              <Input type="text" id="text-input" name="new_organization_name" placeholder="Organization Name" onChange={props.this.Base_inputChanged} />
             </Col>
           </Row>
 
@@ -601,7 +606,7 @@ function Compwork_AddForm(props) {
               <Button type="submit" size="sm" color="primary" ><i className="fa fa-dot-circle-o"></i> Save Changes</Button>
             </Col>
             <Col md="2">
-              <Button size="sm" color="danger" onClick={props.this.toggleFlag_education}><i className="fa fa-close"></i> Cancel</Button>
+              <Button size="sm" color="danger" onClick={props.this.toggleFlag_work}><i className="fa fa-close"></i> Cancel</Button>
             </Col>
           </Row>
 
@@ -800,7 +805,7 @@ class Aform extends Component {
         publications: [],
         services: [],
         work: [],
-        skills: {}
+        skills: {},
       }
     }
 
