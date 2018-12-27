@@ -32,6 +32,7 @@ import Widget03 from '../Widgets/Widget03'
 import { CustomTooltips } from '@coreui/coreui-plugin-chartjs-custom-tooltips';
 import { getStyle, hexToRgba } from '@coreui/coreui/dist/js/coreui-utilities'
 import fire from '../../config/Fire'
+import LeftMenu from '../Jobpost/LeftMenu'
 
 function JobDisplayComponent(props) {
   if (props.this.state.jobDetails.jd)
@@ -49,21 +50,21 @@ function JobDisplayComponent(props) {
                   <h6><i className="fa fa-id-card-o"></i> {props.this.state.jobDetails.jd.jcom}</h6>
                 </Col>
                 <Col md="3">
-                {fire.auth().currentUser.emailVerified?
-                  <Button block outline active color="success" aria-pressed="true" onClick={props.this.ApplyToJob}>Apply Now</Button>:
-                  <Alert color="danger">
-                  Unverified Accounts Can't Apply to Jobs
+                  {fire.auth().currentUser.emailVerified ?
+                    <Button block outline active color="success" aria-pressed="true" onClick={props.this.ApplyToJob}>Apply Now</Button> :
+                    <Alert color="danger">
+                      Unverified Accounts Can't Apply to Jobs
                   </Alert>
- 
+
                   }
-                    </Col>
+                </Col>
               </Row>
             </CardHeader>
             <CardBody>
 
               {props.this.state.jobDetails.jd.resp}
               <br /><br />
-      {(props.this.state.jobDetails.jd.skls)?
+              {(props.this.state.jobDetails.jd.skls) ?
                 Object.keys(props.this.state.jobDetails.jd.skls).map((skill_item, i) => (
                   <Button
                     key={i}
@@ -72,7 +73,7 @@ function JobDisplayComponent(props) {
                     <span>{props.this.state.jobDetails.jd.skls[skill_item].s}</span>
                   </Button>
                 ))
-              :null}
+                : null}
               <br /><br />
               <Row>
                 <Col md="6">
@@ -174,12 +175,7 @@ class JobDetails extends Component {
       <div>
         <Row>
           <Col md="2">
-
-            {/* <Button outline color="primary" size="lg" block href="#/basel/sview">Explore Jobs</Button> */}
-            <Button outline className="text-left" color="primary" size="lg" block href="#/basel/profile"><i className="fa fa-user"></i> Profile</Button>
-            <Button outline className="text-left" color="primary" size="lg" block href="#/basel/jobpost"><i className="fa fa-briefcase"></i> My Jobs</Button>
-            <Button outline className="text-left" color="primary" size="lg" block href="#/basel/aform"><i className="fa fa-edit"></i> Edit Profile</Button>
-
+            <LeftMenu />
           </Col>
 
           <Col md="7">
@@ -195,7 +191,7 @@ class JobDetails extends Component {
           <Col md="3">
             <Card>
               <CardBody>
-              <h4><i className="fa fa-line-chart"></i> Latest Trends</h4>
+                <h4><i className="fa fa-line-chart"></i> Latest Trends</h4>
               </CardBody>
             </Card>
           </Col>

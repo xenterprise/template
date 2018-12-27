@@ -31,6 +31,7 @@ import Widget03 from '../Widgets/Widget03'
 import { CustomTooltips } from '@coreui/coreui-plugin-chartjs-custom-tooltips';
 import { getStyle, hexToRgba } from '@coreui/coreui/dist/js/coreui-utilities'
 import fire from '../../config/Fire'
+import LeftMenu from '../Jobpost/LeftMenu'
 
 
 function CompApplicants(props) {
@@ -151,12 +152,8 @@ class Applicants extends Component {
     return (
       <div>
         <Row>
-          <Col md="2">
-
-            <Button outline color="primary" size="lg" block href="#/basel/profile">Profile</Button>
-            <Button outline color="primary" size="lg" block href="#/basel/jobpost">Job Section</Button>
-            <Button outline color="primary" size="lg" block href="#/basel/aform">Settings</Button>
-
+        <Col md="2">
+            <LeftMenu />
           </Col>
 
           <Col md="7">

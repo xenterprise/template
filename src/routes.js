@@ -229,6 +229,11 @@ const Image = Loadable({
   loading: Loading,
 });
 
+const Home = Loadable({
+  loader: () => import('./views/Jobpost/Home'),
+  loading: Loading,
+});
+
 
 
 // const BaseLayout = Loadable({
@@ -252,6 +257,7 @@ const routes = [
   { path: '/sview', name: 'SearchView', component: SearchView },
   // { path: '/sview/:searchText', name: 'SearchView', component: SearchView },
   { path: '/jobpost', name: 'JobPost', component: Jobpost },
+  { path: '/home', name: 'JobPost', component: Home },
   { path: '/job/:juid', name: 'JobDetails', component: JobDetails },
   { path: '/applicants/:juid', name: 'Applicants', component: Applicants },
   { path: '/theme', exact: true, name: 'Theme', component: Colors },

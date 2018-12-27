@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Badge, DropdownItem, DropdownMenu, DropdownToggle, Nav, NavItem, NavLink, FormGroup, InputGroup, Input, InputGroupAddon, Button } from 'reactstrap';
 import PropTypes from 'prop-types';
 
-import { AppAsideToggler, AppHeaderDropdown, AppNavbarBrand, AppSidebarToggler } from '@coreui/react';
+import { AppAsideToggler, AppHeaderDropdown, AppNavbarBrand, AppSidebarToggler} from '@coreui/react';
 import logo from '../../assets/img/brand/logor.png'
 import sygnet from '../../assets/img/brand/sygnet.svg'
 import fire from '../../config/Fire'
@@ -56,13 +56,18 @@ class DefaultHeader extends Component {
       return (
         <React.Fragment>
           {/* <AppSidebarToggler className="d-lg-none" display="md" mobile /> */}
-          <AppNavbarBrand
+          {/* <AppNavbarBrand
             full={{ src: logo, width: 112, height: 45, alt: 'CoreUI Logo' }}
             minimized={{ src: sygnet, width: 30, height: 30, alt: 'CoreUI Logo' }}
-          />
+          /> */}
+          {/* <img src={logo} width="112" alt="" href="#/basel/profile"/> */}
           {/* <AppSidebarToggler className="d-md-down-none" display="lg" /> */}
 
           <Nav className="d-md-down-none" navbar>
+           
+            <NavItem className="px-3">
+              <NavLink href="#/basel/home"><img src={logo} width="112" alt="logo"/></NavLink>
+            </NavItem>
             <NavItem className="px-3">
               <NavLink href="#/basel/profile">Profile</NavLink>
             </NavItem>
@@ -99,7 +104,7 @@ class DefaultHeader extends Component {
 
             <AppHeaderDropdown direction="down">
               <DropdownToggle nav>
-                {fire.auth().currentUser?<img src={this.state.user.dpurl} className="img-avatar" alt="" />:null}
+                {fire.auth().currentUser?<img src={this.state.user.dpurl?this.state.user.dpurl:'assets/img/avatars/0.png'} className="img-avatar" alt="" />:<img src={'assets/img/avatars/0.png'} className="img-avatar" alt="user picture" />}
               </DropdownToggle>
               <DropdownMenu right style={{ right: 'auto' }}>
                 <DropdownItem header tag="div" className="text-center"><strong>Account</strong></DropdownItem>

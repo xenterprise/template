@@ -27,6 +27,7 @@ import { CustomTooltips } from '@coreui/coreui-plugin-chartjs-custom-tooltips';
 import { getStyle, hexToRgba } from '@coreui/coreui/dist/js/coreui-utilities'
 
 import fire from '../../config/Fire'
+import LeftMenu from '../Jobpost/LeftMenu'
 
 
 //Random Numbers
@@ -595,13 +596,8 @@ class Profile extends Component {
     return (
       <div>
         <Row>
-          <Col md="2">
-
-            {/* <Button outline color="primary" size="lg" block href="#/basel/sview">Explore Jobs</Button> */}
-            <Button block className="text-left" color="primary" size="lg" block href="#/basel/profile"><i className="fa fa-user"></i> Profile</Button>
-            <Button block className="text-left" color="primary" size="lg" block href="#/basel/jobpost"><i className="fa fa-briefcase"></i> My Jobs</Button>
-            <Button block className="text-left" color="primary" size="lg" block href="#/basel/aform"><i className="fa fa-edit"></i> Edit Profile</Button>
-
+        <Col md="2">
+            <LeftMenu />
           </Col>
 
           <Col md="7">

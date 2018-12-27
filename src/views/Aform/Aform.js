@@ -27,6 +27,7 @@ import {
 import fire from '../../config/Fire'
 import GlobalAlert from '../Alerts/ga'
 import Image from '../Pages/Img/Image'
+import LeftMenu from '../Jobpost/LeftMenu'
 
 // const log = (type) => console.log.bind(console, type);
 
@@ -1251,10 +1252,7 @@ class Aform extends Component {
         <Row>
 
           <Col md="2">
-            {/* <Button outline color="primary" size="lg" block href="#/basel/sview">Explore Jobs</Button> */}
-            <Button outline className="text-left" color="primary" size="lg" block href="#/basel/profile"><i className="fa fa-user"></i> Profile</Button>
-            <Button outline className="text-left" color="primary" size="lg" block href="#/basel/jobpost"><i className="fa fa-briefcase"></i> My Jobs</Button>
-            <Button outline className="text-left" color="primary" size="lg" block href="#/basel/aform"><i className="fa fa-edit"></i> Edit Profile</Button>
+            <LeftMenu />
           </Col>
 
           <Col md="7">

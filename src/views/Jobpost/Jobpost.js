@@ -36,6 +36,7 @@ import { getStyle, hexToRgba } from '@coreui/coreui/dist/js/coreui-utilities'
 import GlobalAlert from '../Alerts/ga'
 
 
+import LeftMenu from '../Jobpost/LeftMenu'
 import fire from '../../config/Fire'
 
 function CompApplicants_All(props) {
@@ -46,7 +47,7 @@ function CompApplicants_All(props) {
           Object.keys(props.this.state.ApplicantDetails).map((item, i) => (
             <div key={i}>
               <CardHeader>
-                <Button color="link" size="md" href={'#/basel/profile/' + props.this.state.ApplicantDetails[item].aid}>{props.this.state.ApplicantDetails[item].ad.name}</Button>
+                <Button color="link" size="md" target="_blank" href={'#/basel/profile/' + props.this.state.ApplicantDetails[item].aid}>{props.this.state.ApplicantDetails[item].ad.name}</Button>
                 <div className="card-header-actions">
                   {props.this.state.ApplicantDetails[item].lb === "rj" ? <Badge className="mr-1" color="danger">Rejected</Badge> :
                     props.this.state.ApplicantDetails[item].lb === "sl" ? <Badge className="mr-1" color="primary">Shortlisted</Badge> : null}
@@ -198,7 +199,7 @@ function CompJob_Posted(props) {
               {props.this.state.user_jobs[item].v.titl} at {props.this.state.user_jobs[item].v.jcom}
               <div className="card-header-actions">
                 <a target="_blank" className="card-header-action btn btn-setting" id="ViewApplicants" onClick={props.this.ShowApplicants.bind(props.this, props.this.state.user_jobs[item].k)}><i className="fa fa-group fa-lg"></i></a>
-                <a target="_blank" className="card-header-action btn btn-setting" id="ViewJob" href={'#/basel/job/' + props.this.state.user_jobs[item].k}><i className="fa fa-external-link fa-lg"></i></a>
+                <a target="_blank" className="card-header-action btn btn-setting" id="ViewJob" href={'#/basel/job/' + props.this.state.user_jobs[item].k}><i href={'#/basel/job/' + props.this.state.user_jobs[item].k} className="fa fa-external-link fa-lg"></i></a>
                 <a className="card-header-action btn btn-setting" id="EditJob" onClick={props.this.editJob.bind(props.this, props.this.state.user_jobs[item].k)}><i className="fa fa-gear fa-lg"></i></a>
                 <UncontrolledTooltip placement="top" target="ViewApplicants">
                   View Applicants
@@ -276,7 +277,10 @@ function CompJob_Home(props) {
         <CardHeader id="headingTwo">
           <Button block color="link" className="text-left m-0 p-0" onClick={() => props.this.toggleAccordionPosted(1)} aria-expanded={props.this.state.accordionPosted[1]} aria-controls="collapseTwo">
             <h5 className="m-0 p-0"><i className="fa fa-map-o"></i> My Posted Jobs</h5>
-          </Button>
+            {/* <div className="card-header-actions"> */}
+            
+            {/* </div> */}
+          </Button><a className="card-header-action" id="ViewApplicants" ><i className="fa fa-group fa-lg"></i></a>
         </CardHeader>
         <Collapse isOpen={props.this.state.accordionPosted[1]} data-parent="#accordion" id="collapseTwo">
           <CardBody>
@@ -1080,13 +1084,8 @@ else{
       <div >
 
         <Row>
-          <Col md="2">
-
-            {/* <Button outline color="primary" size="lg" block href="#/basel/sview">Explore Jobs</Button> */}
-            <Button outline className="text-left" color="primary" size="lg" block href="#/basel/profile"><i className="fa fa-user"></i> Profile</Button>
-            <Button outline className="text-left" color="primary" size="lg" block href="#/basel/jobpost"><i className="fa fa-briefcase"></i> My Jobs</Button>
-            <Button outline className="text-left" color="primary" size="lg" block href="#/basel/aform"><i className="fa fa-edit"></i> Edit Profile</Button>
-
+        <Col md="2">
+            <LeftMenu />
           </Col>
 
           <Col md="7">
