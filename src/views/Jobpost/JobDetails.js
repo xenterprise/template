@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Bar, Line } from 'react-chartjs-2';
 import {
+  Alert,
   Badge,
   Button,
   ButtonDropdown,
@@ -48,8 +49,14 @@ function JobDisplayComponent(props) {
                   <h6><i className="fa fa-id-card-o"></i> {props.this.state.jobDetails.jd.jcom}</h6>
                 </Col>
                 <Col md="3">
-                  <Button block outline active color="success" aria-pressed="true" onClick={props.this.ApplyToJob}>Apply Now</Button>
-                </Col>
+                {fire.auth().currentUser.emailVerified?
+                  <Button block outline active color="success" aria-pressed="true" onClick={props.this.ApplyToJob}>Apply Now</Button>:
+                  <Alert color="danger">
+                  Unverified Accounts Can't Apply to Jobs
+                  </Alert>
+ 
+                  }
+                    </Col>
               </Row>
             </CardHeader>
             <CardBody>

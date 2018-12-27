@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Bar, Line } from 'react-chartjs-2';
 import {
-  Alert, 
+  Alert,
   Badge,
   Button,
   ButtonDropdown,
@@ -33,6 +33,9 @@ import Widget03 from '../Widgets/Widget03'
 import { CustomTooltips } from '@coreui/coreui-plugin-chartjs-custom-tooltips';
 import { getStyle, hexToRgba } from '@coreui/coreui/dist/js/coreui-utilities'
 
+import GlobalAlert from '../Alerts/ga'
+
+
 import fire from '../../config/Fire'
 
 function CompApplicants_All(props) {
@@ -45,19 +48,19 @@ function CompApplicants_All(props) {
               <CardHeader>
                 <Button color="link" size="md" href={'#/basel/profile/' + props.this.state.ApplicantDetails[item].aid}>{props.this.state.ApplicantDetails[item].ad.name}</Button>
                 <div className="card-header-actions">
-                {props.this.state.ApplicantDetails[item].lb==="rj"?<Badge className="mr-1" color="danger">Rejected</Badge>:
-                 props.this.state.ApplicantDetails[item].lb==="sl"?<Badge className="mr-1" color="primary">Shortlisted</Badge>:null}
-                <a className="card-header-action btn btn-setting" id="sl" onClick={props.this.SetApplicantLabel.bind(props.this, props.this.state.app_juid, props.this.state.ApplicantDetails[item].aid, "sl")}><i className="fa fa-check fa-lg"></i></a>
-                <a className="card-header-action btn btn-setting" id="rj" onClick={props.this.SetApplicantLabel.bind(props.this, props.this.state.app_juid, props.this.state.ApplicantDetails[item].aid, "rj")}><i className="fa fa-close fa-lg"></i></a>
-                <a className="card-header-action btn btn-setting" id="no" onClick={props.this.SetApplicantLabel.bind(props.this, props.this.state.app_juid, props.this.state.ApplicantDetails[item].aid, "no")}><i className="fa fa-circle-o fa-lg"></i></a>
-                <UncontrolledTooltip placement="top" target="sl">
-                  Shortlist Label
+                  {props.this.state.ApplicantDetails[item].lb === "rj" ? <Badge className="mr-1" color="danger">Rejected</Badge> :
+                    props.this.state.ApplicantDetails[item].lb === "sl" ? <Badge className="mr-1" color="primary">Shortlisted</Badge> : null}
+                  <a className="card-header-action btn btn-setting" id="sl" onClick={props.this.SetApplicantLabel.bind(props.this, props.this.state.app_juid, props.this.state.ApplicantDetails[item].aid, "sl")}><i className="fa fa-check fa-lg"></i></a>
+                  <a className="card-header-action btn btn-setting" id="rj" onClick={props.this.SetApplicantLabel.bind(props.this, props.this.state.app_juid, props.this.state.ApplicantDetails[item].aid, "rj")}><i className="fa fa-close fa-lg"></i></a>
+                  <a className="card-header-action btn btn-setting" id="no" onClick={props.this.SetApplicantLabel.bind(props.this, props.this.state.app_juid, props.this.state.ApplicantDetails[item].aid, "no")}><i className="fa fa-circle-o fa-lg"></i></a>
+                  <UncontrolledTooltip placement="top" target="sl">
+                    Shortlist Label
                 </UncontrolledTooltip>
-                <UncontrolledTooltip placement="top" target="rj">
-                  Rejected Label
+                  <UncontrolledTooltip placement="top" target="rj">
+                    Rejected Label
                 </UncontrolledTooltip>
-                <UncontrolledTooltip placement="top" target="no">
-                  No Label
+                  <UncontrolledTooltip placement="top" target="no">
+                    No Label
                 </UncontrolledTooltip>
                 </div>
               </CardHeader>
@@ -82,15 +85,15 @@ function CompApplicants_Shortlisted(props) {
       <div>
         {
           Object.keys(props.this.state.ApplicantDetails).map((item, i) => (
-            
+
             <div key={i}>
               <CardHeader>
-                {props.this.state.ApplicantDetails[item].lb==="sl"? props.this.state.ApplicantDetails[item].ad.name :null}
+                {props.this.state.ApplicantDetails[item].lb === "sl" ? props.this.state.ApplicantDetails[item].ad.name : null}
 
                 <div className="card-header-actions">
-                
-                <a className="card-header-action btn btn-setting" id="a" onClick={props.this.SetApplicantLabel.bind(props.this, props.this.state.app_juid, props.this.state.ApplicantDetails[item].aid, "sl")}><i className="fa fa-check fa-lg"></i></a>
-                <a className="card-header-action btn btn-setting" id="a" onClick={props.this.SetApplicantLabel.bind(props.this, props.this.state.app_juid, props.this.state.ApplicantDetails[item].aid, "rj")}><i className="fa fa-close fa-lg"></i></a>
+
+                  <a className="card-header-action btn btn-setting" id="a" onClick={props.this.SetApplicantLabel.bind(props.this, props.this.state.app_juid, props.this.state.ApplicantDetails[item].aid, "sl")}><i className="fa fa-check fa-lg"></i></a>
+                  <a className="card-header-action btn btn-setting" id="a" onClick={props.this.SetApplicantLabel.bind(props.this, props.this.state.app_juid, props.this.state.ApplicantDetails[item].aid, "rj")}><i className="fa fa-close fa-lg"></i></a>
                 </div>
               </CardHeader>
             </div>
@@ -130,7 +133,7 @@ function CompApplicants(props) {
           </Col>
         </Row>
         <Alert color="primary">
-                  You can Mark Applicants as Shortlisted or Rejected, These labels are just for your ease and no notification is sent to any Applicant
+          You can Mark Applicants as Shortlisted or Rejected, These labels are just for your ease and no notification is sent to any Applicant
                 </Alert>
         <h5>Applicants Section</h5>
         <Card>
@@ -191,7 +194,7 @@ function CompJob_Posted(props) {
         Object.keys(props.this.state.user_jobs).map((item, i) => (
           <div key={i}>
             <CardHeader>
-            <i className="fa fa-map-o"></i> 
+              <i className="fa fa-map-o"></i>
               {props.this.state.user_jobs[item].v.titl} at {props.this.state.user_jobs[item].v.jcom}
               <div className="card-header-actions">
                 <a target="_blank" className="card-header-action btn btn-setting" id="ViewApplicants" onClick={props.this.ShowApplicants.bind(props.this, props.this.state.user_jobs[item].k)}><i className="fa fa-group fa-lg"></i></a>
@@ -228,7 +231,7 @@ function CompJob_Applied(props) {
         Object.keys(props.this.state.app_user_jobs).map((item, i) => (
           <div key={i}>
             <CardHeader>
-            <i className="fa fa-map"></i> 
+              <i className="fa fa-map"></i>
               {props.this.state.app_user_jobs[item].v.titl} at {props.this.state.app_user_jobs[item].v.jcom}
               {/* <div className="card-header-actions"> */}
               {/* <a className="card-header-action btn btn-setting" onClick={props.this.editJob.bind(props.this, props.this.state.app_user_jobs[item].k)}><i className="icon-settings"></i></a> */}
@@ -292,12 +295,13 @@ function CompJob_Form(props) {
   return (
     <div>
       <h5>Post a New Job</h5>
+      <form>
       <Row>
         <Col md="2" >
           <Label htmlFor="text-input">Job Title</Label>
         </Col>
         <Col xs="12" md="9">
-          <Input type="text" name="titl" placeholder="Title of the Job Position" value={props.this.state.job.titl} onChange={props.this.TextInputChanged} />
+          <Input required type="text" name="titl" placeholder="Title of the Job Position" value={props.this.state.job.titl} onChange={props.this.TextInputChanged} />
         </Col>
       </Row>
 
@@ -314,7 +318,7 @@ function CompJob_Form(props) {
         <Col md="2">
           <Label htmlFor="text-input">Experience Required</Label>
         </Col>
-        <Col md="4">
+        <Col md="3">
           <Dropdown isOpen={props.this.state.DropDownOpen_Experience} toggle={props.this.DropDownToggle_Experience}>
             <DropdownToggle caret>
               {props.this.state.DropDownText_Experience}
@@ -485,6 +489,7 @@ function CompJob_Form(props) {
           <Button type="submit" align="right" size="md" color="dark" onClick={props.this.CancelJob}><i className="fa fa-dot-circle-o"></i> Cancel</Button>
         </Col>
       </Row>
+      </form>
     </div>
   );
 }
@@ -536,7 +541,8 @@ class Jobpost extends Component {
       ji: "",
       jedit: false,
       app_juid: "",
-      ApplicantDetails: []
+      ApplicantDetails: [],
+      FormValidation: true
     };
 
     this.TextInputChanged = this.TextInputChanged.bind(this)
@@ -737,17 +743,17 @@ class Jobpost extends Component {
     })
   }
 
-SetApplicantLabel(juid, auid, label){
-  let labelRef = fire.database().ref(`jobs_users_labels/${juid}`)
-  labelRef.child(auid).set(label)
-    .then(() => {
-    })
-    .catch(error => {
-      console.log(error)
-    });
+  SetApplicantLabel(juid, auid, label) {
+    let labelRef = fire.database().ref(`jobs_users_labels/${juid}`)
+    labelRef.child(auid).set(label)
+      .then(() => {
+      })
+      .catch(error => {
+        console.log(error)
+      });
 
     this.ShowApplicants(juid)
-}
+  }
 
   ShowApplicants(juid) {
 
@@ -785,7 +791,7 @@ SetApplicantLabel(juid, auid, label){
             var Applicants_labels = fire.database().ref(`jobs_users_labels/${juid}/${idd}`)
             Applicants_data.on('value', snap => {
               Applicants_labels.on('value', Label_snap => {
-                tempDetails.push({ aid: snap.key, ad: snap.val(), lb: Label_snap.val()})
+                tempDetails.push({ aid: snap.key, ad: snap.val(), lb: Label_snap.val() })
                 console.log("TDTD:", Label_snap.val())
               })
               resolve(0)
@@ -799,24 +805,27 @@ SetApplicantLabel(juid, auid, label){
             this.setState({
               ApplicantDetails: tempDetails
             })
-
           })
-
       })
-
   }
 
   addSkill(e) {
     e.preventDefault();
     let temp = Object.assign({}, this.state)
-    temp.job.skls.push({ s: this.state.new_skill })
-    this.setState(temp)
+    if (this.state.new_skill !== "") {
+      temp.job.skls.push({ s: this.state.new_skill })
+      this.setState(temp)
+    }
+    else {
+
+    }
+
     this.addSkillForm.reset()
   }
 
   TextInputChanged_lowercase(e) {
     let temp = Object.assign({}, this.state)
-    temp[e.target.name] = e.target.value.toLowerCase();
+    temp[e.target.name] = e.target.value.replace(/[^a-zA-Z ]/g, "").toLowerCase();
     this.setState(temp)
   }
 
@@ -897,8 +906,12 @@ SetApplicantLabel(juid, auid, label){
   Submit_Job(e) {
     e.preventDefault();
 
-
-
+if(this.state.job.titl===""||this.state.job.jcom===""||this.state.job.slry===""){
+this.setState({
+  FormValidation: false
+})
+}
+else{
     //Saving Job
     var dbref = fire.database().ref(`jobs`);
     var key = ""
@@ -954,7 +967,7 @@ SetApplicantLabel(juid, auid, label){
 
     this.setState({ job_view: "DONE" })
   }
-
+  }
 
   toggleAccordionPosted(tab) {
 
@@ -1077,6 +1090,8 @@ SetApplicantLabel(juid, auid, label){
           </Col>
 
           <Col md="7">
+          {fire.auth().currentUser.emailVerified ? null : <GlobalAlert AlertId="A" />}
+          {this.state.FormValidation ? null : <GlobalAlert AlertId="B" />}
             {/* <Card>
               <CardBody> */}
             {this.state.job_view === "FORM" ? <CompJob_Form this={this} />
@@ -1089,7 +1104,7 @@ SetApplicantLabel(juid, auid, label){
           <Col md="3">
             <Card>
               <CardBody>
-              <h4><i className="fa fa-line-chart"></i> Latest Trends</h4>
+                <h4><i className="fa fa-line-chart"></i> Latest Trends</h4>
               </CardBody>
             </Card>
           </Col>

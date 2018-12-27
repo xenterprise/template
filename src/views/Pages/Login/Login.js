@@ -37,16 +37,19 @@ class Login extends Component {
   }
 
   inputChanged(e) {
-    this.setState({ [e.target.name]: e.target.value })
-    if (this.state.email.includes('@')) {
-      this.setState({
-        emailFlag: 0
-      })
-    } else {
-      this.setState({
-        emailFlag: 1
-      })
-    }
+    this.setState({ [e.target.name]: e.target.value }, ()=>{
+      if (this.state.email.includes('@')) {
+        this.setState({
+          emailFlag: 0
+        })
+      } else {
+        this.setState({
+          emailFlag: 1
+        })
+      }
+    })
+    
+    
 
     // console.log(fire.auth().currentUser.uid)
   }

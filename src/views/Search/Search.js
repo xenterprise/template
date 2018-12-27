@@ -67,9 +67,8 @@ class Search extends Component {
     // console.log(this.state.text)
     let temp = Object.assign({}, this.state)
     
-    temp[e.target.name] = e.target.value.toLowerCase()
+    temp[e.target.name] = e.target.value.replace(/[^a-zA-Z ]/g, "").toLowerCase()
     this.setState(temp)
-
   }
 
   SearchEvent() {
@@ -82,9 +81,6 @@ class Search extends Component {
       text: pretext,
       sview: true
     })
-
-    // this.props.history.push("/basel/sview/"+ this.state)
-
   }
 
 

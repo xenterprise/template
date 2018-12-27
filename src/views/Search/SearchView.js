@@ -163,6 +163,7 @@ class SearchView extends Component {
     let finalJobIds = []
     let promises = []
 
+    tags.push(query.split("~").join(" "))
     this.setState({
       searching: true
     })

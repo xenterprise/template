@@ -13,6 +13,19 @@ import 'simple-line-icons/css/simple-line-icons.css';
 // Import Main styles for this application
 import './scss/style.css'
 
+import { css } from 'react-emotion';
+// First way to import
+// import { ClipLoader } from 'react-spinners';
+// Another way to import
+import ClipLoader from 'react-spinners/ClipLoader';
+import CircleLoader from 'react-spinners/CircleLoader';
+import BounceLoader from 'react-spinners/BounceLoader';
+// const override = css"
+//     display: block;
+//     margin: 0 auto;
+//     border-color: red;
+// ";
+
 // Containers
 import { DefaultLayout } from './containers';
 import { BaseLayout } from './containers';
@@ -86,11 +99,11 @@ class App extends Component {
         // localStorage.setItem('user', null)
         this.setState({
           user: user,
-          UserEmailVerified: false
+          UserEmailVerified: false,
+          waiting: false
         })
         // this.userSignedIn = false
       }
-
     })
   }
 
@@ -98,14 +111,26 @@ class App extends Component {
     this.authListener();
   }
 
+
+  
+
+
   render() {
     if(this.state.waiting) {
       return(
-        <div></div>
+        <div className="app flex-row align-items-center justify-content-center">
+       {<BounceLoader
+          // className={override}
+          sizeUnit={"px"}
+          size={150}
+          color={'red'}
+          loading={this.state.loading}
+        />}
+      </div> 
       )
     }else {
+      
       return (
-
         <HashRouter>
           <Switch>
             <Route exact path="/login" name="Login Page" component={this.state.user ? BaseLayout : Login} />
@@ -123,7 +148,6 @@ class App extends Component {
         </HashRouter>
       );
     }
-    
   }
 }
 

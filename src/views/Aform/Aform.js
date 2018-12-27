@@ -988,7 +988,7 @@ class Aform extends Component {
   }
   Base_inputChanged_lowercase(e) {
     let temp = Object.assign({}, this.state)
-    temp[e.target.name] = e.target.value.toLowerCase();
+    temp[e.target.name] = e.target.value.replace(/[^a-zA-Z ]/g, "").toLowerCase();
     this.setState(temp)
   }
 
@@ -1114,13 +1114,14 @@ class Aform extends Component {
     console.log('Add Skill Form Submitted', this.state.new_skill)
 
     var dbref = fire.database().ref(`users/${fire.auth().currentUser.uid}/skills`)
+    if (this.state.new_skill !== "") {
     dbref.child(this.state.new_skill).set(true)
       .then(() => {
       })
       .catch(error => {
         console.log(error)
       });
-
+    }
     this.addSkillForm.reset()
   }
 

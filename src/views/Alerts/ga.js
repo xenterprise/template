@@ -135,6 +135,16 @@ class GlobalAlert extends Component {
                 </div>
             )
         }
+        else if (this.state.AlertId === "B") {
+            return (
+                <div>
+                    <Alert color="danger">
+                    {/* or <a href="#" className="alert-link">Resend Verification Email</a>. */}
+                        Please fill out the form properly, Job Title, Company and Salary cannot be left blank
+                    </Alert>
+                </div>
+            )
+        }
         else{
             return null
         }
