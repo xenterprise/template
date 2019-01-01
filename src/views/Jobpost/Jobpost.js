@@ -35,6 +35,7 @@ import { getStyle, hexToRgba } from '@coreui/coreui/dist/js/coreui-utilities'
 
 import GlobalAlert from '../Alerts/ga'
 
+import BounceLoader from 'react-spinners/BounceLoader';
 
 import LeftMenu from '../Jobpost/LeftMenu'
 import fire from '../../config/Fire'
@@ -189,62 +190,87 @@ function CompApplicants(props) {
 
 
 function CompJob_Posted(props) {
-  return (
-    <div>
-      {
-        Object.keys(props.this.state.user_jobs).map((item, i) => (
-          <div key={i}>
-            <CardHeader>
-              <i className="fa fa-map-o"></i>
-              {props.this.state.user_jobs[item].v.titl} at {props.this.state.user_jobs[item].v.jcom}
-              <div className="card-header-actions">
-                <a target="_blank" className="card-header-action btn btn-setting" id="ViewApplicants" onClick={props.this.ShowApplicants.bind(props.this, props.this.state.user_jobs[item].k)}><i className="fa fa-group fa-lg"></i></a>
-                <a target="_blank" className="card-header-action btn btn-setting" id="ViewJob" href={'#/basel/job/' + props.this.state.user_jobs[item].k}><i href={'#/basel/job/' + props.this.state.user_jobs[item].k} className="fa fa-external-link fa-lg"></i></a>
-                <a className="card-header-action btn btn-setting" id="EditJob" onClick={props.this.editJob.bind(props.this, props.this.state.user_jobs[item].k)}><i className="fa fa-gear fa-lg"></i></a>
-                <UncontrolledTooltip placement="top" target="ViewApplicants">
-                  View Applicants
-                </UncontrolledTooltip>
-                <UncontrolledTooltip placement="top" target="ViewJob">
-                  View Job Post
-                </UncontrolledTooltip>
-                <UncontrolledTooltip placement="top" target="EditJob">
-                  Edit Job Post
-                </UncontrolledTooltip>
+  if (!props.this.state.jobsLoadFlag) {
+    return (
+      <div className="flex-row align-items-center justify-content-center">
+        {<BounceLoader
+          sizeUnit={"px"}
+          size={50}
+          color={'red'}
+        />}
+      </div>
+    )
+  } else {
+    return (
+      <div>
+        {
+          Object.keys(props.this.state.user_jobs).map((item, i) => (
+            <div key={i}>
+              <CardHeader>
+                <i className="fa fa-map-o"></i>
+                {props.this.state.user_jobs[item].v.titl} at {props.this.state.user_jobs[item].v.jcom}
+                <div className="card-header-actions">
+                  <a target="_blank" className="card-header-action btn btn-setting" id="ViewApplicants" onClick={props.this.ShowApplicants.bind(props.this, props.this.state.user_jobs[item].k)}><i className="fa fa-group fa-lg"></i></a>
+                  <a target="_blank" className="card-header-action btn btn-setting" id="ViewJob" href={'#/basel/job/' + props.this.state.user_jobs[item].k}><i href={'#/basel/job/' + props.this.state.user_jobs[item].k} className="fa fa-external-link fa-lg"></i></a>
+                  <a className="card-header-action btn btn-setting" id="EditJob" onClick={props.this.editJob.bind(props.this, props.this.state.user_jobs[item].k)}><i className="fa fa-gear fa-lg"></i></a>
+                  <UncontrolledTooltip placement="top" target="ViewApplicants">
+                    View Applicants
+                  </UncontrolledTooltip>
+                  <UncontrolledTooltip placement="top" target="ViewJob">
+                    View Job Post
+                  </UncontrolledTooltip>
+                  <UncontrolledTooltip placement="top" target="EditJob">
+                    Edit Job Post
+                  </UncontrolledTooltip>
 
-                {/* <a className="card-header-action btn btn-minimize" data-target="#collapseExample" ><i className="icon-arrow-up"></i></a> */}
-                {/* <a className="card-header-action btn btn-close" onClick={props.this.DeleteChildOf_Jobs.bind(props.this, props.this.state.user_jobs[item].k)}><i className="icon-close"></i></a> */}
-              </div>
-            </CardHeader>
-          </div>
-        ))
-      }
-    </div>
-  )
+                  {/* <a className="card-header-action btn btn-minimize" data-target="#collapseExample" ><i className="icon-arrow-up"></i></a> */}
+                  {/* <a className="card-header-action btn btn-close" onClick={props.this.DeleteChildOf_Jobs.bind(props.this, props.this.state.user_jobs[item].k)}><i className="icon-close"></i></a> */}
+                </div>
+              </CardHeader>
+            </div>
+          ))
+        }
+      </div>
+    )
+  }
+
 }
 
 
 
 
 function CompJob_Applied(props) {
-  return (
-    <div>
-      {
-        Object.keys(props.this.state.app_user_jobs).map((item, i) => (
-          <div key={i}>
-            <CardHeader>
-              <i className="fa fa-map"></i>
-              {props.this.state.app_user_jobs[item].v.titl} at {props.this.state.app_user_jobs[item].v.jcom}
-              {/* <div className="card-header-actions"> */}
-              {/* <a className="card-header-action btn btn-setting" onClick={props.this.editJob.bind(props.this, props.this.state.app_user_jobs[item].k)}><i className="icon-settings"></i></a> */}
-              {/* <a className="card-header-action btn btn-minimize" data-target="#collapseExample" ><i className="icon-arrow-up"></i></a> */}
-              {/* <a className="card-header-action btn btn-close" onClick={props.this.DeleteChildOf_Jobs.bind(props.this, props.this.state.app_user_jobs[item].k)}><i className="icon-close"></i></a> */}
-              {/* </div> */}
-            </CardHeader>
-          </div>
-        ))
-      }
-    </div>
-  )
+  if (!props.this.state.jobsLoadFlag) {
+    return (
+      <div className="flex-row align-items-center justify-content-center">
+        {<BounceLoader
+          sizeUnit={"px"}
+          size={50}
+          color={'red'}
+        />}
+      </div>
+    )
+  } else {
+    return (
+      <div>
+        {
+          Object.keys(props.this.state.app_user_jobs).map((item, i) => (
+            <div key={i}>
+              <CardHeader>
+                <i className="fa fa-map"></i>
+                {props.this.state.app_user_jobs[item].v.titl} at {props.this.state.app_user_jobs[item].v.jcom}
+                {/* <div className="card-header-actions"> */}
+                {/* <a className="card-header-action btn btn-setting" onClick={props.this.editJob.bind(props.this, props.this.state.app_user_jobs[item].k)}><i className="icon-settings"></i></a> */}
+                {/* <a className="card-header-action btn btn-minimize" data-target="#collapseExample" ><i className="icon-arrow-up"></i></a> */}
+                {/* <a className="card-header-action btn btn-close" onClick={props.this.DeleteChildOf_Jobs.bind(props.this, props.this.state.app_user_jobs[item].k)}><i className="icon-close"></i></a> */}
+                {/* </div> */}
+              </CardHeader>
+            </div>
+          ))
+        }
+      </div>
+    )
+  }
 }
 
 function CompJob_Home(props) {
@@ -277,7 +303,7 @@ function CompJob_Home(props) {
         <CardHeader id="headingTwo">
           <Button block color="link" className="text-left m-0 p-0" onClick={() => props.this.toggleAccordionPosted(1)} aria-expanded={props.this.state.accordionPosted[1]} aria-controls="collapseTwo">
             <h5 className="m-0 p-0"><i className="fa fa-map-o"></i><i className="card-header-actions fa fa-chevron-down"></i> My Posted Jobs</h5>
-            
+
           </Button>
         </CardHeader>
         <Collapse isOpen={props.this.state.accordionPosted[1]} data-parent="#accordion" id="collapseTwo">
@@ -298,199 +324,199 @@ function CompJob_Form(props) {
     <div>
       <h5>Post a New Job</h5>
       <form>
-      <Row>
-        <Col md="2" >
-          <Label htmlFor="text-input">Job Title</Label>
-        </Col>
-        <Col xs="12" md="9">
-          <Input required type="text" name="titl" placeholder="Title of the Job Position" value={props.this.state.job.titl} onChange={props.this.TextInputChanged} />
-        </Col>
-      </Row>
+        <Row>
+          <Col md="2" >
+            <Label htmlFor="text-input">Job Title</Label>
+          </Col>
+          <Col xs="12" md="9">
+            <Input required type="text" name="titl" placeholder="Title of the Job Position" value={props.this.state.job.titl} onChange={props.this.TextInputChanged} />
+          </Col>
+        </Row>
 
-      <Row>
-        <Col md="2">
-          <Label htmlFor="text-input">Company Name</Label>
-        </Col>
-        <Col xs="12" md="9">
-          <Input type="text" name="jcom" placeholder="Company Name Here" value={props.this.state.job.jcom} onChange={props.this.TextInputChanged} />
-        </Col>
-      </Row>
+        <Row>
+          <Col md="2">
+            <Label htmlFor="text-input">Company Name</Label>
+          </Col>
+          <Col xs="12" md="9">
+            <Input type="text" name="jcom" placeholder="Company Name Here" value={props.this.state.job.jcom} onChange={props.this.TextInputChanged} />
+          </Col>
+        </Row>
 
-      <Row>
-        <Col md="2">
-          <Label htmlFor="text-input">Experience Required</Label>
-        </Col>
-        <Col md="3">
-          <Dropdown isOpen={props.this.state.DropDownOpen_Experience} toggle={props.this.DropDownToggle_Experience}>
-            <DropdownToggle caret>
-              {props.this.state.DropDownText_Experience}
-            </DropdownToggle>
-            <DropdownMenu>
-              <DropdownItem name="fresh" onClick={props.this.DropDownChanged_Experience} value="Fresh Eligible">Fresh Eligible</DropdownItem>
-              <DropdownItem name="1y" onClick={props.this.DropDownChanged_Experience} value="1 year or More">1 year or More</DropdownItem>
-              <DropdownItem name="2y" onClick={props.this.DropDownChanged_Experience} value="2 years or More">2 years or More</DropdownItem>
-              <DropdownItem name="3y" onClick={props.this.DropDownChanged_Experience} value="3 years or More">3 years or More</DropdownItem>
-              <DropdownItem name="5y" onClick={props.this.DropDownChanged_Experience} value="5 years or More">5 years or More</DropdownItem>
-              <DropdownItem name="10y" onClick={props.this.DropDownChanged_Experience} value="10 years or More">10 years or More</DropdownItem>
-              <DropdownItem name="15y" onClick={props.this.DropDownChanged_Experience} value="15 years or More">15 years or More</DropdownItem>
-            </DropdownMenu>
-          </Dropdown>
-        </Col>
+        <Row>
+          <Col md="2">
+            <Label htmlFor="text-input">Experience Required</Label>
+          </Col>
+          <Col md="3">
+            <Dropdown isOpen={props.this.state.DropDownOpen_Experience} toggle={props.this.DropDownToggle_Experience}>
+              <DropdownToggle caret>
+                {props.this.state.DropDownText_Experience}
+              </DropdownToggle>
+              <DropdownMenu>
+                <DropdownItem name="fresh" onClick={props.this.DropDownChanged_Experience} value="Fresh Eligible">Fresh Eligible</DropdownItem>
+                <DropdownItem name="1y" onClick={props.this.DropDownChanged_Experience} value="1 year or More">1 year or More</DropdownItem>
+                <DropdownItem name="2y" onClick={props.this.DropDownChanged_Experience} value="2 years or More">2 years or More</DropdownItem>
+                <DropdownItem name="3y" onClick={props.this.DropDownChanged_Experience} value="3 years or More">3 years or More</DropdownItem>
+                <DropdownItem name="5y" onClick={props.this.DropDownChanged_Experience} value="5 years or More">5 years or More</DropdownItem>
+                <DropdownItem name="10y" onClick={props.this.DropDownChanged_Experience} value="10 years or More">10 years or More</DropdownItem>
+                <DropdownItem name="15y" onClick={props.this.DropDownChanged_Experience} value="15 years or More">15 years or More</DropdownItem>
+              </DropdownMenu>
+            </Dropdown>
+          </Col>
 
-        <Col md="2">
-          <Label htmlFor="text-input">Qualification</Label>
-        </Col>
-        <Col md="4">
-          <Dropdown isOpen={props.this.state.DropDownOpen_Qualification} toggle={props.this.DropDownToggle_Qualification}>
-            <DropdownToggle caret>
-              {props.this.state.DropDownText_Qualification}
-            </DropdownToggle>
-            <DropdownMenu>
-              <DropdownItem name="no" onClick={props.this.DropDownChanged_Qualification} value="No Degree Requirement">No Degree Requirement</DropdownItem>
-              <DropdownItem name="bs" onClick={props.this.DropDownChanged_Qualification} value="Bachelors">Bachelors</DropdownItem>
-              <DropdownItem name="ms" onClick={props.this.DropDownChanged_Qualification} value="Masters">Masters</DropdownItem>
-              <DropdownItem name="pd" onClick={props.this.DropDownChanged_Qualification} value="Ph.D">Ph.D</DropdownItem>
-            </DropdownMenu>
-          </Dropdown>
-        </Col>
-      </Row>
-      <Row>
-        <Col md="2">
-          <Label htmlFor="text-input">Required Skills</Label>
-        </Col>
-        <Col md="9">
-          <div>
-            {
-              Object.keys(props.this.state.job.skls).map((item, i) => (
-                <Button
-                  key={i}
-                  size="sm"
-                  className="btn-facebook btn-brand text mr-1 mb-1">
-                  {/* <span>{item}</span><a className="card-header-action btn btn-close" >  <i className="icon-close" onClick={props.this.delChildOfuser.bind(props.this, "skills", item)}></i></a> */}
-                  <span>{props.this.state.job.skls[item].s}</span><a className="card-header-action btn btn-close" >  <i className="icon-close" onClick={props.this.DeleteChildOf_Skills.bind(props.this, item)}></i></a>
-                </Button>
-              ))
-            }
+          <Col md="2">
+            <Label htmlFor="text-input">Qualification</Label>
+          </Col>
+          <Col md="4">
+            <Dropdown isOpen={props.this.state.DropDownOpen_Qualification} toggle={props.this.DropDownToggle_Qualification}>
+              <DropdownToggle caret>
+                {props.this.state.DropDownText_Qualification}
+              </DropdownToggle>
+              <DropdownMenu>
+                <DropdownItem name="no" onClick={props.this.DropDownChanged_Qualification} value="No Degree Requirement">No Degree Requirement</DropdownItem>
+                <DropdownItem name="bs" onClick={props.this.DropDownChanged_Qualification} value="Bachelors">Bachelors</DropdownItem>
+                <DropdownItem name="ms" onClick={props.this.DropDownChanged_Qualification} value="Masters">Masters</DropdownItem>
+                <DropdownItem name="pd" onClick={props.this.DropDownChanged_Qualification} value="Ph.D">Ph.D</DropdownItem>
+              </DropdownMenu>
+            </Dropdown>
+          </Col>
+        </Row>
+        <Row>
+          <Col md="2">
+            <Label htmlFor="text-input">Required Skills</Label>
+          </Col>
+          <Col md="9">
+            <div>
+              {
+                Object.keys(props.this.state.job.skls).map((item, i) => (
+                  <Button
+                    key={i}
+                    size="sm"
+                    className="btn-facebook btn-brand text mr-1 mb-1">
+                    {/* <span>{item}</span><a className="card-header-action btn btn-close" >  <i className="icon-close" onClick={props.this.delChildOfuser.bind(props.this, "skills", item)}></i></a> */}
+                    <span>{props.this.state.job.skls[item].s}</span><a className="card-header-action btn btn-close" >  <i className="icon-close" onClick={props.this.DeleteChildOf_Skills.bind(props.this, item)}></i></a>
+                  </Button>
+                ))
+              }
 
-            {/* <Row>
+              {/* <Row>
             <Col xs="12" md="9"> */}
-            <form ref={input => props.this.addSkillForm = input} onSubmit={(e) => { props.this.addSkill(e) }}>
-              <Input type="text" id="text-input" name="new_skill" placeholder="Enter New Skills Here & Press Enter" onChange={props.this.TextInputChanged_lowercase} />
-            </form>
-            {/* </Col>
+              <form ref={input => props.this.addSkillForm = input} onSubmit={(e) => { props.this.addSkill(e) }}>
+                <Input type="text" id="text-input" name="new_skill" placeholder="Enter New Skills Here & Press Enter" onChange={props.this.TextInputChanged_lowercase} />
+              </form>
+              {/* </Col>
           </Row> */}
 
-          </div>
-        </Col>
-      </Row>
+            </div>
+          </Col>
+        </Row>
 
-      <Row>
-        <Col md="2">
-          <Label htmlFor="text-input">Salary Offered</Label>
-        </Col>
-        <Col md="1">
-          <Dropdown isOpen={props.this.state.DropDownOpen_SalaryCurrency} toggle={props.this.DropDownToggle_SalaryCurrency}>
-            <DropdownToggle caret>
-              {props.this.state.DropDownText_SalaryCurrency}
-            </DropdownToggle>
-            <DropdownMenu>
-              <DropdownItem name="PKR" onClick={props.this.DropDownChanged_SalaryCurrency} value="PKR">PKR</DropdownItem>
-              <DropdownItem name="USD" onClick={props.this.DropDownChanged_SalaryCurrency} value="USD">USD</DropdownItem>
-            </DropdownMenu>
-          </Dropdown>
-        </Col>
-        <Col md="2">
-          <Input type="text" name="slry" placeholder="Salary Offered" value={props.this.state.job.slry} onChange={props.this.TextInputChanged} />
-        </Col>
+        <Row>
+          <Col md="2">
+            <Label htmlFor="text-input">Salary Offered</Label>
+          </Col>
+          <Col md="1">
+            <Dropdown isOpen={props.this.state.DropDownOpen_SalaryCurrency} toggle={props.this.DropDownToggle_SalaryCurrency}>
+              <DropdownToggle caret>
+                {props.this.state.DropDownText_SalaryCurrency}
+              </DropdownToggle>
+              <DropdownMenu>
+                <DropdownItem name="PKR" onClick={props.this.DropDownChanged_SalaryCurrency} value="PKR">PKR</DropdownItem>
+                <DropdownItem name="USD" onClick={props.this.DropDownChanged_SalaryCurrency} value="USD">USD</DropdownItem>
+              </DropdownMenu>
+            </Dropdown>
+          </Col>
+          <Col md="2">
+            <Input type="text" name="slry" placeholder="Salary Offered" value={props.this.state.job.slry} onChange={props.this.TextInputChanged} />
+          </Col>
 
-        <Col md="2">
-          <Label htmlFor="text-input">Appointment Location</Label>
-        </Col>
-        <Col md="4">
-          <Input type="text" name="jloc" placeholder="Appointment Location City/ Country" value={props.this.state.job.jloc} onChange={props.this.TextInputChanged} />
-        </Col>
-      </Row>
+          <Col md="2">
+            <Label htmlFor="text-input">Appointment Location</Label>
+          </Col>
+          <Col md="4">
+            <Input type="text" name="jloc" placeholder="Appointment Location City/ Country" value={props.this.state.job.jloc} onChange={props.this.TextInputChanged} />
+          </Col>
+        </Row>
 
-      <Row>
-        <Col md="2">
-          <Label htmlFor="text-input">Contact Numbers</Label>
-        </Col>
-        <Col xs="12" md="9">
-          <Input type="text" name="ctct" placeholder="Optional Contact Numbers for Job Communication" value={props.this.state.job.ctct} onChange={props.this.TextInputChanged} />
-        </Col>
-      </Row>
+        <Row>
+          <Col md="2">
+            <Label htmlFor="text-input">Contact Numbers</Label>
+          </Col>
+          <Col xs="12" md="9">
+            <Input type="text" name="ctct" placeholder="Optional Contact Numbers for Job Communication" value={props.this.state.job.ctct} onChange={props.this.TextInputChanged} />
+          </Col>
+        </Row>
 
 
-      <Row>
-        <Col md="2">
-          <Label htmlFor="text-input">Application Deadline</Label>
-        </Col>
-        <Col xs="12" md="9">
-          <Input type="date" name="apdl" placeholder="Last date to apply to this job" value={props.this.state.job.apdl} onChange={props.this.TextInputChanged_applyDeadline} />
-        </Col>
-      </Row>
+        <Row>
+          <Col md="2">
+            <Label htmlFor="text-input">Application Deadline</Label>
+          </Col>
+          <Col xs="12" md="9">
+            <Input type="date" name="apdl" placeholder="Last date to apply to this job" value={props.this.state.job.apdl} onChange={props.this.TextInputChanged_applyDeadline} />
+          </Col>
+        </Row>
 
-      <Row>
-        <Col md="2">
-          <Label htmlFor="text-input">Job Description</Label>
-        </Col>
-        <Col xs="12" md="9">
-          <Input type="textarea" name="resp" placeholder="Mention in detail the responsibilities required" value={props.this.state.job.resp} onChange={props.this.TextInputChanged} />
-        </Col>
-      </Row>
+        <Row>
+          <Col md="2">
+            <Label htmlFor="text-input">Job Description</Label>
+          </Col>
+          <Col xs="12" md="9">
+            <Input type="textarea" name="resp" placeholder="Mention in detail the responsibilities required" value={props.this.state.job.resp} onChange={props.this.TextInputChanged} />
+          </Col>
+        </Row>
 
-      <Row>
-        <Col md="2">
-          <Label htmlFor="text-input">Age Limit</Label>
-        </Col>
-        <Col md="2">
-          <Input type="text" name="agel" placeholder="Enter the Age Limit" value={props.this.state.job.agel} onChange={props.this.TextInputChanged} />
-        </Col>
+        <Row>
+          <Col md="2">
+            <Label htmlFor="text-input">Age Limit</Label>
+          </Col>
+          <Col md="2">
+            <Input type="text" name="agel" placeholder="Enter the Age Limit" value={props.this.state.job.agel} onChange={props.this.TextInputChanged} />
+          </Col>
 
-        <Col md="2">
-          <Label htmlFor="text-input">Job Timings</Label>
-        </Col>
-        <Col md="4">
-          <Input type="text" name="tmgs" placeholder="Mention Timings, Regular 9-5 or Shifts based" value={props.this.state.job.tmgs} onChange={props.this.TextInputChanged} />
-        </Col>
-      </Row>
+          <Col md="2">
+            <Label htmlFor="text-input">Job Timings</Label>
+          </Col>
+          <Col md="4">
+            <Input type="text" name="tmgs" placeholder="Mention Timings, Regular 9-5 or Shifts based" value={props.this.state.job.tmgs} onChange={props.this.TextInputChanged} />
+          </Col>
+        </Row>
 
-      <Row>
-        <Col md="2">
-          <Label htmlFor="text-input">Other Requirements</Label>
-        </Col>
-        <Col xs="12" md="9">
-          <Input type="textarea" name="oreq" placeholder="Mention in detail any other requirements, like, tools used etc" value={props.this.state.job.oreq} onChange={props.this.TextInputChanged} />
-        </Col>
-      </Row>
+        <Row>
+          <Col md="2">
+            <Label htmlFor="text-input">Other Requirements</Label>
+          </Col>
+          <Col xs="12" md="9">
+            <Input type="textarea" name="oreq" placeholder="Mention in detail any other requirements, like, tools used etc" value={props.this.state.job.oreq} onChange={props.this.TextInputChanged} />
+          </Col>
+        </Row>
 
-      <Row>
-        <Col md="2">
-          <Label htmlFor="text-input">Probation</Label>
-        </Col>
-        <Col xs="12" md="9">
-          <Input type="text" name="pbtn" placeholder="Duration of Initial Probation" value={props.this.state.job.pbtn} onChange={props.this.TextInputChanged} />
-        </Col>
-      </Row>
+        <Row>
+          <Col md="2">
+            <Label htmlFor="text-input">Probation</Label>
+          </Col>
+          <Col xs="12" md="9">
+            <Input type="text" name="pbtn" placeholder="Duration of Initial Probation" value={props.this.state.job.pbtn} onChange={props.this.TextInputChanged} />
+          </Col>
+        </Row>
 
-      <Row>
-        <Col md="2">
-          <Label htmlFor="text-input">Other Details (Optional)</Label>
-        </Col>
-        <Col xs="12" md="9">
-          <Input type="textarea" name="odet" placeholder="Mention any other details like Interview date etc" value={props.this.state.job.odet} onChange={props.this.TextInputChanged} />
-        </Col>
-      </Row>
+        <Row>
+          <Col md="2">
+            <Label htmlFor="text-input">Other Details (Optional)</Label>
+          </Col>
+          <Col xs="12" md="9">
+            <Input type="textarea" name="odet" placeholder="Mention any other details like Interview date etc" value={props.this.state.job.odet} onChange={props.this.TextInputChanged} />
+          </Col>
+        </Row>
 
-      {/* <Input type="date" id="date-input" name="date-input" placeholder="date" /> */}
-      <Row>
-        <Col md="2">
-          <Button type="submit" align="right" size="md" color="primary" onClick={props.this.Submit_Job}><i className="fa fa-dot-circle-o"></i> Save </Button>
-        </Col>
-        <Col md="2">
-          <Button type="submit" align="right" size="md" color="dark" onClick={props.this.CancelJob}><i className="fa fa-dot-circle-o"></i> Cancel</Button>
-        </Col>
-      </Row>
+        {/* <Input type="date" id="date-input" name="date-input" placeholder="date" /> */}
+        <Row>
+          <Col md="2">
+            <Button type="submit" align="right" size="md" color="primary" onClick={props.this.Submit_Job}><i className="fa fa-dot-circle-o"></i> Save </Button>
+          </Col>
+          <Col md="2">
+            <Button type="submit" align="right" size="md" color="dark" onClick={props.this.CancelJob}><i className="fa fa-dot-circle-o"></i> Cancel</Button>
+          </Col>
+        </Row>
       </form>
     </div>
   );
@@ -544,7 +570,8 @@ class Jobpost extends Component {
       jedit: false,
       app_juid: "",
       ApplicantDetails: [],
-      FormValidation: true
+      FormValidation: true,
+      jobsLoadFlag: false
     };
 
     this.TextInputChanged = this.TextInputChanged.bind(this)
@@ -685,6 +712,9 @@ class Jobpost extends Component {
           let app_temp = Object.assign({}, this.state)
           app_temp.app_user_jobs.push({ k: app_jobSnap.key, v: app_jobSnap.val() })
           this.setState(app_temp)
+          this.setState({
+            jobsLoadFlag: true
+          })
         })
       }
     })
@@ -908,67 +938,67 @@ class Jobpost extends Component {
   Submit_Job(e) {
     e.preventDefault();
 
-if(this.state.job.titl===""||this.state.job.jcom===""||this.state.job.slry===""){
-this.setState({
-  FormValidation: false
-})
-}
-else{
-    //Saving Job
-    var dbref = fire.database().ref(`jobs`);
-    var key = ""
-
-    //Get Key Depending upon New Job or Edit Job
-    if (this.state.jedit === true) {
-      key = this.state.ji
+    if (this.state.job.titl === "" || this.state.job.jcom === "" || this.state.job.slry === "") {
+      this.setState({
+        FormValidation: false
+      })
     }
     else {
-      key = dbref.push().getKey()
-    }
+      //Saving Job
+      var dbref = fire.database().ref(`jobs`);
+      var key = ""
 
-    dbref.child(key).set(this.state.job)
-      .then(() => {
-        console.log("Posted")
-      })
-      .catch(error => {
-        console.log(error)
-      });
+      //Get Key Depending upon New Job or Edit Job
+      if (this.state.jedit === true) {
+        key = this.state.ji
+      }
+      else {
+        key = dbref.push().getKey()
+      }
 
-    console.log("Key", key)
-
-    //Saving Job Id in User
-    if (this.state.jedit === false) {
-      dbref = fire.database().ref(`users/${fire.auth().currentUser.uid}/jobs`)
-      dbref.child(key).set(true)
+      dbref.child(key).set(this.state.job)
         .then(() => {
+          console.log("Posted")
         })
         .catch(error => {
           console.log(error)
         });
-    }
+
+      console.log("Key", key)
+
+      //Saving Job Id in User
+      if (this.state.jedit === false) {
+        dbref = fire.database().ref(`users/${fire.auth().currentUser.uid}/jobs`)
+        dbref.child(key).set(true)
+          .then(() => {
+          })
+          .catch(error => {
+            console.log(error)
+          });
+      }
 
 
-    //Saving Job Id in skills_jobs 
-    for (var i = 0; i < this.state.job.skls.length; i++) {
-      dbref = fire.database().ref(`skills_jobs/${this.state.job.skls[i].s}`)
-      dbref.child(key).set(true)
+      //Saving Job Id in skills_jobs 
+      for (var i = 0; i < this.state.job.skls.length; i++) {
+        dbref = fire.database().ref(`skills_jobs/${this.state.job.skls[i].s}`)
+        dbref.child(key).set(true)
+          .then(() => {
+          })
+          .catch(error => {
+            console.log(error)
+          });
+      }
+      //Saving the Enable/Disable status of a Job
+      dbref = fire.database().ref(`jobs/${key}/ActiveStatus`)
+      dbref.set(true)
         .then(() => {
         })
         .catch(error => {
           console.log(error)
-        });
-    }
-    //Saving the Enable/Disable status of a Job
-    dbref = fire.database().ref(`jobs/${key}/ActiveStatus`)
-    dbref.set(true)
-      .then(() => {
-      })
-      .catch(error => {
-        console.log(error)
-      })
+        })
 
-    this.setState({ job_view: "DONE" })
-  }
+      this.setState({ job_view: "DONE" })
+    }
   }
 
   toggleAccordionPosted(tab) {
@@ -1082,13 +1112,13 @@ else{
       <div >
 
         <Row>
-        <Col md="2">
+          <Col md="2">
             <LeftMenu />
           </Col>
 
           <Col md="7">
-          {fire.auth().currentUser.emailVerified ? null : <GlobalAlert AlertId="A" />}
-          {this.state.FormValidation ? null : <GlobalAlert AlertId="B" />}
+            {fire.auth().currentUser.emailVerified ? null : <GlobalAlert AlertId="A" />}
+            {this.state.FormValidation ? null : <GlobalAlert AlertId="B" />}
             {/* <Card>
               <CardBody> */}
             {this.state.job_view === "FORM" ? <CompJob_Form this={this} />

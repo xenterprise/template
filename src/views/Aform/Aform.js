@@ -19,7 +19,7 @@ import {
   Badge,
   Fade,
   Collapse, Dropdown, DropdownToggle, DropdownMenu, DropdownItem, Progress, Table, TabContent, TabPane,
-  Modal, ModalBody, ModalHeader, ModalFooter
+ 
 } from 'reactstrap';
 
 // import Form from "react-jsonschema-form";
@@ -27,6 +27,7 @@ import {
 // import { auth, db } from '../../firebase';
 import fire from '../../config/Fire'
 import GlobalAlert from '../Alerts/ga'
+import GlobalModals from '../Alerts/modals'
 import Image from '../Pages/Img/Image'
 import LeftMenu from '../Jobpost/LeftMenu'
 
@@ -791,7 +792,7 @@ class Aform extends Component {
       Flag_Publication_View: false,
 
 
-      modal_working:true,
+
       accordion: [false, false, false, false, false, false, false, false],
 
       user: {
@@ -809,6 +810,7 @@ class Aform extends Component {
         services: [],
         work: [],
         skills: {},
+        settings: {}
       }
     }
 
@@ -851,7 +853,7 @@ class Aform extends Component {
     this.toggleAccordion = this.toggleAccordion.bind(this);
     this.toggleSectionOpenClose = this.toggleSectionOpenClose.bind(this)
 
-    this.toggleModal_Working = this.toggleModal_Working.bind(this)
+    
   }
 
 
@@ -1097,11 +1099,7 @@ class Aform extends Component {
     this.toggleFlag_Publication()
   }
 
-  toggleModal_Working() {
-    this.setState({
-      modal_working : !this.state.modal_working,
-    });
-  }
+  
 
 
   addItem_work(e) {
@@ -1272,52 +1270,8 @@ class Aform extends Component {
             <div>
               {fire.auth().currentUser.emailVerified ? null : <GlobalAlert AlertId="A" />}
               <h4>Resume & Profile Settings</h4>
-              {/* <Button color="danger" onClick={this.toggleModal_Working} className="mr-1">Danger modal</Button> */}
-                <Modal isOpen={this.state.modal_working} toggle={this.toggleModal_Working}
-                       className={'modal-lg' + this.props.className}>
-                  <ModalHeader toggle={this.toggleModal_Working}>How it works?</ModalHeader>
-                  <ModalBody>
-                    <Row>
-                      <Col md="4" className="justify-content-center">
-                      <p>Complete Your Profile</p>
-                      </Col>
-                      <Col md="4" className="align-items-center">
-                      <p>View & Confirm Resume</p>
-                      </Col>
-                      <Col md="4" className="align-items-center">
-                      <p>Search & Apply to Jobs</p>
-                      </Col>
-
-                    </Row>
-                    <Row>
-                      <Col md="1" className="justify-content-center">
-                      
-                      </Col>
-                      <Col md="2" className="justify-content-center">
-                      <img src="https://img.icons8.com/color/48/000000/resume.png"/>
-                      </Col>
-                      <Col md="2" className="align-items-center">
-                      <img src="https://img.icons8.com/color/48/000000/play.png"/>
-                      </Col>
-                      <Col md="2" className="align-items-center">
-                      <img src="https://img.icons8.com/color/48/000000/task-completed.png"/>
-                      </Col>
-                      <Col md="2" className="align-items-center">
-                      <img src="https://img.icons8.com/color/48/000000/play.png"/>
-                      </Col>
-                      <Col md="2" className="align-items-center">
-                      <img src="https://img.icons8.com/color/48/000000/contract-job.png"/>
-                      </Col>
-                    </Row>
-
-                    
-                  
-                  </ModalBody>
-                  <ModalFooter>
-                    <Button color="danger" onClick={this.toggleModal_Working}>Ok</Button>{' '}
-                    {/* <Button color="secondary" onClick={this.toggleModal_Working}>Cancel</Button> */}
-                  </ModalFooter>
-                </Modal>
+              <GlobalModals ModalId="A"/>
+              
             </div>
 
             {/* </CardBody>

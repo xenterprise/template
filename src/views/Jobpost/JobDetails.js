@@ -51,7 +51,7 @@ function JobDisplayComponent(props) {
                   <h6><i className="fa fa-id-card-o"></i> {props.this.state.jobDetails.jd.jcom}</h6>
                 </Col>
                 <Col md="3">
-                  {fire.auth().currentUser.emailVerified ?
+                  {fire.auth().currentUser.emailVerified && props.this.state.jobDetails.jd.user !== fire.auth().currentUser.uid?
                     <Button block outline active color="success" aria-pressed="true" onClick={props.this.ApplyToJob}>Apply Now</Button> :
                     null
 

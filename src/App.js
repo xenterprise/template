@@ -124,7 +124,7 @@ class App extends Component {
           sizeUnit={"px"}
           size={150}
           color={'red'}
-          loading={this.state.loading}
+          // loading={this.state.loading}
         />}
       </div> 
       )

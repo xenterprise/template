@@ -37,13 +37,13 @@ import LeftMenu from '../Jobpost/LeftMenu'
 
 
 function SearchResultJobs(props) {
-  if(props.this.state.searching){
-    return(
+  if (props.this.state.searching) {
+    return (
       <div>Searching</div>
     )
   }
-  else{
-    if(props.this.state.found){
+  else {
+    if (props.this.state.found) {
       return (
         <div>
           {
@@ -53,21 +53,21 @@ function SearchResultJobs(props) {
                   <CardHeader>
                     {/* onClick={() => props.this.toggleAccordionPosted(0)} */}
                     {/* aria-expanded={props.this.state.accordionPosted[0]} aria-controls="collapseOne" */}
-    
+
                     <Row>
                       <Col md="9">
                         <Button block target="_blank" id="job_title" color="link" className="text-left m-0 p-0" href={'#/basel/job/' + props.this.state.jobDetails[item].jid} >
-                        <h5 className="m-0 p-0"><i className="fa fa-briefcase"></i> {props.this.state.jobDetails[item].jd.titl}</h5>
+                          <h5 className="m-0 p-0"><i className="fa fa-briefcase"></i> {props.this.state.jobDetails[item].jd.titl}</h5>
                         </Button>
-                        
+
                       </Col>
                       <Col md="3">
-                        <h6>Package: {props.this.state.jobDetails[item].jd.crcy}:{props.this.state.jobDetails[item].jd.slry}</h6>
-    
+                        <h5>{props.this.state.jobDetails[item].jd.crcy}: {props.this.state.jobDetails[item].jd.slry}</h5>
+
                       </Col>
                     </Row>
-    
-    
+
+
                   </CardHeader>
                   <CardBody>
                     <Row>
@@ -78,10 +78,10 @@ function SearchResultJobs(props) {
                         <p><strong>Last Date to Apply: </strong>{props.this.state.jobDetails[item].jd.apdl}</p>
                       </Col>
                     </Row>
-    
+
                     <span><p><strong>Job Description: </strong>{props.this.state.jobDetails[item].jd.resp}</p></span>
                     {/* <p>{props.this.state.jobDetails[item].jd.date}</p> */}
-    
+
                     {
                       Object.keys(props.this.state.jobDetails[item].jd.skls).map((skill_item, i) => (
                         <Button
@@ -92,6 +92,16 @@ function SearchResultJobs(props) {
                         </Button>
                       ))
                     }
+
+                    <Row >
+                      <Col>
+                        <div align="right">
+                          <Button target="_blank" id="job_title" color="primary" href={'#/basel/job/' + props.this.state.jobDetails[item].jid}>
+                            <i className="fa fa-location-arrow"></i> View Details
+                          </Button>
+                        </div>
+                      </Col>
+                    </Row>
                   </CardBody>
                 </Card>
               </div>
@@ -99,14 +109,14 @@ function SearchResultJobs(props) {
           }
         </div>
       )
-        }
-        else{
-          return(
-            <div>No Search Results Found, Search Again</div>
-          )
-        }
+    }
+    else {
+      return (
+        <div>No Search Results Found, Search Again</div>
+      )
+    }
   }
-  
+
 }
 
 class SearchView extends Component {
@@ -137,18 +147,18 @@ class SearchView extends Component {
     }
   }
 
-  
+
 
 
   componentWillReceiveProps(nextProps) {
     // console.log("Next props", nextProps.location.state)
     // if(nextProps.location.state){
-      this.searchJobs(nextProps.location.state.text)
-      this.setState({
-        query: nextProps.location.state.text
-      })
+    this.searchJobs(nextProps.location.state.text)
+    this.setState({
+      query: nextProps.location.state.text
+    })
     // }
-    
+
   }
 
 
@@ -178,15 +188,15 @@ class SearchView extends Component {
         skills_jobs.on('value', snap => {
           unique = snap.val()
           console.log("JobsArray: ", unique, snap.val())
-          if(unique)
-          Object.keys(unique).forEach((key, index) => {
-            console.log(key, index, unique[key])
-            if (unique[key] === true) {
-              finalJobIds.push(key)
+          if (unique)
+            Object.keys(unique).forEach((key, index) => {
+              console.log(key, index, unique[key])
+              if (unique[key] === true) {
+                finalJobIds.push(key)
+              }
             }
-          }
-          
-          )
+
+            )
           resolve(0)
         })
         // )
@@ -214,13 +224,13 @@ class SearchView extends Component {
           .then(() => {
             console.log("All Prms cler", tempDetails)
             console.log("TEMP DETAILS Length", tempDetails.length)
-            if(tempDetails.length>0)
-            this.setState({
-              jobDetails: tempDetails,
-              found: true,
-              searching: false
-            })
-            else{
+            if (tempDetails.length > 0)
+              this.setState({
+                jobDetails: tempDetails,
+                found: true,
+                searching: false
+              })
+            else {
               this.setState({
                 jobDetails: tempDetails,
                 found: false,
@@ -261,7 +271,7 @@ class SearchView extends Component {
     return (
       <div>
         <Row>
-        <Col md="2">
+          <Col md="2">
             <LeftMenu />
           </Col>
 
@@ -279,7 +289,7 @@ class SearchView extends Component {
           <Col md="3">
             <Card>
               <CardBody>
-              <h4><i className="fa fa-line-chart"></i> Latest Trends</h4>
+                <h4><i className="fa fa-line-chart"></i> Latest Trends</h4>
               </CardBody>
             </Card>
           </Col>

@@ -34,6 +34,8 @@ import { getStyle, hexToRgba } from '@coreui/coreui/dist/js/coreui-utilities'
 import fire from '../../config/Fire'
 import LeftMenu from '../Jobpost/LeftMenu'
 
+import GlobalModals from '../Alerts/modals'
+
 const brandPrimary = getStyle('--primary')
 const brandSuccess = getStyle('--success')
 const brandInfo = getStyle('--info')
@@ -115,6 +117,7 @@ class Home extends Component {
                     </Col>
 
                     <Col md="7">
+                        <GlobalModals ModalId="A" />
                         <Row>
 
                             <Col xs="12" sm="6" lg="4">

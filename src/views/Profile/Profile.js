@@ -169,35 +169,35 @@ function SocialPlatforms(props) {
 }
 
 function Skills(props) {
-  if (props.this.state.user.skills) {
-    return (
-      <div align="center">
-        {
-          Object.keys(props.this.state.user.skills).map((item, i) => (
-            <Button
-              key={i}
-              size="md"
-              className="btn-facebook btn-brand text mr-1 mb-1">
-              <span>{item}</span>
-            </Button>
-          ))
-        }
-      </div>
-    )
-  } else {
-    return (
-      <div>
-        <p>
-          No Data Available, Please Go to "Edit Profile"
+    if (props.this.state.user && props.this.state.user.skills) {
+      return (
+        <div align="center">
+          {
+            Object.keys(props.this.state.user.skills).map((item, i) => (
+              <Button
+                key={i}
+                size="md"
+                className="btn-facebook btn-brand text mr-1 mb-1">
+                <span>{item}</span>
+              </Button>
+            ))
+          }
+        </div>
+      )
+    } else {
+      return (
+        <div>
+          <p>
+            No Data Available, Please Go to "Edit Profile"
         </p>
-      </div>
-    )
-  }
+        </div>
+      )
+    }
 }
 
 // This code also executes even when Personal is not populated yet so at that time, work does not exist
 function WorkExperience(props) {
-  if (props.this.state.user.work) {
+  if (props.this.state.user) {
     if (props.this.state.user.work) {
       return (
         <div>
@@ -246,7 +246,7 @@ function WorkExperience(props) {
 
 
 function Education(props) {
-  if (props.this.state.user.education) {
+  if (props.this.state.user && props.this.state.user.education) {
     return (
       <div>
         {
@@ -268,11 +268,10 @@ function Education(props) {
       </div>
     )
   }
-
 }
 
 function Organizations(props) {
-  if (props.this.state.user.organizations) {
+  if (props.this.state.user && props.this.state.user.organizations) {
     return (
       <div>
         {
@@ -297,7 +296,7 @@ function Organizations(props) {
 }
 
 function Certifications(props) {
-  if (props.this.state.user.certifications) {
+  if (props.this.state.user && props.this.state.user.certifications) {
     return (
       <div>
         {
@@ -322,7 +321,7 @@ function Certifications(props) {
 }
 
 function Publications(props) {
-  if (props.this.state.user.publications) {
+  if (props.this.state.user && props.this.state.user.publications) {
     return (
       <div>
         {
@@ -596,100 +595,100 @@ class Profile extends Component {
     return (
       <div>
         <Row>
-        <Col md="2">
+          <Col md="2">
             <LeftMenu />
           </Col>
 
           <Col md="7">
             {/* <Card>
               <CardBody> */}
-                <Card>
-                  <CardBody>
-                    <PrimaryInfo this={this} />
-                  </CardBody>
-                </Card>
+            <Card>
+              <CardBody>
+                <PrimaryInfo this={this} />
+              </CardBody>
+            </Card>
 
+            <Card>
+              <CardHeader>
+                <h5><i className="fa fa-check-circle"></i> Skills</h5>
+              </CardHeader>
+              <CardBody >
+                <Skills this={this} />
+              </CardBody>
+            </Card>
+
+            <Card>
+              <CardHeader>
+                <h5><i className="fa fa-briefcase"></i> Work Experience & Projects</h5>
+              </CardHeader>
+              <CardBody>
+                <WorkExperience this={this} />
+              </CardBody>
+            </Card>
+
+
+
+
+
+            <Row>
+              <Col>
                 <Card>
                   <CardHeader>
-                    <h5><i className="fa fa-check-circle"></i> Skills</h5>
-                  </CardHeader>
-                  <CardBody >
-                    <Skills this={this} />
-                  </CardBody>
-                </Card>
-
-                <Card>
-                  <CardHeader>
-                    <h5><i className="fa fa-briefcase"></i> Work Experience & Projects</h5>
+                    <h5><i className="fa fa-graduation-cap"></i> Education</h5>
                   </CardHeader>
                   <CardBody>
-                    <WorkExperience this={this} />
+                    <ListGroup>
+                      <Education this={this} />
+                    </ListGroup>
                   </CardBody>
                 </Card>
+              </Col>
+            </Row>
 
 
-
-
-
-                <Row>
-                  <Col>
-                    <Card>
-                      <CardHeader>
-                        <h5><i className="fa fa-graduation-cap"></i> Education</h5>
-                      </CardHeader>
-                      <CardBody>
-                        <ListGroup>
-                          <Education this={this} />
-                        </ListGroup>
-                      </CardBody>
-                    </Card>
-                  </Col>
-                </Row>
-
-
-                <Row>
-                  <Col>
-                    <Card>
-                      <CardHeader>
-                        <h5><i className="fa fa-users"></i> Organizations</h5>
-                      </CardHeader>
-                      <CardBody>
-                        <ListGroup>
-                          <Organizations this={this} />
-                        </ListGroup>
-                      </CardBody>
-                    </Card>
-                  </Col>
-                </Row>
-                <Row>
-                  <Col>
-                    <Card>
-                      <CardHeader>
-                        <h5><i className="fa fa-certificate"></i> Certifications</h5>
-                      </CardHeader>
-                      <CardBody>
-                        <ListGroup>
-                          <Certifications this={this} />
-                        </ListGroup>
-                      </CardBody>
-                    </Card>
-                  </Col>
-                </Row>
-                <Row>
-                  <Col>
-                    <Card>
-                      <CardHeader>
-                        <h5><i className="fa fa-globe"></i> Publications</h5>
-                      </CardHeader>
-                      <CardBody>
-                        <ListGroup>
-                          <Publications this={this} />
-                        </ListGroup>
-                      </CardBody>
-                    </Card>
-                  </Col>
-                </Row>
-              {/* </CardBody>
+            <Row>
+              <Col>
+                <Card>
+                  <CardHeader>
+                    <h5><i className="fa fa-users"></i> Organizations</h5>
+                  </CardHeader>
+                  <CardBody>
+                    <ListGroup>
+                      <Organizations this={this} />
+                    </ListGroup>
+                  </CardBody>
+                </Card>
+              </Col>
+            </Row>
+            <Row>
+              <Col>
+                <Card>
+                  <CardHeader>
+                    <h5><i className="fa fa-certificate"></i> Certifications</h5>
+                  </CardHeader>
+                  <CardBody>
+                    <ListGroup>
+                      <Certifications this={this} />
+                    </ListGroup>
+                  </CardBody>
+                </Card>
+              </Col>
+            </Row>
+            <Row>
+              <Col>
+                <Card>
+                  <CardHeader>
+                    <h5><i className="fa fa-globe"></i> Publications</h5>
+                  </CardHeader>
+                  <CardBody>
+                    <ListGroup>
+                      <Publications this={this} />
+                    </ListGroup>
+                  </CardBody>
+                </Card>
+              </Col>
+            </Row>
+            {/* </CardBody>
             </Card> */}
           </Col>
 

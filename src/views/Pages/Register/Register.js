@@ -35,6 +35,9 @@ class Register extends Component {
         "Work": [],
 
       },
+      settings:{
+        Acheck: true
+      }
 
     }
     this.formSubmit = this.formSubmit.bind(this);
