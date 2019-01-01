@@ -18,7 +18,8 @@ import {
   ListGroupItem,
   Badge,
   Fade,
-  Collapse, Dropdown, DropdownToggle, DropdownMenu, DropdownItem, Progress, Table, TabContent, TabPane
+  Collapse, Dropdown, DropdownToggle, DropdownMenu, DropdownItem, Progress, Table, TabContent, TabPane,
+  Modal, ModalBody, ModalHeader, ModalFooter
 } from 'reactstrap';
 
 // import Form from "react-jsonschema-form";
@@ -41,7 +42,7 @@ function CompAbout(props) {
           <Label htmlFor="text-input">Name</Label>
         </Col>
         <Col xs="12" md="9">
-          <Input required type="text" name="name" placeholder="Your Name Here" value={props.data.name} onChange={props.this.inputChanged} />
+          <Input type="text" name="name" placeholder="Your Name Here" value={props.data.name} onChange={props.this.inputChanged} />
         </Col>
       </Row>
 
@@ -59,7 +60,7 @@ function CompAbout(props) {
           <Label htmlFor="text-input">Tagline</Label>
         </Col>
         <Col xs="12" md="9">
-          <Input required type="text" name="tagline" placeholder="Something about you briefly" value={props.data.tagline} onChange={props.this.inputChanged} />
+          <Input type="text" name="tagline" placeholder="Something about you briefly" value={props.data.tagline} onChange={props.this.inputChanged} />
         </Col>
       </Row>
 
@@ -77,7 +78,7 @@ function CompAbout(props) {
           <Label htmlFor="text-input">Phone Number</Label>
         </Col>
         <Col xs="12" md="9">
-          <Input require type="text" name="contactno" placeholder="Your Contact Number" value={props.data.contactno} onChange={props.this.inputChanged} />
+          <Input type="text" name="contactno" placeholder="Your Contact Number" value={props.data.contactno} onChange={props.this.inputChanged} />
         </Col>
       </Row>
 
@@ -86,7 +87,7 @@ function CompAbout(props) {
           <Label htmlFor="text-input">Website</Label>
         </Col>
         <Col xs="12" md="9">
-          <Input require type="text" name="website" placeholder="Your Website Address" value={props.data.website} onChange={props.this.inputChanged} />
+          <Input type="text" name="website" placeholder="Your Website Address" value={props.data.website} onChange={props.this.inputChanged} />
         </Col>
       </Row>
 
@@ -790,6 +791,7 @@ class Aform extends Component {
       Flag_Publication_View: false,
 
 
+      modal_working:true,
       accordion: [false, false, false, false, false, false, false, false],
 
       user: {
@@ -848,6 +850,8 @@ class Aform extends Component {
 
     this.toggleAccordion = this.toggleAccordion.bind(this);
     this.toggleSectionOpenClose = this.toggleSectionOpenClose.bind(this)
+
+    this.toggleModal_Working = this.toggleModal_Working.bind(this)
   }
 
 
@@ -1093,6 +1097,12 @@ class Aform extends Component {
     this.toggleFlag_Publication()
   }
 
+  toggleModal_Working() {
+    this.setState({
+      modal_working : !this.state.modal_working,
+    });
+  }
+
 
   addItem_work(e) {
     e.preventDefault();
@@ -1262,6 +1272,52 @@ class Aform extends Component {
             <div>
               {fire.auth().currentUser.emailVerified ? null : <GlobalAlert AlertId="A" />}
               <h4>Resume & Profile Settings</h4>
+              {/* <Button color="danger" onClick={this.toggleModal_Working} className="mr-1">Danger modal</Button> */}
+                <Modal isOpen={this.state.modal_working} toggle={this.toggleModal_Working}
+                       className={'modal-lg' + this.props.className}>
+                  <ModalHeader toggle={this.toggleModal_Working}>How it works?</ModalHeader>
+                  <ModalBody>
+                    <Row>
+                      <Col md="4" className="justify-content-center">
+                      <p>Complete Your Profile</p>
+                      </Col>
+                      <Col md="4" className="align-items-center">
+                      <p>View & Confirm Resume</p>
+                      </Col>
+                      <Col md="4" className="align-items-center">
+                      <p>Search & Apply to Jobs</p>
+                      </Col>
+
+                    </Row>
+                    <Row>
+                      <Col md="1" className="justify-content-center">
+                      
+                      </Col>
+                      <Col md="2" className="justify-content-center">
+                      <img src="https://img.icons8.com/color/48/000000/resume.png"/>
+                      </Col>
+                      <Col md="2" className="align-items-center">
+                      <img src="https://img.icons8.com/color/48/000000/play.png"/>
+                      </Col>
+                      <Col md="2" className="align-items-center">
+                      <img src="https://img.icons8.com/color/48/000000/task-completed.png"/>
+                      </Col>
+                      <Col md="2" className="align-items-center">
+                      <img src="https://img.icons8.com/color/48/000000/play.png"/>
+                      </Col>
+                      <Col md="2" className="align-items-center">
+                      <img src="https://img.icons8.com/color/48/000000/contract-job.png"/>
+                      </Col>
+                    </Row>
+
+                    
+                  
+                  </ModalBody>
+                  <ModalFooter>
+                    <Button color="danger" onClick={this.toggleModal_Working}>Ok</Button>{' '}
+                    {/* <Button color="secondary" onClick={this.toggleModal_Working}>Cancel</Button> */}
+                  </ModalFooter>
+                </Modal>
             </div>
 
             {/* </CardBody>
@@ -1274,7 +1330,7 @@ class Aform extends Component {
                 <Card>
                   <CardHeader id="headingOne">
                     <Button block color="link" className="text-left m-0 p-0" onClick={() => this.toggleAccordion(0)} aria-expanded={this.state.accordion[0]} aria-controls="collapseOne">
-                      <h5 className="m-0 p-0"><i className="fa fa-user"></i> About</h5>
+                      <h5 className="m-0 p-0"><i className="fa fa-user"></i><i className="card-header-actions fa fa-chevron-down"></i> About</h5>
                     </Button>
                   </CardHeader>
                   <Collapse isOpen={this.state.accordion[0]} data-parent="#accordion" id="collapseOne" aria-labelledby="headingOne">
@@ -1288,7 +1344,7 @@ class Aform extends Component {
                 <Card>
                   <CardHeader id="headingOne">
                     <Button block color="link" className="text-left m-0 p-0" onClick={() => this.toggleAccordion(1)} aria-expanded={this.state.accordion[1]} aria-controls="collapseOne">
-                      <h5 className="m-0 p-0"><i className="fa fa-check-circle"></i> Skills</h5>
+                      <h5 className="m-0 p-0"><i className="fa fa-check-circle"></i><i className="card-header-actions fa fa-chevron-down"></i> Skills</h5>
                     </Button>
                   </CardHeader>
                   <Collapse isOpen={this.state.accordion[1]} data-parent="#accordion" id="collapseOne" aria-labelledby="headingOne">
@@ -1301,7 +1357,7 @@ class Aform extends Component {
                 <Card>
                   <CardHeader id="headingTwo">
                     <Button block color="link" className="text-left m-0 p-0" onClick={() => this.toggleAccordion(2)} aria-expanded={this.state.accordion[2]} aria-controls="collapseTwo">
-                      <h5 className="m-0 p-0"><i className="fa fa-snowflake-o"></i> Social</h5>
+                      <h5 className="m-0 p-0"><i className="fa fa-snowflake-o"></i><i className="card-header-actions fa fa-chevron-down"></i> Social</h5>
                     </Button>
                   </CardHeader>
                   <Collapse isOpen={this.state.accordion[2]} data-parent="#accordion" id="collapseTwo">
@@ -1316,7 +1372,7 @@ class Aform extends Component {
                 <Card>
                   <CardHeader id="headingThree">
                     <Button block color="link" className="text-left m-0 p-0" onClick={() => this.toggleAccordion(3)} aria-expanded={this.state.accordion[3]} aria-controls="collapseThree">
-                      <h5 className="m-0 p-0"><i className="fa fa-graduation-cap"></i> Education</h5>
+                      <h5 className="m-0 p-0"><i className="fa fa-graduation-cap"></i><i className="card-header-actions fa fa-chevron-down"></i> Education</h5>
                     </Button>
                   </CardHeader>
                   <Collapse isOpen={this.state.accordion[3]} data-parent="#accordion" id="collapseThree">
@@ -1330,7 +1386,7 @@ class Aform extends Component {
                 <Card>
                   <CardHeader id="headingFour">
                     <Button block color="link" className="text-left m-0 p-0" onClick={() => this.toggleAccordion(4)} aria-expanded={this.state.accordion[4]} aria-controls="collapseThree">
-                      <h5 className="m-0 p-0"><i className="fa fa-briefcase"></i> Work</h5>
+                      <h5 className="m-0 p-0"><i className="fa fa-briefcase"></i><i className="card-header-actions fa fa-chevron-down"></i> Work</h5>
                     </Button>
                   </CardHeader>
                   <Collapse isOpen={this.state.accordion[4]} data-parent="#accordion" id="collapseThree">
@@ -1344,7 +1400,7 @@ class Aform extends Component {
                 <Card>
                   <CardHeader id="headingFive">
                     <Button block color="link" className="text-left m-0 p-0" onClick={() => this.toggleAccordion(5)} aria-expanded={this.state.accordion[5]} aria-controls="collapseThree">
-                      <h5 className="m-0 p-0"><i className="fa fa-certificate"></i> Certifications</h5>
+                      <h5 className="m-0 p-0"><i className="fa fa-certificate"></i><i className="card-header-actions fa fa-chevron-down"></i> Certifications</h5>
                     </Button>
                   </CardHeader>
                   <Collapse isOpen={this.state.accordion[5]} data-parent="#accordion" id="collapseThree">
@@ -1357,7 +1413,7 @@ class Aform extends Component {
                 <Card>
                   <CardHeader id="headingSix">
                     <Button block color="link" className="text-left m-0 p-0" onClick={() => this.toggleAccordion(6)} aria-expanded={this.state.accordion[6]} aria-controls="collapseThree">
-                      <h5 className="m-0 p-0"><i className="fa fa-users"></i> Organizations</h5>
+                      <h5 className="m-0 p-0"><i className="fa fa-users"></i><i className="card-header-actions fa fa-chevron-down"></i> Organizations</h5>
                     </Button>
                   </CardHeader>
                   <Collapse isOpen={this.state.accordion[6]} data-parent="#accordion" id="collapseThree">
@@ -1371,7 +1427,7 @@ class Aform extends Component {
                 <Card>
                   <CardHeader id="headingSeven">
                     <Button block color="link" className="text-left m-0 p-0" onClick={() => this.toggleAccordion(7)} aria-expanded={this.state.accordion[7]} aria-controls="collapseThree">
-                      <h5 className="m-0 p-0"><i className="fa fa-globe"></i> Publications</h5>
+                      <h5 className="m-0 p-0"><i className="fa fa-globe"></i><i className="card-header-actions fa fa-chevron-down"></i> Publications</h5>
                     </Button>
                   </CardHeader>
                   <Collapse isOpen={this.state.accordion[7]} data-parent="#accordion" id="collapseThree">

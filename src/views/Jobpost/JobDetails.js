@@ -32,6 +32,7 @@ import Widget03 from '../Widgets/Widget03'
 import { CustomTooltips } from '@coreui/coreui-plugin-chartjs-custom-tooltips';
 import { getStyle, hexToRgba } from '@coreui/coreui/dist/js/coreui-utilities'
 import fire from '../../config/Fire'
+import GlobalAlert from '../Alerts/ga'
 import LeftMenu from '../Jobpost/LeftMenu'
 
 function JobDisplayComponent(props) {
@@ -52,13 +53,16 @@ function JobDisplayComponent(props) {
                 <Col md="3">
                   {fire.auth().currentUser.emailVerified ?
                     <Button block outline active color="success" aria-pressed="true" onClick={props.this.ApplyToJob}>Apply Now</Button> :
-                    <Alert color="danger">
-                      Unverified Accounts Can't Apply to Jobs
-                  </Alert>
+                    null
 
                   }
                 </Col>
               </Row>
+              {fire.auth().currentUser.emailVerified ?
+                    null :
+                    <GlobalAlert AlertId="C" />
+
+                  }
             </CardHeader>
             <CardBody>
 

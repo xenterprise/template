@@ -101,9 +101,9 @@ class Search extends Component {
       <div>
         <NavItem className="px-3">
           <InputGroup>
-            <Input valid name="text" id="appendedInputButtons" size="48" type="text" placeholder="Search for Skills, Jobs & other opportunities" onChange={this.TextInputChanged_lowercase} />
+            <Input invalid name="text" id="appendedInputButtons" size="48" type="text" placeholder="Search for Skills, Jobs & other opportunities" onChange={this.TextInputChanged_lowercase} />
             <InputGroupAddon addonType="append">
-              <Button color="primary" onClick={this.SearchEvent}>Search</Button>
+              <Button color="danger" onClick={this.SearchEvent}>Search</Button>
               {/* <Button color="secondary">Options</Button> */}
             </InputGroupAddon>
           </InputGroup>

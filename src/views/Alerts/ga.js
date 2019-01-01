@@ -102,8 +102,10 @@ class GlobalAlert extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            AlertId: ""
+            AlertId: "",
+            VerificationClicked: false
         }
+        this.sendEmailVerificationFunction = this.sendEmailVerificationFunction.bind(this)
     }
 
     componentDidMount() {
@@ -123,6 +125,15 @@ class GlobalAlert extends Component {
     //     // }
     // }
 
+    sendEmailVerificationFunction(){
+        fire.auth().currentUser.sendEmailVerification()
+        .then(verify => {
+            console.log("VERIFICATION EMAIL SENT", verify)
+            this.setState({
+                VerificationClicked : true
+            })
+          })
+    }
 
     render() {
         if (this.state.AlertId === "A") {
@@ -130,7 +141,7 @@ class GlobalAlert extends Component {
                 <div>
                     <Alert color="danger">
                     {/* or <a href="#" className="alert-link">Resend Verification Email</a>. */}
-                        Verification email is sent to you, Please click on the link in verification email. You may not be able to Apply to Jobs or access some features of this site without verification
+                        Verification email is sent to you, Please click on the link in verification email. You may not be able to Apply to Jobs or access some features of this site without verification {this.state.VerificationClicked?<Button outline color="link" className="alert-link"> <i className="fa fa-check"></i> Email Sent</Button>:<Button outline active color="link" onClick={this.sendEmailVerificationFunction} className="alert-link">Resend Verification Email</Button>}
                     </Alert>
                 </div>
             )
@@ -141,6 +152,16 @@ class GlobalAlert extends Component {
                     <Alert color="danger">
                     {/* or <a href="#" className="alert-link">Resend Verification Email</a>. */}
                         Please fill out the form properly, Job Title, Company and Salary cannot be left blank
+                    </Alert>
+                </div>
+            )
+        }
+        else if (this.state.AlertId === "C") {
+            return (
+                <div>
+                    <Alert color="danger">
+                    {/* or <a href="#" className="alert-link">Resend Verification Email</a>. */}
+                        Unverified accounts cannot apply to jobs, verify your email first {this.state.VerificationClicked?<Button outline color="link" className="alert-link"> <i className="fa fa-check"></i> Email Sent</Button>:<Button outline active color="link" onClick={this.sendEmailVerificationFunction} className="alert-link">Resend Verification Email</Button>}
                     </Alert>
                 </div>
             )

@@ -102,7 +102,7 @@ class Modals extends Component {
 
                 <Button onClick={this.toggleLarge} className="mr-1">Launch large modal</Button>
                 <Modal isOpen={this.state.large} toggle={this.toggleLarge}
-                       className={'modal-lg ' + this.props.className}>
+                       className={'modal-lg'+'modal-danger' + this.props.className}>
                   <ModalHeader toggle={this.toggleLarge}>Modal title</ModalHeader>
                   <ModalBody>
                     Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore

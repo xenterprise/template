@@ -50,9 +50,11 @@ class LeftMenu extends Component {
         return (
             <div>
                 {/* <Button outline color="primary" size="lg" block href="#/basel/sview">Explore Jobs</Button> */}
-                <Button block className="text-left" color="primary" size="lg" block href="#/basel/profile"><i className="fa fa-user"></i> Profile</Button>
+                <Button outline className="text-left" color="primary" size="lg" block href="#/basel/profile"><i className="fa fa-user"></i> My Resume</Button>
+                <Button outline className="text-left" color="primary" size="lg" block href="#/basel/aform"><i className="fa fa-edit"></i> Edit Profile</Button>
                 <Button outline className="text-left" color="primary" size="lg" block href="#/basel/jobpost"><i className="fa fa-briefcase"></i> My Jobs</Button>
-                <Button outline className="text-left" color="primary" size="lg" block href="#/basel/aform"><i className="fa fa-edit"></i> Eat Profile</Button>
+                <Button outline className="text-left" color="primary" size="lg" block href="#/basel/sview"><i className="fa fa-search"></i> Explore Jobs</Button>
+                
             </div>
         )
     }

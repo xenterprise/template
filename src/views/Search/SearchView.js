@@ -33,7 +33,7 @@ import { getStyle, hexToRgba } from '@coreui/coreui/dist/js/coreui-utilities'
 
 import fire from '../../config/Fire'
 import { focusableElements } from 'reactstrap/lib/utils';
-
+import LeftMenu from '../Jobpost/LeftMenu'
 
 
 function SearchResultJobs(props) {
@@ -261,13 +261,8 @@ class SearchView extends Component {
     return (
       <div>
         <Row>
-          <Col md="2">
-
-            {/* <Button outline color="primary" size="lg" block href="#/basel/sview">Explore Jobs</Button> */}
-            <Button outline className="text-left" color="primary" size="lg" block href="#/basel/profile"><i className="fa fa-user"></i> Profile</Button>
-            <Button outline className="text-left" color="primary" size="lg" block href="#/basel/jobpost"><i className="fa fa-briefcase"></i> My Jobs</Button>
-            <Button outline className="text-left" color="primary" size="lg" block href="#/basel/aform"><i className="fa fa-edit"></i> Edit Profile</Button>
-
+        <Col md="2">
+            <LeftMenu />
           </Col>
 
           <Col md="7">

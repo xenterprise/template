@@ -262,7 +262,7 @@ function CompJob_Home(props) {
       <Card>
         <CardHeader id="headingOne">
           <Button block color="link" className="text-left m-0 p-0" onClick={() => props.this.toggleAccordionPosted(0)} aria-expanded={props.this.state.accordionPosted[0]} aria-controls="collapseOne">
-            <h5 className="m-0 p-0"><i className="fa fa-map"></i> My Applied Jobs</h5>
+            <h5 className="m-0 p-0"><i className="fa fa-map"></i><i className="card-header-actions fa fa-chevron-down"></i> My Applied Jobs</h5>
           </Button>
         </CardHeader>
         <Collapse isOpen={props.this.state.accordionPosted[0]} data-parent="#accordion" id="collapseOne" aria-labelledby="headingOne">
@@ -276,11 +276,9 @@ function CompJob_Home(props) {
       <Card>
         <CardHeader id="headingTwo">
           <Button block color="link" className="text-left m-0 p-0" onClick={() => props.this.toggleAccordionPosted(1)} aria-expanded={props.this.state.accordionPosted[1]} aria-controls="collapseTwo">
-            <h5 className="m-0 p-0"><i className="fa fa-map-o"></i> My Posted Jobs</h5>
-            {/* <div className="card-header-actions"> */}
+            <h5 className="m-0 p-0"><i className="fa fa-map-o"></i><i className="card-header-actions fa fa-chevron-down"></i> My Posted Jobs</h5>
             
-            {/* </div> */}
-          </Button><a className="card-header-action" id="ViewApplicants" ><i className="fa fa-group fa-lg"></i></a>
+          </Button>
         </CardHeader>
         <Collapse isOpen={props.this.state.accordionPosted[1]} data-parent="#accordion" id="collapseTwo">
           <CardBody>
