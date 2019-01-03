@@ -61,6 +61,7 @@ class Image extends Component {
                         onProgress={this.handleProgress}
                     />
                     {this.state.avatarURL && <img src={this.state.avatarURL} width="100px" />}
+                    {/* <img src={this.state.user.dpurl?this.state.user.dpurl:'assets/img/avatars/0.png'} className="img-avatar" alt="" /> */}
                     {/* <label>{this.state.avatarURL}</label> */}
                 </form>
             </div>

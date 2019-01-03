@@ -143,7 +143,7 @@ class App extends Component {
             <Route path="/basel" name="Basel" component={this.state.user ? BaseLayout : Login} />
             <Route path="/home" name="Home" component={this.state.user ? BaseLayout : HomeLayout} />
             {/* <Route exact path="/def" name="Home" component={DefaultLayout} /> */}
-            <Route path="/" name="Home" component={DefaultLayout} />
+            <Route path="/" name="Home" component={this.state.user ? BaseLayout : HomeLayout} />
           </Switch>
         </HashRouter>
       );

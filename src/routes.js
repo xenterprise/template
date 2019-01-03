@@ -234,6 +234,10 @@ const Home = Loadable({
   loading: Loading,
 });
 
+const Idata = Loadable({
+  loader: () => import('./views/Jobpost/Idata'),
+  loading: Loading,
+});
 
 
 // const BaseLayout = Loadable({
@@ -258,6 +262,7 @@ const routes = [
   // { path: '/sview/:searchText', name: 'SearchView', component: SearchView },
   { path: '/jobpost', name: 'JobPost', component: Jobpost },
   { path: '/home', name: 'JobPost', component: Home },
+  { path: '/idata', name: 'JobPost', component: Idata },
   { path: '/job/:juid', name: 'JobDetails', component: JobDetails },
   { path: '/applicants/:juid', name: 'Applicants', component: Applicants },
   { path: '/theme', exact: true, name: 'Theme', component: Colors },

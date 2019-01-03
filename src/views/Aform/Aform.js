@@ -82,6 +82,14 @@ function CompAbout(props) {
           <Input type="text" name="contactno" placeholder="Your Contact Number" value={props.data.contactno} onChange={props.this.inputChanged} />
         </Col>
       </Row>
+      <Row>
+        <Col md="2">
+          <Label htmlFor="text-input">City</Label>
+        </Col>
+        <Col xs="12" md="9">
+          <Input type="text" name="city" placeholder="City name" value={props.data.city} onChange={props.this.inputChanged} />
+        </Col>
+      </Row>
 
       <Row>
         <Col md="2">
@@ -810,7 +818,8 @@ class Aform extends Component {
         services: [],
         work: [],
         skills: {},
-        settings: {}
+        settings: {},
+        city:""
       }
     }
 

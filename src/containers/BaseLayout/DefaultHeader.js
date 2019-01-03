@@ -63,14 +63,14 @@ class DefaultHeader extends Component {
           {/* <img src={logo} width="112" alt="" href="#/basel/profile"/> */}
           {/* <AppSidebarToggler className="d-md-down-none" display="lg" /> */}
 
-          <Nav className="d-md-down-none" navbar>
+          <Nav  navbar>
            
             <NavItem className="px-3">
               <NavLink href="#/basel/home"><img src={logo} width="112" alt="logo"/></NavLink>
             </NavItem>
-            <NavItem className="px-3">
+            {/* <NavItem className="px-3">
               <NavLink href="#/basel/profile">Profile</NavLink>
-            </NavItem>
+            </NavItem> */}
             {/* <NavItem className="px-3">
             <NavLink href="#/basel/search">Search</NavLink>
           </NavItem> */}
@@ -80,9 +80,9 @@ class DefaultHeader extends Component {
             {/* <NavItem className="px-3">
             <NavLink href="/">Dashboard</NavLink>
           </NavItem> */}
-            <NavItem className="px-3">
+            {/* <NavItem className="px-3">
               <NavLink href="#/basel/jobpost">Job</NavLink>
-            </NavItem>
+            </NavItem> */}
             {/* <NavItem className="px-3">
             <NavLink href="#">Settings</NavLink>
           </NavItem> */}

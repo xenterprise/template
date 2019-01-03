@@ -61,6 +61,7 @@ class BaseLayout extends Component {
                 <Redirect from="/login" to="/basel/home" />
                 <Redirect from="/register" to="/basel/home" />
                 <Redirect from="/home" to="/basel/home" />
+                <Redirect from="/" to="/basel/home" />
                 
               </Switch>
             </Container>

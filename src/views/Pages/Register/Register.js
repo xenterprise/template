@@ -35,7 +35,7 @@ class Register extends Component {
         "Work": [],
 
       },
-      settings:{
+      settings: {
         Acheck: true
       }
 
@@ -66,6 +66,14 @@ class Register extends Component {
           .catch(error => {
             console.log(error)
           });
+
+        var dbref = fire.database().ref(`Counts/users/${authUser.user.uid}`);
+        dbref.set(authUser.user.email)
+          .then(() => {
+          })
+          .catch(error => {
+            console.log(error)
+          });
       })
   }
 
@@ -87,7 +95,7 @@ class Register extends Component {
                   <Row className="justify-content-center">
                     <Col >
                       <div align="center">
-                        <img width="250px" src={'assets/img/avatars/acr.png'} alt="admin@bootstrapmaster.com" href="#/home"/>
+                        <img width="250px" src={'assets/img/avatars/acr.png'} alt="admin@bootstrapmaster.com" href="#/home" />
                       </div>
                     </Col>
                   </Row>

@@ -38,12 +38,7 @@ class LeftMenu extends Component {
         super(props);
         this.state = {
         }
-    }
-
-
-    componentDidMount() {
-    }
-
+      }
 
 
     render() {
@@ -53,7 +48,6 @@ class LeftMenu extends Component {
                 <Button outline className="text-left" color="primary" size="lg" block href="#/basel/profile"><i className="fa fa-user"></i> My Resume</Button>
                 <Button outline className="text-left" color="primary" size="lg" block href="#/basel/aform"><i className="fa fa-edit"></i> Edit Profile</Button>
                 <Button outline className="text-left" color="primary" size="lg" block href="#/basel/jobpost"><i className="fa fa-briefcase"></i> My Jobs</Button>
-                <Button outline className="text-left" color="primary" size="lg" block href="#/basel/sview"><i className="fa fa-search"></i> Explore Jobs</Button>
                 
             </div>
         )

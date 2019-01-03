@@ -278,10 +278,11 @@ function CompJob_Home(props) {
     <div>
 
       <Row>
-        <Col md="9">
+        <Col md="10">
         </Col>
-        <Col md="3">
-          <Button type="submit" align="right" size="md" color="primary" onClick={props.this.createJob}><i className="fa fa-dot-circle-o"></i> Post A Job</Button>
+        <Col md="2">
+          {fire.auth().currentUser.emailVerified?<Button type="submit" align="right" size="md" color="primary" onClick={props.this.createJob}><i className="fa fa-plus"></i> Post Job</Button>:<Button type="submit" align="right" size="md" color="danger" > Job Post Disabled</Button>}
+          {/* <Button type="submit" align="right" size="md" color="primary" onClick={props.this.createJob}><i className="fa fa-plus"></i> Post Job</Button> */}
         </Col>
       </Row>
       <h5>My Job Section</h5>
@@ -322,7 +323,17 @@ function CompJob_Home(props) {
 function CompJob_Form(props) {
   return (
     <div>
-      <h5>Post a New Job</h5>
+     
+      <Row>
+        <Col md="8">
+        <h5>Post a New Job</h5>
+        </Col>
+        <Col md="4">
+        <Button type="submit" align="right" size="md" color="primary" onClick={props.this.Submit_Job}><i className="fa fa-check"></i> Save </Button>
+         
+         <Button type="submit" align="right" size="md" color="dark" onClick={props.this.CancelJob}><i className="fa fa-close"></i> Cancel</Button>
+       </Col>
+      </Row>
       <form>
         <Row>
           <Col md="2" >
@@ -510,11 +521,10 @@ function CompJob_Form(props) {
 
         {/* <Input type="date" id="date-input" name="date-input" placeholder="date" /> */}
         <Row>
-          <Col md="2">
-            <Button type="submit" align="right" size="md" color="primary" onClick={props.this.Submit_Job}><i className="fa fa-dot-circle-o"></i> Save </Button>
-          </Col>
-          <Col md="2">
-            <Button type="submit" align="right" size="md" color="dark" onClick={props.this.CancelJob}><i className="fa fa-dot-circle-o"></i> Cancel</Button>
+          <Col md="4">
+            <Button type="submit" align="right" size="md" color="primary" onClick={props.this.Submit_Job}><i className="fa fa-check"></i> Save </Button>
+         
+            <Button type="submit" align="right" size="md" color="dark" onClick={props.this.CancelJob}><i className="fa fa-close"></i> Cancel</Button>
           </Col>
         </Row>
       </form>

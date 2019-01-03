@@ -9,15 +9,20 @@ const Dev = {
     messagingSenderId: "1004709971994"
   };
 
+  const Production = {
+  apiKey: "AIzaSyCbjcNghPTLVsukjnvbIYqBFn8A-hiX0MY",
+  authDomain: "acpb-4bc85.firebaseapp.com",
+  databaseURL: "https://acpb-4bc85.firebaseio.com",
+  projectId: "acpb-4bc85",
+  storageBucket: "acpb-4bc85.appspot.com",
+  messagingSenderId: "615359412310"
+};
 
-// const Production = {
-//   apiKey: "AIzaSyCbjcNghPTLVsukjnvbIYqBFn8A-hiX0MY",
-//   authDomain: "acpb-4bc85.firebaseapp.com",
-//   databaseURL: "https://acpb-4bc85.firebaseio.com",
-//   projectId: "acpb-4bc85",
-//   storageBucket: "",
-//   messagingSenderId: "615359412310"
-// };
+  const config = process.env.NODE_ENV === 'production' ? Production : Dev;
 
-const fire = firebase.initializeApp(Dev);
+
+
+
+
+const fire = firebase.initializeApp(config);
 export default fire;
